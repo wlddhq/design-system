@@ -3,10 +3,13 @@
 .w-table th, .w-table td { height: 38px; padding: 0 12px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); white-space: nowrap; text-align: left; background: var(--surface); color: var(--fg); }
 .w-table [data-align='right'] { text-align: right; }
 .w-table th { height: 34px; position: sticky; top: 0; z-index: 2; font-weight: 500; color: var(--muted); font-size: 12px; }
+.w-table thead td { height: 34px; position: sticky; top: 0; z-index: 2; }
 .w-table th.w-sortable { cursor: pointer; }
 .w-table th.w-sortable:hover { color: var(--fg); background: var(--sunken); }
 .w-table th[data-sorted] { color: var(--fg); }
 .w-th { display: inline-flex; align-items: center; gap: 6px; }
+.w-th-btn { color: inherit; font: inherit; height: 100%; }
+.w-th-btn:focus-visible { outline: 2px solid var(--fg-2); outline-offset: 2px; border-radius: 4px; }
 
 /* 12 + 15px checkbox + 9 = 36, the primary column's sticky offset. The fill column squeezes every other column
    to its content, so the padding (not the width) is what holds this at 36 and keeps the seam closed. */

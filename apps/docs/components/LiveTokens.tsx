@@ -21,7 +21,7 @@ export function ColourTable({ rows }: { rows: TokenRow[] }) {
   return (
     <div className="tbl-w">
       <table className="tbl">
-        <thead><tr><th style={{ width: 52 }} /><th>Token</th><th>Tailwind</th><th>Value</th><th>Use for</th></tr></thead>
+        <thead><tr><th style={{ width: 52 }}><span className="w-sr">Swatch</span></th><th>Token</th><th>Tailwind</th><th>Value</th><th>Use for</th></tr></thead>
         <tbody>
           {rows.map((r) => (
             <tr key={r.v}>

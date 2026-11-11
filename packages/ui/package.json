@@ -26,20 +26,23 @@
   "peerDependencies": {
     "@wldd/tokens": "*",
     "lucide-react": ">=0.400.0",
+    "motion": ">=12.0.0",
     "react": "^18.2.0 || ^19.0.0",
-    "react-dom": "^18.2.0 || ^19.0.0",
-    "motion": ">=11.0.0"
+    "react-dom": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@wldd/tokens": "*",
     "lucide-react": "^0.468.0",
+    "motion": "^12.42.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "react-docgen-typescript": "^2.2.2",
+    "react-dom": "^19.0.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.7.2",
-    "motion": "^11.15.0"
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "sonner": "^1.7.4"
   }
 }

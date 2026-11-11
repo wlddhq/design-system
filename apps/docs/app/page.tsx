@@ -38,7 +38,7 @@ export function CampaignsHead() {
       </ul>
 
       <H2>Status</H2>
-      <p>Ready now: tokens for every theme, the Tailwind theme, and everything needed to build the DMS Campaigns screen: the app shell, table, controls and primitives. See it assembled in <Link href="/showcase/campaigns">Showcase › Campaigns</Link>. Next: sheets and dialogs, lists, boards, cards and metrics, forms, and toasts.</p>
+      <p>Ready now: tokens for every theme, the Tailwind theme, and everything to build a DMS work area: the app shell, all five record views (list, board, table, timeline, grid), record pages, sheets, dialogs, forms and toasts. See them assembled in <Link href="/showcase/campaigns">Showcase › Campaigns</Link> and <Link href="/showcase/campaign">Showcase › Campaign</Link>. Next: the command menu, dashboard metrics and charts.</p>
     </DocPage>
   )
 }

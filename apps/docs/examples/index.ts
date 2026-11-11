@@ -25,6 +25,12 @@ import PopoverDisplay from './popover/display'
 import SelectOrder from './select/order'
 import TableCampaigns from './table/campaigns'
 import TableLong from './table/long'
+import OverlayPeek from './overlay/peek'
+import OverlayConfirm from './overlay/confirm'
+import ToastUndo from './toast/undo'
+import FormNewCampaign from './form/new-campaign'
+import RecordHead from './record/head'
+import ShowcaseCampaign from './showcase/campaign'
 import ListGrouped from './list/grouped'
 import BoardStages from './board/stages'
 import TimelineCampaigns from './timeline/campaigns'
@@ -71,6 +77,12 @@ export const EXAMPLES = {
   'select/order': SelectOrder,
   'table/campaigns': TableCampaigns,
   'table/long': TableLong,
+  'overlay/peek': OverlayPeek,
+  'overlay/confirm': OverlayConfirm,
+  'toast/undo': ToastUndo,
+  'form/new-campaign': FormNewCampaign,
+  'record/head': RecordHead,
+  'showcase/campaign': ShowcaseCampaign,
   'list/grouped': ListGrouped,
   'board/stages': BoardStages,
   'timeline/campaigns': TimelineCampaigns,

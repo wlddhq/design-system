@@ -77,10 +77,15 @@ export type ThProps = {
 
 export function Th({ icon: Icon, kind, onSort, sorted, align, className, children, ...rest }: ThProps) {
   const Arrow = sorted === 'asc' ? ArrowUp : ArrowDown
+  // The fill column is only a spacer: a plain cell hidden from screen readers, not a nameless column header.
+  if (kind === 'fill') return <td className={cx('w-col-fill', className)} aria-hidden="true" />
   return (
     <th className={cx(kind && `w-col-${kind}`, onSort && 'w-sortable', className)} data-sorted={sorted} data-align={align}
       aria-sort={sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : undefined} onClick={onSort} {...rest}>
-      {kind !== 'fill' && (
+      {/* Sortable headers hold a real button, so keyboards can sort too. */}
+      {onSort ? (
+        <button type="button" className="w-th w-th-btn" onClick={(e) => { e.stopPropagation(); onSort() }}>{Icon && <Icon size={13} aria-hidden />}{children}{sorted && <Arrow size={12} aria-hidden />}</button>
+      ) : (
         <span className="w-th">{Icon && <Icon size={13} aria-hidden />}{children}{sorted && <Arrow size={12} aria-hidden />}</span>
       )}
     </th>

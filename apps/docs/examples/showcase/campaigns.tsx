@@ -11,7 +11,7 @@ import {
   Table, Th, Td, Tr, RecordCell, CellButton, Aggregate,
   List, ListGroup, ListRow, ListTitle, ListCell,
   Board, BoardColumn, BoardCard, Timeline, TimelineGroup, TimelineRow, CardGroup, RecordCard, Sparkline,
-  ViewPicker, ToggleChips,
+  ViewPicker, ToggleChips, Sheet, RecordHeader, PropertyList, Property, PropertySeparator,
   Button, Tooltip, Tabs, Popover, MenuItem, MenuLabel, PopoverSection, PopoverRow, Select, Switch,
   Checkbox, Logo, ProgressIcon, Track, AvatarGroup, Avatar, Tag, TagList, Dot, DotLabel, Chip, SelectionBar, Empty,
 } from '@wldd/ui'
@@ -83,7 +83,9 @@ export default function CampaignsScreen() {
   const all = shown.length > 0 && shown.every((c) => sel.includes(c.id))
   const toggle = (id: string, on: boolean) => setSel((s) => (on ? [...s, id] : s.filter((x) => x !== id)))
   const patch = (id: string, p: Partial<Campaign>) => setRows((r) => r.map((c) => (c.id === id ? { ...c, ...p, updated: 'now' } : c)))
-  const open = (c: Campaign) => console.info('open', c.code)
+  const [peek, setPeek] = useState<string | null>(null)
+  const open = (c: Campaign) => setPeek(c.id)
+  const pc = rows.find((c) => c.id === peek)
   const none = <Empty icon={Megaphone} title="No campaigns">Nothing matches these filters.</Empty>
 
   const stageMenu = (c: Campaign) => (
@@ -305,6 +307,27 @@ export default function CampaignsScreen() {
         {d.layout === 'timeline' && timeline}
         {d.layout === 'grid' && grid}
       </PageScroll>
+
+      <Sheet open={!!pc} onClose={() => setPeek(null)} label={pc ? `${pc.client} × ${pc.activity}` : 'Campaign'}>
+        {pc && (
+          <>
+            <RecordHeader lead={<Logo name={pc.client} src={logo(pc.domain)} size={32} />} title={pc.client} sub={`× ${pc.activity}`}
+              meta={<span className="font-mono">{pc.code}</span>} />
+            <PropertyList className="mt-6">
+              <Property label="Stage"><ProgressIcon value={pc.stage} tone={stageTone(pc.stage)} />{STAGES[pc.stage]}</Property>
+              <Property label="Pod"><DotLabel shape="square" tone={podTone(pc.pod)}>{pc.pod}</DotLabel></Property>
+              <Property label="Lead"><Avatar {...pc.lead} size={20} />{pc.lead.name}</Property>
+              <Property label="Team"><AvatarGroup people={pc.team} /></Property>
+              <Property label="Services">{services(pc)}</Property>
+              <PropertySeparator />
+              <Property label="Budget"><span className="tabular-nums">{inr(pc.budget)}</span></Property>
+              <Property label="Dates">{date(pc.start)} → {date(pc.end)}</Property>
+              <Property label="Updated">{pc.updated === 'now' ? 'Just now' : `${pc.updated} ago`}</Property>
+            </PropertyList>
+            <div className="mt-6"><Button href="/showcase/campaign" icon={ArrowUpRight}>Open campaign</Button></div>
+          </>
+        )}
+      </Sheet>
 
       <SelectionBar count={sel.length} onClear={() => setSel([])}>
         <Button size="sm" icon={ArrowUpRight} onClick={() => { sel.forEach((id) => patch(id, { stage: Math.min(6, rows.find((r) => r.id === id)!.stage + 1) })); setSel([]) }}>Next stage</Button>

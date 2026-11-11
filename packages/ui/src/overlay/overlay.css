@@ -1,0 +1,28 @@
+/* Sheet and Dialog, as the prototype: a dimmed page, an 18px-round panel inset 8px from the edges. */
+.w-layer { position: fixed; inset: 0; z-index: 60; font-family: var(--font); font-size: var(--text-size); color: var(--fg); }
+.w-scrim-l { position: absolute; inset: 0; background: var(--overlay); }
+
+.w-sheet {
+  position: absolute; top: 8px; right: 8px; bottom: 8px; max-width: calc(100vw - 16px); overflow: auto; overscroll-behavior: contain;
+  padding: 28px 32px; border-radius: 18px; background: var(--surface); box-shadow: var(--shadow-pop); outline: none;
+}
+.w-sheet-x { position: absolute; top: 14px; right: 14px; z-index: 1; }
+:root[data-style='pop'] .w-sheet, :root[data-style='pop'] .w-dialog { border-radius: var(--radius-pop); }
+
+.w-layer-center { display: flex; justify-content: center; align-items: flex-start; padding: 14vh 16px 16px; }
+.w-dialog {
+  position: relative; max-width: 100%; max-height: calc(100% - 8px); display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 16px; background: var(--pop); box-shadow: var(--shadow-pop); outline: none;
+}
+.w-dialog-h { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 8px 0 20px; }
+.w-dialog-h h2 { flex: 1; min-width: 0; margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.w-dialog-d { margin: 0; padding: 0 20px; color: var(--fg-2); line-height: 1.55; }
+.w-dialog-b { padding: 16px 20px 4px; overflow: auto; min-height: 0; display: grid; gap: 14px; }
+.w-dialog-f { display: flex; justify-content: flex-end; gap: 8px; padding: 16px 20px 18px; }
+
+@media (max-width: 760px) {
+  .w-sheet { top: 8px; left: 8px; right: 8px; bottom: 8px; width: auto !important; max-width: none; padding: 20px 16px calc(20px + env(safe-area-inset-bottom)); }
+  .w-layer-center { align-items: flex-end; padding: 8px; }
+  .w-dialog { width: 100% !important; }
+  .w-dialog-f > .w-btn { flex: 1; }
+}

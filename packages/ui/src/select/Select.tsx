@@ -18,16 +18,20 @@ export type SelectProps<T extends string> = {
   label?: string
   /** Shown when the value matches no option (nothing chosen yet). @default 'Select' */
   placeholder?: string
+  /** Set by Field. */
+  id?: string
+  'aria-describedby'?: string
+  'aria-invalid'?: boolean
   disabled?: boolean
 }
 
 /** Picks one option from a short list. A small button that opens a menu. */
-export function Select<T extends string>({ value, onChange, options, align = 'end', width = 180, label, disabled, placeholder = 'Select' }: SelectProps<T>) {
+export function Select<T extends string>({ value, onChange, options, align = 'end', width = 180, label, disabled, placeholder = 'Select', id, ...aria }: SelectProps<T>) {
   // An unknown value shows the placeholder (never a wrong option); no options disables the button.
   const cur = options.find((o) => o.value === value)
   return (
     <Popover align={align} width={width} trigger={
-      <Button size="sm" icon={cur?.icon} disabled={disabled || options.length === 0} aria-label={label} className="w-select">
+      <Button size="sm" icon={cur?.icon} disabled={disabled || options.length === 0} aria-label={label} id={id} aria-describedby={aria['aria-describedby']} aria-invalid={aria['aria-invalid']} className="w-select">
         {cur ? <>{cur.lead}<span className="w-select-t">{cur.label}</span></> : <span className="w-select-t w-select-ph">{placeholder}</span>}<ChevronDown size={13} className="w-select-chev" aria-hidden />
       </Button>
     }>

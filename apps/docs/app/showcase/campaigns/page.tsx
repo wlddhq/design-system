@@ -7,15 +7,16 @@ export default function Page() {
   return (
     <DocPage wide href="/showcase/campaigns" lead="The DMS Campaigns screen, rebuilt with nothing but @wldd/ui. If this matches the prototype, the library can build the product.">
       <H2>Live screen</H2>
-      <p>Select rows to see the selection bar. Click a stage to change it. Try Filter, Display, the tabs, and the theme switcher in the sidebar.</p>
+      <p>Open Display to switch between List, Board, Table, Timeline and Grid, and to change grouping, ordering and properties. Click a campaign to peek at it. Drag cards on the Board; click a stage in the Table to change it; select rows to see the selection bar.</p>
       <Example id="showcase/campaigns" frame={720} />
 
       <H2>What it’s made of</H2>
       <ul>
-        <li><strong>App shell:</strong> AppShell, Sidebar (SidebarGroup per workspace, SidebarItem per page, a Pinned SidebarSection, SidebarFooter), TopBar with TopBarTitle and TopBarActions, Toolbar, PageScroll.</li>
-        <li><strong>Controls:</strong> Tabs for the views, Popover with MenuItems for Filter and the stage cell, Popover with Segmented, Select and Switch for Display.</li>
-        <li><strong>Data:</strong> Table with Th, Td and Tr, RecordCell for the campaign, CellButton for editable stage, Aggregate in the footer, SelectionBar for bulk actions.</li>
-        <li><strong>Primitives:</strong> Button, Tooltip, Checkbox, Logo, ProgressIcon, Tag and TagList, AvatarGroup, Avatar, Dot.</li>
+        <li><strong>App shell:</strong> AppShell, Sidebar (SidebarGroup per workspace, SidebarItem per page, a Pinned SidebarSection, SidebarFooter), TopBar, Toolbar, PageScroll.</li>
+        <li><strong>Views:</strong> List with ListGroup and ListRow; Board with BoardColumn and BoardCard; Table with RecordCell and CellButton; Timeline with TimelineRow; CardGroup with RecordCard.</li>
+        <li><strong>Display:</strong> a Popover holding ViewPicker, Select, Switch and ToggleChips.</li>
+        <li><strong>Peek:</strong> a Sheet with RecordHeader and PropertyList.</li>
+        <li><strong>Primitives:</strong> Button, Tooltip, Checkbox, Logo, ProgressIcon, Track, Tag and TagList, AvatarGroup, Avatar, Dot, Chip, Sparkline, SelectionBar, Empty.</li>
       </ul>
     </DocPage>
   )

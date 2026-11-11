@@ -47,7 +47,7 @@ function readRules(file) {
   return { fm, body: m ? raw.slice(m[0].length) : raw }
 }
 
-const GROUPS = { primitives: 'Primitives', controls: 'Controls', data: 'Data display', views: 'Views (List, Board, Table, Timeline, Grid)', shell: 'App shell', motion: 'Motion & loaders' }
+const GROUPS = { primitives: 'Primitives', controls: 'Controls', data: 'Data display', views: 'Views (List, Board, Table, Timeline, Grid)', records: 'Records (pages, sheets, dialogs, forms, toasts)', shell: 'App shell', motion: 'Motion & loaders' }
 const components = []
 for (const md of files.filter((f) => f.endsWith('.md'))) {
   const id = basename(md, '.md')

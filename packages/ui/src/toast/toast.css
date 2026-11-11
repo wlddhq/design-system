@@ -1,0 +1,16 @@
+/* Toasts (sonner), in WLDD tokens, as the prototype. */
+.w-toaster[data-sonner-toaster] { font-family: var(--font) !important; --width: 340px; }
+.w-toaster [data-sonner-toast] {
+  background: var(--pop) !important; color: var(--fg) !important; border: 1px solid var(--line) !important;
+  border-radius: var(--radius-pop, 10px) !important; box-shadow: 0 12px 32px -8px rgba(0, 0, 0, .35) !important; font-size: 13px !important;
+  padding: 12px 14px !important; gap: 10px !important;
+}
+.w-toaster [data-sonner-toast] [data-title] { font-weight: 500 !important; }
+.w-toaster [data-sonner-toast] [data-description] { color: var(--muted) !important; }
+.w-toaster [data-sonner-toast] [data-button] {
+  height: 26px !important; padding: 0 10px !important; border-radius: 7px !important; font-weight: 600 !important; font-size: 12.5px !important;
+  background: var(--fg) !important; color: var(--bg) !important;
+}
+.w-toaster [data-sonner-toast][data-type='success'] [data-icon] { color: var(--green) !important; }
+.w-toaster [data-sonner-toast][data-type='error'] [data-icon] { color: var(--pink) !important; }
+@media (max-width: 760px) { .w-toaster[data-sonner-toaster] { --width: calc(100vw - 32px); } }

@@ -48,6 +48,19 @@ export type { RecordCardProps } from './card/Card'
 export { ViewPicker, ToggleChips } from './display/Display'
 export type { ViewOption, ViewPickerProps, ToggleChipsProps } from './display/Display'
 
+/* ── Records: opening, editing and confirming ── */
+export { Sheet } from './overlay/Sheet'
+export type { SheetProps } from './overlay/Sheet'
+export { Dialog } from './overlay/Dialog'
+export type { DialogProps } from './overlay/Dialog'
+export { Toaster, toast } from './toast/Toast'
+export { Field, Textarea, DateInput } from './form/Field'
+export type { FieldProps, TextareaProps, DateInputProps } from './form/Field'
+export { RadioGroup, MultiSelect } from './form/Choice'
+export type { RadioOption, RadioGroupProps, MultiSelectOption, MultiSelectProps } from './form/Choice'
+export { RecordHeader, Stepper, Metrics, Metric, PropertyList, Property, PropertySeparator, RecordLayout } from './record/Record'
+export type { RecordHeaderProps, StepperProps, MetricProps } from './record/Record'
+
 /* ── App shell ── */
 export { AppShell } from './shell/AppShell'
 export {

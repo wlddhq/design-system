@@ -19,7 +19,9 @@ export function TextMorph({ children, className }: TextMorphProps) {
   const seen: Record<string, number> = {}
   const chars = [...text].map((ch) => { seen[ch] = (seen[ch] || 0) + 1; return { ch, key: ch + seen[ch] } })
   return (
-    <span className={cx('w-morph', className)} aria-label={text}>
+    <span className={cx('w-morph', className)}>
+      {/* Screen readers read the whole word once; the animated letters are hidden from them. */}
+      <span className="w-sr">{text}</span>
       <AnimatePresence mode="popLayout" initial={false}>
         {chars.map((c) => (
           <motion.span key={c.key} aria-hidden layout="position"

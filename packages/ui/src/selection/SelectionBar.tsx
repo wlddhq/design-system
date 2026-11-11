@@ -35,8 +35,7 @@ export function SelectionBar({ count, children, noun = 'selected', total, onSele
     if (!shown || !canClear) return
     const key = (e: KeyboardEvent) => {
       if (e.key !== 'Escape' || e.defaultPrevented) return
-      // Escape closes an open menu first; the next press clears.
-      if (document.querySelector('.w-pop')) return
+      if (document.querySelector('.w-pop, .w-layer')) return // a menu, sheet or dialog takes Escape first
       // Escape inside a text field belongs to the field.
       const t = e.target
       if (t instanceof Element && t.closest('input, textarea, [contenteditable="true"]')) return

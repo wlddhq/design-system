@@ -1,4 +1,4 @@
-import { LayoutList, BookOpen, Palette, Shapes, SlidersHorizontal, Table2, PanelsTopLeft, LayoutTemplate, PenTool, Sparkles, type LucideIcon } from 'lucide-react'
+import { FileText, LayoutList, BookOpen, Palette, Shapes, SlidersHorizontal, Table2, PanelsTopLeft, LayoutTemplate, PenTool, Sparkles, type LucideIcon } from 'lucide-react'
 
 export type Page = { title: string; href: string }
 export type Group = { id: string; label: string; icon: LucideIcon; color: string; pages: Page[] }
@@ -51,6 +51,10 @@ export const NAV: Group[] = [
     pages: [c('list', 'List'), c('board', 'Board'), c('table', 'Table'), c('timeline', 'Timeline'), c('card', 'Grid (cards)'), c('display', 'Display menu')],
   },
   {
+    id: 'records', label: 'Records', icon: FileText, color: 'var(--violet)',
+    pages: [c('record', 'Record page'), c('sheet', 'Sheet'), c('dialog', 'Dialog'), c('form', 'Form fields'), c('toast', 'Toast')],
+  },
+  {
     id: 'shell', label: 'App shell', icon: PanelsTopLeft, color: 'var(--fg)',
     pages: [c('shell', 'App shell')],
   },
@@ -60,7 +64,7 @@ export const NAV: Group[] = [
   },
   {
     id: 'showcase', label: 'Showcase', icon: LayoutTemplate, color: 'var(--green)',
-    pages: [{ title: 'Campaigns', href: '/showcase/campaigns' }],
+    pages: [{ title: 'Campaigns', href: '/showcase/campaigns' }, { title: 'Campaign', href: '/showcase/campaign' }],
   },
 ]
 

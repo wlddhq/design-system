@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <DocPage href="/installation" lead="Add WLDD to a Next.js app with Tailwind v4.">
       <H2>Install</H2>
-      <Code lang="bash" code={`npm install @wldd/ui @wldd/tokens @wldd/tailwind lucide-react`} />
+      <Code lang="bash" code={`npm install @wldd/ui @wldd/tokens @wldd/tailwind lucide-react motion`} />
 
       <H2>Styles</H2>
       <p>Import everything once, in your global stylesheet. The order matters: Tailwind, then the WLDD theme, then tokens and components.</p>
