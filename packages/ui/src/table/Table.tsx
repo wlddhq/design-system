@@ -19,6 +19,8 @@ export type TableProps = {
   onLoadMore?: () => void
   /** Shown in place of the rows when the body has none (and nothing is loading). Usually an <Empty>. */
   empty?: ReactNode
+  /** Names the scroll area for screen readers, e.g. "Campaigns". @default 'Table' */
+  label?: string
 } & HTMLAttributes<HTMLTableElement>
 
 type El = ReturnType<typeof Children.toArray>[number]
@@ -30,14 +32,15 @@ const part = (children: ReactNode, tag: string) => Children.toArray(children).fi
  * and a filler column so the grid always reaches the right edge. Compose it from the parts below.
  * One component covers every size: all rows at once, or batches loaded as people scroll (`hasMore`).
  */
-export function Table({ loading, rows = 8, hasMore, onLoadMore, empty, children, className, ...rest }: TableProps) {
+export function Table({ loading, rows = 8, hasMore, onLoadMore, empty, label = 'Table', children, className, ...rest }: TableProps) {
   const head = part(children, 'thead')
   const body = part(children, 'tbody')
   const cols = columnsOf(head)
   const rowCount = isValidElement<Props>(body) ? Children.toArray(body.props.children).length : 0
   const isEmpty = !loading && !hasMore && empty != null && rowCount === 0
   return (
-    <div className={cx('w-table-wrap', className)}>
+    // Focusable so keyboard users can scroll it sideways when it doesn't fit (phones, many columns).
+    <div className={cx('w-table-wrap', className)} tabIndex={0} role="region" aria-label={label}>
       <table className="w-table" aria-busy={loading || undefined} aria-rowcount={hasMore ? -1 : undefined} {...rest}>
         {loading ? <>{head}<SkeletonRows cols={cols} rows={rows} /></>
           : isEmpty ? <>{head}<tbody><tr><td className="w-table-empty" colSpan={Math.max(cols.length, 1)}>{empty}</td></tr></tbody></>

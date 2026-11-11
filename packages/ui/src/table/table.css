@@ -58,3 +58,4 @@
   .w-table .w-col-primary { left: 0; min-width: 0; width: 46vw; max-width: 46vw; }
   .w-record-sub, .w-record-open { display: none; }
 }
+.w-table-wrap:focus-visible { outline: 2px solid var(--fg-2); outline-offset: -2px; }

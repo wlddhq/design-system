@@ -19,7 +19,7 @@ export type TokenRow = { v: string; cls: string; note?: string }
 export function ColourTable({ rows }: { rows: TokenRow[] }) {
   const vals = useVars(rows.map((r) => r.v))
   return (
-    <div className="tbl-w">
+    <div className="tbl-w" tabIndex={0} role="region" aria-label="Table">
       <table className="tbl">
         <thead><tr><th style={{ width: 52 }}><span className="w-sr">Swatch</span></th><th>Token</th><th>Tailwind</th><th>Value</th><th>Use for</th></tr></thead>
         <tbody>

@@ -17,7 +17,7 @@ import { Button } from '@wldd/ui'
 <Plus size={15} />                           // on its own: match the text`} />
 
       <H2>Sizes</H2>
-      <div className="tbl-w">
+      <div className="tbl-w" tabIndex={0} role="region" aria-label="Table">
         <table className="tbl">
           <thead><tr><th>Size</th><th>Where</th></tr></thead>
           <tbody>

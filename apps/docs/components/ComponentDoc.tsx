@@ -25,7 +25,7 @@ export async function Example({ id, title, note, frame }: { id: keyof typeof EXA
 export function PropsTable({ props }: { props: PropMeta[] }) {
   if (!props.length) return <p className="ex-d">No props of its own. Takes the standard HTML attributes of its element.</p>
   return (
-    <div className="tbl-w">
+    <div className="tbl-w" tabIndex={0} role="region" aria-label="Table">
       <table className="tbl">
         <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>

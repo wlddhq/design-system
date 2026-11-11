@@ -29,7 +29,7 @@ export function ToneGallery() {
   const { dark } = useHtmlTheme()
   const groups = [...new Set(TONES.map((t) => t.group))]
   return (
-    <div className="tbl-w" style={{ padding: '6px 14px 12px' }}>
+    <div className="tbl-w" tabIndex={0} role="region" aria-label="Table" style={{ padding: '6px 14px 12px' }}>
       {groups.map((g) => (
         <div key={g}>
           <div className="pop-h" style={{ paddingLeft: 0 }}>{g}</div>

@@ -30,7 +30,7 @@ export default function Page() {
       </div>
 
       <H2>Fonts</H2>
-      <div className="tbl-w">
+      <div className="tbl-w" tabIndex={0} role="region" aria-label="Table">
         <table className="tbl">
           <thead><tr><th>Token</th><th>Tailwind</th><th>Now</th><th>Use for</th></tr></thead>
           <tbody>
