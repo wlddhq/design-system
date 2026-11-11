@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Check, Palette } from 'lucide-react'
 import { Button } from '@wldd/ui'
-import { STYLES, TONES, CORNERS, type Theme } from '@wldd/tokens'
+import { STYLES, TONES, CORNERS, FONTS, type Theme } from '@wldd/tokens'
 import { useTheme } from '@/lib/theme'
 import { useHtmlTheme } from '@/lib/useHtmlTheme'
 
@@ -61,10 +61,17 @@ export function Appearance() {
                   </button>
                 ))}
               </div>
-              <div className="pop-h">Corners</div>
-              <div className="pop-pad"><Seg value={theme.corners} options={CORNERS} onChange={(corners) => setTheme({ corners })} /></div>
             </>
           )}
+          {/* Personal preferences, in every theme. Colour themes never change them. */}
+          <div className="pop-sep" />
+          <div className="pop-h">Corners</div>
+          <div className="pop-pad"><Seg value={theme.corners} options={CORNERS.map((c) => ({ ...c, label: c.id === 'default' ? 'Default' : c.id }))} onChange={(corners) => setTheme({ corners })} /></div>
+          <div className="pop-h">Type</div>
+          <div className="pop-pad">
+            <Seg value={theme.font ?? 'default'} options={[{ id: 'default', label: 'Default' }, ...FONTS.filter((f) => ['geist', 'plex', 'manrope'].includes(f.id)).map((f) => ({ id: f.id, label: f.label }))]}
+              onChange={(font) => setTheme({ font: font === 'default' ? null : (font as Theme['font']) })} />
+          </div>
         </div>
       )}
     </>

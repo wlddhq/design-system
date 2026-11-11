@@ -7,7 +7,7 @@
   padding: 28px 32px; border-radius: 18px; background: var(--surface); box-shadow: var(--shadow-pop); outline: none;
 }
 .w-sheet-x { position: absolute; top: 14px; right: 14px; z-index: 1; }
-:root[data-style='pop'] .w-sheet, :root[data-style='pop'] .w-dialog { border-radius: var(--radius-pop); }
+:root[data-corners] .w-sheet, :root[data-corners] .w-dialog { border-radius: var(--radius-pop); }
 
 .w-layer-center { display: flex; justify-content: center; align-items: flex-start; padding: 14vh 16px 16px; }
 .w-dialog {

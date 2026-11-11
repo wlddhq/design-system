@@ -6,7 +6,7 @@
 :root[data-font='manrope']   { --font: 'Manrope', 'Inter', system-ui, sans-serif; --display: 'Manrope', 'Inter', sans-serif; }
 :root[data-font='bricolage'] { --font: 'Inter', system-ui, sans-serif; --display: 'Bricolage Grotesque', 'Inter', sans-serif; }
 :root[data-font='system']    { --font: system-ui, -apple-system, 'Segoe UI', sans-serif; --display: system-ui, -apple-system, 'Segoe UI', sans-serif; }
-:root[data-style='pop'][data-font='bricolage'] { --btn-weight: 550; }
+:root[data-font='bricolage'] { --btn-weight: 550; }
 
 /* Reduced motion: keep fades and colour, drop movement. Spinners and progress keep running. */
 :root[data-motion='reduced'] *, :root[data-motion='reduced'] *::before, :root[data-motion='reduced'] *::after {

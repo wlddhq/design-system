@@ -18,7 +18,7 @@
 .w-side-head-btn { display: flex; align-items: center; gap: 10px; width: 100%; height: 34px; padding: 0 10px 0 6px; border-radius: 8px; font-weight: 600; color: var(--fg-2); text-align: left; }
 .w-side-head-btn:hover { background: var(--hover); color: var(--fg); }
 .w-side-group[data-open] .w-side-head-btn { color: var(--fg); }
-:root[data-style='pop'] .w-side-head-btn { border-radius: var(--radius-base); }
+:root[data-corners] .w-side-head-btn { border-radius: var(--radius-base); }
 .w-side-sub { display: flex; flex-direction: column; gap: 1px; margin: 2px 0 8px 18px; }
 
 .w-side-item { position: relative; display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 10px; border-radius: var(--radius-item); width: 100%; text-align: left; font-size: 13px; font-weight: 500; color: var(--fg-2); }
@@ -27,7 +27,7 @@
 .w-side-item[data-active] { color: var(--fg); background: color-mix(in oklab, var(--fg) 7%, transparent); }
 .w-side-item[data-active]:hover { background: color-mix(in oklab, var(--fg) 9%, transparent); }
 .w-side-item[data-active] > svg { color: var(--fg); }
-:root[data-style='pop'] .w-side-item[data-active] { background: var(--surface); font-weight: 600; box-shadow: inset 0 0 0 1px var(--line-2), 0 2px 0 var(--lip); }
+:root[data-style='pop'] .w-side-item[data-active] { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line-2), 0 2px 0 var(--lip); }
 
 /* Tree guides: a trunk from under the group icon, a soft elbow into each page; the active path a shade darker. */
 .w-side { --guide: color-mix(in oklab, var(--fg) 16%, var(--bg)); --guide-on: color-mix(in oklab, var(--fg) 58%, var(--bg)); }

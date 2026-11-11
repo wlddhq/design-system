@@ -1,7 +1,7 @@
 /* ═════════ Buttons and corners ═════════
    Lip is the only button style, in every style: a 2px lip under each control that presses flat.
    Every style supplies --lip, --cta, --cta-fg and --cta-lip for it.
-   Corners (data-corners) is Pop only. */
+   Corners (data-corners) is a preference in every style. */
 
 /* Lip */
 :root {
@@ -24,8 +24,9 @@
 :root[data-style='pop'] { --dur-press: 100ms; --kbd-on-primary: rgba(0, 0, 0, .08); }
 :root[data-style='pop'][data-tone]:not([data-tone='haldi']):not([data-tone='jamun']) { --kbd-on-primary: rgba(255, 255, 255, .18); }
 
-/* Corners — Pop only. Default 6px. */
-:root[data-style='pop'] { --radius-control: 6px; --radius-control-sm: 6px; --radius-chip: 5px; --radius-card: 6px; --radius-pop: 8px; --radius-base: 6px; --radius-tag: 5px; --radius-item: var(--radius-base); }
-:root[data-style='pop'][data-corners='4']  { --radius-control: 4px;  --radius-control-sm: 4px;  --radius-chip: 3px;  --radius-card: 4px;  --radius-pop: 6px;  --radius-base: 4px;  --radius-tag: 3px; }
-:root[data-style='pop'][data-corners='10'] { --radius-control: 10px; --radius-control-sm: 10px; --radius-chip: 7px;  --radius-card: 10px; --radius-pop: 12px; --radius-base: 10px; --radius-tag: 7px; }
-:root[data-style='pop'][data-corners='14'] { --radius-control: 14px; --radius-control-sm: 14px; --radius-chip: 10px; --radius-card: 14px; --radius-pop: 16px; --radius-base: 14px; --radius-tag: 10px; }
+/* Corners — a personal preference in every style. No data-corners = each element keeps its own radius.
+   Set, it rounds controls, chips, cards and menus to one scale. Colour themes never set it. */
+:root[data-corners='4']  { --radius-control: 4px;  --radius-control-sm: 4px;  --radius-chip: 3px;  --radius-card: 4px;  --radius-pop: 6px;  --radius-base: 4px;  --radius-tag: 3px;  --radius-tab: 4px;  --radius-item: 4px; }
+:root[data-corners='6']  { --radius-control: 6px;  --radius-control-sm: 6px;  --radius-chip: 5px;  --radius-card: 6px;  --radius-pop: 8px;  --radius-base: 6px;  --radius-tag: 5px;  --radius-tab: 6px;  --radius-item: 6px; }
+:root[data-corners='10'] { --radius-control: 10px; --radius-control-sm: 10px; --radius-chip: 7px;  --radius-card: 10px; --radius-pop: 12px; --radius-base: 10px; --radius-tag: 7px;  --radius-tab: 10px; --radius-item: 10px; }
+:root[data-corners='14'] { --radius-control: 14px; --radius-control-sm: 14px; --radius-chip: 10px; --radius-card: 14px; --radius-pop: 16px; --radius-base: 14px; --radius-tag: 10px; --radius-tab: 14px; --radius-item: 14px; }

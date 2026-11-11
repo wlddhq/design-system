@@ -55,7 +55,7 @@ export function PresetRow() {
   return (
     <div className="flex flex-wrap gap-2">
       {PRESETS.map((p) => {
-        const on = theme.style === 'pop' && theme.tone === p.theme.tone && theme.corners === p.theme.corners && theme.font === p.theme.font
+        const on = theme.style === 'pop' && theme.tone === p.theme.tone
         return (
           <Button key={p.id} pressed={on} onClick={() => setTheme({ style: 'pop', ...p.theme })}>
             <Orb sw={TONES.find((t) => t.id === p.theme.tone)!.swatch[dark ? 'dark' : 'light']} size={14} />{p.label}
@@ -71,7 +71,7 @@ export function DialRow() {
   return (
     <div className="grid gap-3" style={{ maxWidth: 420 }}>
       <div className="grid gap-1.5"><span className="text-xs text-muted">Corners</span>
-        <Seg value={theme.corners} options={CORNERS} onChange={(corners) => setTheme({ style: 'pop', corners })} /></div>
+        <Seg value={theme.corners} options={CORNERS} onChange={(corners) => setTheme({ corners })} /></div>
       <div className="flex flex-wrap gap-2 pt-2">
         <Button variant="primary">Approve</Button><Button>Reschedule</Button><Button variant="ghost">Skip</Button>
       </div>
@@ -83,7 +83,7 @@ export function FontRow() {
   const { theme, setTheme } = useTheme()
   return (
     <div className="flex flex-wrap gap-1.5">
-      <Button size="sm" variant="ghost" pressed={!theme.font} onClick={() => setTheme({ font: null })}>Style default</Button>
+      <Button size="sm" variant="ghost" pressed={!theme.font} onClick={() => setTheme({ font: null })}>Default</Button>
       {FONTS.map((f) => (
         <Button key={f.id} size="sm" variant="ghost" pressed={theme.font === f.id} onClick={() => setTheme({ font: f.id })}>
           <span style={{ fontFamily: f.family }}>{f.label}</span>

@@ -3,5 +3,5 @@
 .w-check[data-on] { background: var(--ink); box-shadow: none; }
 .w-check:active { transform: scale(.9); }
 .w-check:disabled { opacity: .35; pointer-events: none; }
-:root[data-style='pop'] .w-check { border-radius: max(3px, calc(var(--radius-base) - 2px)); }
+:root[data-corners] .w-check { border-radius: max(3px, calc(var(--radius-base) - 2px)); }
 :root[data-style='pop'] .w-check[data-on] { background: var(--hl); color: var(--cta-fg); }

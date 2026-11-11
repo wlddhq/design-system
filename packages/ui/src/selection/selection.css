@@ -1,6 +1,6 @@
 /* max-content: a centred fixed box may only use half the width, so it would squeeze its own buttons. */
 .w-selbar { position: fixed; left: 50%; bottom: 20px; z-index: 50; translate: -50% 0; width: max-content; max-width: calc(100% - 16px); display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 16px; border-radius: 14px; background: var(--ink); color: var(--ink-fg); box-shadow: 0 16px 40px -10px rgba(0, 0, 0, .4); animation: w-selbar-in 200ms var(--ease-out); }
-:root[data-style='pop'] .w-selbar { border-radius: var(--radius-pop); }
+:root[data-corners] .w-selbar { border-radius: var(--radius-pop); }
 @keyframes w-selbar-in { from { opacity: 0; transform: translateY(12px) scale(.97); } }
 .w-selbar-n { font-weight: 600; font-variant-numeric: tabular-nums; }
 .w-selbar-l { opacity: .6; margin-right: 8px; }

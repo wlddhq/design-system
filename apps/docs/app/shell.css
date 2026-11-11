@@ -35,14 +35,14 @@
 
 .role-ic { flex: none; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; color: color-mix(in oklab, var(--rc) 72%, #000); background: color-mix(in oklab, var(--fg) 8%, transparent); }
 :root[data-theme='dark'] .role-ic, :root[data-style='kajal'] .role-ic { color: var(--rc); background: color-mix(in oklab, var(--fg) 9%, transparent); }
-:root[data-style='pop'] .sb-wsh { border-radius: var(--radius-control); }
+:root[data-corners] .sb-wsh { border-radius: var(--radius-control); }
 
 .d-item { position: relative; display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 10px; border-radius: 7px; color: var(--fg-2); font-weight: 500; font-size: 13px; width: 100%; text-align: left; }
 .d-item:hover { background: var(--hover); color: var(--fg); }
 /* Active = instant filled background. Navigation never animates. */
 .d-item.on { color: var(--fg); background: color-mix(in oklab, var(--fg) 7%, transparent); }
 .d-item.on:hover { background: color-mix(in oklab, var(--fg) 9%, transparent); }
-:root[data-style='pop'] .d-item { border-radius: var(--radius-control); }
+:root[data-corners] .d-item { border-radius: var(--radius-control); }
 
 /* Tree guides: one trunk from under the group icon, a soft elbow into each page; the current path a shade darker. */
 .sb-stack { --guide: color-mix(in oklab, var(--fg) 16%, var(--bg)); --guide-on: color-mix(in oklab, var(--fg) 58%, var(--bg)); }
@@ -68,12 +68,11 @@
 .d-scroll { flex: 1; overflow: auto; min-height: 0; }
 .d-page { max-width: 1120px; margin: 0 auto; padding: 20px 32px 96px; }
 .d-h1 { font-family: var(--display); font-size: 24px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; }
-:root[data-style='pop'] .d-h1 { font-weight: 700; letter-spacing: -0.02em; }
 :root[data-style='kajal'] .d-h1 { font-weight: 500; letter-spacing: -0.03em; }
 
 /* ───────── Popover (Appearance) ───────── */
 .pop { position: fixed; z-index: 70; width: 272px; padding: 4px; border-radius: 12px; background: var(--pop); box-shadow: var(--shadow-pop); color: var(--fg); transform-origin: bottom left; animation: pop-in 160ms var(--ease-out); }
-:root[data-style='pop'] .pop { border-radius: var(--radius-pop); }
+:root[data-corners] .pop { border-radius: var(--radius-pop); }
 @keyframes pop-in { from { opacity: 0; transform: scale(.96); } }
 .pop-h { font-size: 11.5px; color: var(--muted); padding: 8px 10px 4px; font-weight: 500; }
 .pop-sep { height: 1px; background: var(--line); margin: 4px 6px; }

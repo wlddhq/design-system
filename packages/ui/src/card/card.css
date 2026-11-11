@@ -10,7 +10,7 @@
   border-radius: 12px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); transition: box-shadow 150ms;
 }
 a.w-rcard:hover, button.w-rcard:hover, .w-rcard:focus-visible { outline: none; box-shadow: 0 0 0 1px var(--line-2), 0 8px 24px -12px rgba(0, 0, 0, .18); }
-:root[data-style='pop'] .w-rcard { border-radius: var(--radius-card); }
+:root[data-corners] .w-rcard { border-radius: var(--radius-card); }
 :root[data-style='pop'] a.w-rcard:hover, :root[data-style='pop'] button.w-rcard:hover { box-shadow: 0 0 0 1px var(--faint), 0 2px 0 var(--lip); }
 .w-rcard-head { display: flex; align-items: center; gap: 12px; min-width: 0; }
 .w-rcard-head > .w-logo, .w-rcard-head > .w-av { flex: none; }
