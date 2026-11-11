@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "@wldd/tailwind";
+@import "@wldd/tokens/tokens.css";
+@import "@wldd/ui/styles.css";
+@import "./shell.css";
+@import "./doc.css";
+@import "./hero.css";
+
+/* Examples live in apps/docs/examples; make sure Tailwind sees their classes. */
+@source "../examples";

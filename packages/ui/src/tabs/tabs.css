@@ -1,0 +1,26 @@
+/* Pill tabs — the view bar (All 28 · Active 17 · Pipeline 7) */
+.w-tabs { display: flex; gap: 4px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.w-tabs::-webkit-scrollbar { display: none; }
+.w-tab { height: 26px; padding: 0 10px; border-radius: var(--radius-tab); display: inline-flex; align-items: center; gap: 6px; flex: none; font-weight: 500; font-size: 12.5px; color: var(--fg-2); box-shadow: inset 0 0 0 1px var(--line); white-space: nowrap; }
+.w-tab:hover { color: var(--fg); background: var(--hover); }
+.w-tab[aria-selected='true'] { background: var(--sunken); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line-2); }
+.w-tab-n { color: var(--muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.w-tab > svg { color: var(--muted); }
+
+/* Underline tabs — sections of one page */
+.w-tabs[data-variant='underline'] { gap: 20px; box-shadow: inset 0 -1px 0 var(--line); } /* inset: the scroll box would clip a border-hung indicator */
+.w-tabs[data-variant='underline'] .w-tab { position: relative; height: 38px; padding: 0; border-radius: 0; box-shadow: none; background: none; font-size: inherit; color: var(--muted); }
+.w-tabs[data-variant='underline'] .w-tab:hover { color: var(--fg); }
+.w-tabs[data-variant='underline'] .w-tab[aria-selected='true'] { color: var(--fg); }
+.w-tabs[data-variant='underline'] .w-tab[aria-selected='true']::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; border-radius: 2px; background: var(--fg); }
+:root[data-style='pop'] .w-tabs[data-variant='underline'] .w-tab[aria-selected='true']::after { background: var(--hl); height: 2px; }
+
+/* Segmented — fill track, raised option (light) / lighter fill (dark) */
+.w-seg { display: inline-flex; padding: 2px; border-radius: var(--radius-control); background: color-mix(in oklab, var(--fg) 5.5%, transparent); }
+.w-seg button { height: 28px; padding: 0 11px; border-radius: calc(var(--radius-control) - 1px); display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: 1; font-weight: 500; color: var(--muted); white-space: nowrap; transition: color 150ms; }
+.w-seg[data-size='sm'] button { height: 24px; padding: 0 8px; font-size: 12.5px; }
+.w-seg button:hover { color: var(--fg); }
+.w-seg button[aria-checked='true'] { color: var(--fg); background: var(--surface); box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 0 0 .5px rgba(0, 0, 0, .06); }
+:root[data-theme='dark'] .w-seg button[aria-checked='true'], :root[data-style='kajal'] .w-seg button[aria-checked='true'] { background: color-mix(in oklab, var(--fg) 13%, transparent); box-shadow: none; }
+:root[data-style='pop'] .w-seg { background: var(--sunken); }
+:root[data-style='pop'] .w-seg button[aria-checked='true'] { font-weight: 600; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line-2), 0 2px 0 var(--lip); }

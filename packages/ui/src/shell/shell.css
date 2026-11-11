@@ -1,0 +1,85 @@
+/* ═════════ App shell — Velin: Linear's structure, main panel flush ═════════ */
+.w-app { display: flex; height: 100vh; height: 100dvh; background: var(--bg); color: var(--fg); overflow: hidden; }
+
+/* Sidebar */
+.w-side { width: 224px; flex: none; display: flex; flex-direction: column; gap: 2px; padding: 12px 8px 10px; background: var(--bg); }
+.w-side-head { display: flex; align-items: center; justify-content: space-between; padding: 0 6px 14px; }
+.w-side-tools { display: inline-flex; align-items: center; gap: 2px; }
+.w-side-body { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; margin: 0 -8px; padding: 0 8px; scrollbar-width: none; }
+.w-side-body::-webkit-scrollbar { display: none; }
+.w-side-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.w-side-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w-side-n { margin-left: auto; font-size: 11.5px; color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+.w-tile { flex: none; display: inline-grid; place-items: center; border-radius: 6px; color: color-mix(in oklab, var(--rc) 72%, #000); background: color-mix(in oklab, var(--fg) 8%, transparent); }
+:root[data-theme='dark'] .w-tile, :root[data-style='kajal'] .w-tile { color: var(--rc); background: color-mix(in oklab, var(--fg) 9%, transparent); }
+
+.w-side-group + .w-side-group { margin-top: 2px; }
+.w-side-head-btn { display: flex; align-items: center; gap: 10px; width: 100%; height: 34px; padding: 0 10px 0 6px; border-radius: 8px; font-weight: 600; color: var(--fg-2); text-align: left; }
+.w-side-head-btn:hover { background: var(--hover); color: var(--fg); }
+.w-side-group[data-open] .w-side-head-btn { color: var(--fg); }
+:root[data-style='pop'] .w-side-head-btn { border-radius: var(--radius-base); }
+.w-side-sub { display: flex; flex-direction: column; gap: 1px; margin: 2px 0 8px 18px; }
+
+.w-side-item { position: relative; display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 10px; border-radius: var(--radius-item); width: 100%; text-align: left; font-size: 13px; font-weight: 500; color: var(--fg-2); }
+.w-side-item > svg { color: var(--muted); flex: none; transition: color var(--dur-fast); }
+.w-side-item:hover { background: var(--hover); color: var(--fg); }
+.w-side-item[data-active] { color: var(--fg); background: color-mix(in oklab, var(--fg) 7%, transparent); }
+.w-side-item[data-active]:hover { background: color-mix(in oklab, var(--fg) 9%, transparent); }
+.w-side-item[data-active] > svg { color: var(--fg); }
+:root[data-style='pop'] .w-side-item[data-active] { background: var(--surface); font-weight: 600; box-shadow: inset 0 0 0 1px var(--line-2), 0 2px 0 var(--lip); }
+
+/* Tree guides: a trunk from under the group icon, a soft elbow into each page; the active path a shade darker. */
+.w-side { --guide: color-mix(in oklab, var(--fg) 16%, var(--bg)); --guide-on: color-mix(in oklab, var(--fg) 58%, var(--bg)); }
+.w-side-tree { display: flex; flex-direction: column; gap: 1px; padding-left: 14px; }
+.w-side-tree > .w-side-item::after { content: ''; position: absolute; left: -14px; top: -1px; bottom: -2px; border-left: 1px solid var(--guide); pointer-events: none; }
+.w-side-tree > .w-side-item:first-child::after { top: -8px; }
+.w-side-tree > .w-side-item:last-child::after { bottom: calc(50% + 6px); }
+.w-side-tree > .w-side-item::before { content: ''; position: absolute; left: -14px; top: calc(50% - 7px); width: 10px; height: 7px; border-left: 1px solid var(--guide); border-bottom: 1px solid var(--guide); border-bottom-left-radius: 7px; pointer-events: none; }
+.w-side-tree > .w-side-item:has(~ .w-side-item[data-active])::after { border-color: var(--guide-on); }
+.w-side-tree > .w-side-item[data-active]::before { z-index: 1; top: -1px; height: calc(50% + 1px); width: 14px; border-color: var(--guide-on); }
+.w-side-tree > .w-side-item[data-active]:first-child::before { top: -8px; height: calc(50% + 8px); }
+
+.w-side-sec { display: flex; flex-direction: column; gap: 1px; }
+.w-side-sec[data-bottom] { margin-top: auto; padding: 10px 0; }
+.w-side-sec-l { font-size: 11.5px; color: var(--muted); font-weight: 500; padding: 12px 10px 4px; }
+.w-side-sec .w-side-item { font-weight: 450; gap: 10px; }
+.w-side-foot { margin-top: auto; display: flex; align-items: center; gap: 8px; padding: 8px 6px 0; font-weight: 500; }
+
+/* Main panel */
+.w-main { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--surface); border-left: 1px solid var(--line); }
+.w-top { height: 44px; flex: none; display: flex; align-items: center; gap: 10px; padding: 0 10px 0 18px; border-bottom: 1px solid var(--line); }
+.w-top .w-btn[data-variant='primary'] { height: 28px; margin-left: 6px; }
+.w-crumb { display: flex; align-items: center; gap: 6px; min-width: 0; font-weight: 500; color: var(--muted); }
+.w-crumb-cur { display: inline-flex; align-items: center; gap: 8px; min-width: 0; color: var(--fg); }
+.w-crumb-link { min-width: 0; flex: 0 1 auto; }
+.w-crumb-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w-crumb-cur > svg, .w-crumb-link > svg, .w-crumb-n, .w-crumb-sep { flex: none; }
+.w-crumb-ic { color: var(--muted); }
+.w-crumb-n { color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+.w-crumb-link { display: inline-flex; align-items: center; gap: 8px; }
+.w-crumb-link:hover { color: var(--fg); }
+.w-crumb-sep { color: var(--muted); }
+.w-crumb-code { font-family: var(--mono); font-size: 12.5px; }
+.w-top-r { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.w-toolbar { height: 44px; flex: none; display: flex; align-items: center; gap: 6px; padding: 0 10px 0 14px; border-bottom: 1px solid var(--line); background: var(--surface); }
+.w-spacer { flex: 1; }
+.w-scroll { flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; }
+/* min-height 0: the table scrolls itself, so its header and footer stay put (instead of the page scrolling them away). */
+.w-scroll > .w-table-wrap { flex: 1; min-height: 0; }
+.w-page { width: 100%; max-width: 1120px; margin: 0 auto; padding: 20px 32px 96px; }
+.w-page[data-wide] { max-width: 1360px; }
+
+/* Phones and tablets: the sidebar becomes a drawer */
+.w-scrim { display: none; }
+@media (max-width: 960px) {
+  .w-side { position: fixed; z-index: 60; inset: 0 auto 0 0; width: 260px; transform: translateX(-100%); transition: transform 360ms var(--ease-drawer); box-shadow: var(--shadow-pop); }
+  .w-app[data-drawer] .w-side { transform: none; }
+  .w-scrim { display: block; position: fixed; inset: 0; z-index: 55; background: var(--overlay); opacity: 0; pointer-events: none; transition: opacity 200ms; }
+  .w-app[data-drawer] .w-scrim { opacity: 1; pointer-events: auto; }
+  .w-main { border-left: 0; }
+  .w-top { padding-left: 8px; }
+  .w-toolbar { overflow-x: auto; scrollbar-width: none; }
+  .w-toolbar > * { flex: none; }
+  .w-page { padding: 16px 16px 72px; }
+}

@@ -1,0 +1,48 @@
+/* ═════════ WLDD tokens — foundation ═════════
+   One source of truth. Every component and every Tailwind utility reads these variables.
+
+   The page is themed with attributes on <html> (see applyTheme in @wldd/tokens):
+     data-theme    light | dark                         (default light)
+     data-style    khadi | kajal | pop                  (default khadi)
+     data-tone     haldi | tulsi | baingani | …          Pop only (default haldi)
+     data-corners  4 | 6 | 10 | 14                       Pop only (default 6)
+     data-font     inter | geist | plex | manrope | bricolage | system   (default: the style's own)
+     data-density  comfortable | compact                (default comfortable)
+     data-motion   full | reduced                       (default full)
+
+   Layer order: foundation → khadi → kajal → pop → pop tones → buttons & corners → preferences → base. */
+
+:root {
+  /* Type */
+  --font: 'Inter', system-ui, sans-serif;
+  --display: 'Inter Tight', 'Inter', sans-serif;
+  --mono: 'Geist Mono', ui-monospace, monospace;
+  --text-size: 13.5px;
+  /* Type scale (provisional — consolidated from 16 sizes in the prototype) */
+  --text-2xs: 10.5px; --text-xs: 11.5px; --text-sm: 12.5px; --text-base: 13.5px; --text-md: 15px;
+  --text-lg: 17px; --text-xl: 22px; --text-2xl: 26px; --text-3xl: 36px;
+
+  /* Motion — mirror EASE / DRAWER in @wldd/ui motion */
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-drawer: cubic-bezier(.32, .72, 0, 1);
+  --dur-fast: 120ms;
+  --dur-press: 160ms;
+
+  /* Controls */
+  --control-h: 32px;
+  --control-h-sm: 26px;
+  --control-pad: 12px;
+  --control-pad-sm: 9px;
+  --radius-control: 9px;
+  --radius-control-sm: 7px;
+  --radius-card: 14px;
+  --radius-pop: 12px;
+  --radius-chip: 6px;   /* chips, status pills */
+  --radius-tag: 4px;    /* mono code tags (AMP, INF…) */
+  --radius-tab: 7px;    /* view tabs */
+  --radius-item: 7px;   /* sidebar items, menu rows */
+  --radius-base: 7px;   /* Pop's corner value; things Pill must not round (logos, items) */
+
+  /* Button recipes live in 40-buttons.css (Lip, the only button style). */
+  --kbd-on-primary: rgba(255, 255, 255, .14);
+}

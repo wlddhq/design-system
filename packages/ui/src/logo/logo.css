@@ -1,0 +1,6 @@
+.w-logo { display: inline-grid; place-items: center; flex: none; position: relative; overflow: hidden; border-radius: var(--logo-r); color: #fff; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+:root[data-style='pop'] .w-logo { border-radius: var(--radius-base); }
+.w-logo-img { background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); }
+.w-logo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.w-logo-img::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); pointer-events: none; }
+:root[data-theme='dark'] .w-logo-img::after, :root[data-style='kajal'] .w-logo-img::after { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }

@@ -1,0 +1,111 @@
+/* ═════════ Docs shell — the DMS prototype's Velin shell with the Stacked sidebar ═════════
+   Values are lifted from dms-play (app.css + exp.css linear/velin + the sb-stack tree) so the
+   docs read as the product. When Sidebar/AppShell land in @wldd/ui, this file goes away. */
+
+.d { display: flex; height: 100vh; height: 100dvh; background: var(--bg); color: var(--fg); overflow: hidden; }
+.d * { -webkit-tap-highlight-color: transparent; }
+.mute { color: var(--muted); }
+.grow { flex: 1; min-width: 0; }
+.ell { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ───────── Sidebar ───────── */
+.d-side { width: 224px; flex: none; display: flex; flex-direction: column; padding: 12px 8px 10px; gap: 2px; background: var(--bg); }
+.d-brand { display: flex; align-items: center; justify-content: space-between; padding: 0 6px 14px; }
+.d-brand > a { display: block; }
+
+/* Grey WLDD mark (from the DMS Home page). Knock-out fill matches whatever it sits on. */
+.wm { display: block; flex: none; overflow: visible; }
+.wm-outline { --wm-l: color-mix(in oklab, var(--fg) 26%, var(--surface)); }
+.wm-line { fill: var(--wm-l); stroke: var(--wm-l); }
+.wm-bg { fill: var(--wm-bg, var(--surface)); stroke: var(--wm-bg, var(--surface)); }
+.d-brand .wm { --wm-bg: var(--bg); }
+.sb-tools { display: inline-flex; align-items: center; gap: 2px; }
+.sb-scroll { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; margin: 0 -8px; padding: 0 8px; scrollbar-width: none; }
+.sb-scroll::-webkit-scrollbar { display: none; }
+.d-nav { display: flex; flex-direction: column; gap: 2px; }
+
+/* Group head = a workspace in the prototype: icon tile + label; the open one shows its pages as a tree */
+.sb-wsh { display: flex; align-items: center; gap: 10px; width: 100%; height: 34px; padding: 0 10px 0 6px; border-radius: 8px; font-weight: 600; color: var(--fg-2); text-align: left; }
+.sb-wsh:hover { background: var(--hover); color: var(--fg); }
+.sb-ws-g.on .sb-wsh { color: var(--fg); }
+.sb-wsh .n { margin-left: auto; font-size: 11.5px; color: var(--muted); font-weight: 500; }
+.sb-ws-g + .sb-ws-g { margin-top: 2px; }
+.sb-sub { display: flex; flex-direction: column; gap: 1px; margin: 2px 0 8px 18px; }
+
+.role-ic { flex: none; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; color: color-mix(in oklab, var(--rc) 72%, #000); background: color-mix(in oklab, var(--fg) 8%, transparent); }
+:root[data-theme='dark'] .role-ic, :root[data-style='kajal'] .role-ic { color: var(--rc); background: color-mix(in oklab, var(--fg) 9%, transparent); }
+:root[data-style='pop'] .sb-wsh { border-radius: var(--radius-control); }
+
+.d-item { position: relative; display: flex; align-items: center; gap: 9px; height: 28px; padding: 0 10px; border-radius: 7px; color: var(--fg-2); font-weight: 500; font-size: 13px; width: 100%; text-align: left; }
+.d-item:hover { background: var(--hover); color: var(--fg); }
+/* Active = instant filled background. Navigation never animates. */
+.d-item.on { color: var(--fg); background: color-mix(in oklab, var(--fg) 7%, transparent); }
+.d-item.on:hover { background: color-mix(in oklab, var(--fg) 9%, transparent); }
+:root[data-style='pop'] .d-item { border-radius: var(--radius-control); }
+
+/* Tree guides: one trunk from under the group icon, a soft elbow into each page; the current path a shade darker. */
+.sb-stack { --guide: color-mix(in oklab, var(--fg) 16%, var(--bg)); --guide-on: color-mix(in oklab, var(--fg) 58%, var(--bg)); }
+.sb-tree { display: flex; flex-direction: column; gap: 1px; padding-left: 14px; }
+.sb-tree > .d-item::after { content: ''; position: absolute; left: -14px; top: -1px; bottom: -2px; border-left: 1px solid var(--guide); pointer-events: none; }
+.sb-tree > .d-item:first-child::after { top: -8px; }
+.sb-tree > .d-item:last-child::after { bottom: calc(50% + 6px); }
+.sb-tree > .d-item::before { content: ''; position: absolute; left: -14px; top: calc(50% - 7px); width: 10px; height: 7px; border-left: 1px solid var(--guide); border-bottom: 1px solid var(--guide); border-bottom-left-radius: 7px; pointer-events: none; }
+.sb-tree > .d-item:has(~ .d-item.on)::after { border-color: var(--guide-on); }
+.sb-tree > .d-item.on::before { z-index: 1; top: -1px; height: calc(50% + 1px); width: 14px; border-color: var(--guide-on); }
+.sb-tree > .d-item.on:first-child::before { top: -8px; height: calc(50% + 8px); }
+
+.d-side-f { margin-top: auto; display: flex; align-items: center; gap: 8px; padding: 8px 6px 0; }
+.d-ver { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+/* ───────── Main (Velin: flush, one hairline to the sidebar) ───────── */
+.d-main { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--surface); border-left: 1px solid var(--line); }
+.d-top { height: 44px; flex: none; display: flex; align-items: center; gap: 10px; padding: 0 10px 0 18px; border-bottom: 1px solid var(--line); }
+.d-crumb { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--muted); min-width: 0; }
+.d-crumb .cur { color: var(--fg); }
+.d-crumb a:hover { color: var(--fg); }
+.d-top-r { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.d-scroll { flex: 1; overflow: auto; min-height: 0; }
+.d-page { max-width: 1120px; margin: 0 auto; padding: 20px 32px 96px; }
+.d-h1 { font-family: var(--display); font-size: 24px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; }
+:root[data-style='pop'] .d-h1 { font-weight: 700; letter-spacing: -0.02em; }
+:root[data-style='kajal'] .d-h1 { font-weight: 500; letter-spacing: -0.03em; }
+
+/* ───────── Popover (Appearance) ───────── */
+.pop { position: fixed; z-index: 70; width: 272px; padding: 4px; border-radius: 12px; background: var(--pop); box-shadow: var(--shadow-pop); color: var(--fg); transform-origin: bottom left; animation: pop-in 160ms var(--ease-out); }
+:root[data-style='pop'] .pop { border-radius: var(--radius-pop); }
+@keyframes pop-in { from { opacity: 0; transform: scale(.96); } }
+.pop-h { font-size: 11.5px; color: var(--muted); padding: 8px 10px 4px; font-weight: 500; }
+.pop-sep { height: 1px; background: var(--line); margin: 4px 6px; }
+.pop-row { display: flex; align-items: center; gap: 10px; width: 100%; height: 32px; padding: 0 10px; border-radius: 8px; text-align: left; color: var(--fg-2); font-weight: 500; }
+.pop-row:hover { background: var(--hover); color: var(--fg); }
+.pop-row.on { color: var(--fg); }
+.pop-row .chk { margin-left: auto; color: var(--fg); }
+.pop-pad { padding: 2px 6px 6px; }
+
+/* Segmented: fill track, raised pill (light) / lighter fill (dark) */
+.seg { display: flex; padding: 2px; border-radius: 9px; background: color-mix(in oklab, var(--fg) 5.5%, transparent); }
+.seg button { flex: 1; height: 26px; padding: 0 8px; border-radius: 7px; font-weight: 500; font-size: 12.5px; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; transition: color 150ms; }
+.seg button:hover { color: var(--fg); }
+.seg button.on { color: var(--fg); background: var(--surface); box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 0 0 .5px rgba(0, 0, 0, .06); }
+:root[data-theme='dark'] .seg button.on, :root[data-style='kajal'] .seg button.on { background: color-mix(in oklab, var(--fg) 13%, transparent); box-shadow: none; }
+
+/* Colour orb: background ↗ accent */
+.orb { display: inline-block; flex: none; border-radius: 99px; background: linear-gradient(135deg, var(--a) 0 52%, var(--b) 52% 100%); box-shadow: inset 0 0 0 1px rgba(128, 128, 128, .32); }
+.orb.on { box-shadow: inset 0 0 0 1px rgba(128, 128, 128, .32), 0 0 0 2px var(--pop), 0 0 0 3.5px var(--fg); }
+.tones { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); justify-items: center; padding: 4px 6px 8px; }
+.tones button { display: grid; place-items: center; width: 20px; height: 22px; border-radius: 99px; }
+.tones button:active .orb { transform: scale(.92); }
+
+/* ───────── Phones and tablets: the sidebar becomes a drawer ───────── */
+.m-menu, .m-scrim { display: none; }
+@media (max-width: 960px) {
+  .d-side { position: fixed; z-index: 60; inset: 0 auto 0 0; width: 260px; transform: translateX(-100%); transition: transform 360ms var(--ease-drawer); box-shadow: var(--shadow-pop); }
+  .d-side.open { transform: none; }
+  .m-scrim { display: block; position: fixed; inset: 0; z-index: 55; background: var(--overlay); opacity: 0; pointer-events: none; transition: opacity 200ms; }
+  .m-scrim.open { opacity: 1; pointer-events: auto; }
+  .m-menu { display: inline-flex; }
+  .d-main { border-left: 0; }
+  .d-top { padding-left: 8px; }
+  .d-page { padding: 16px 16px 72px; }
+}

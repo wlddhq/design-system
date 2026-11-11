@@ -1,0 +1,5 @@
+.w-track { display: inline-flex; gap: 3px; align-items: center; flex: none; }
+.w-track i { width: 12px; height: 4px; border-radius: 9px; background: var(--line-2); transition: background 300ms ease; }
+.w-track i[data-s='done'] { background: var(--fg-2); }
+.w-track i[data-s='cur'] { background: var(--green); }
+.w-track[data-done] i { background: var(--green); }

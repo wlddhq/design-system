@@ -1,0 +1,29 @@
+/* Grid view cards, as the prototype: 18px padding, a hairline ring, a soft lift on hover. */
+.w-cgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.w-cgroup + .w-cgroup { margin-top: 24px; }
+.w-cgroup-h { display: flex; align-items: center; gap: 8px; height: 36px; margin: 0; font-size: 12.5px; font-weight: 600; color: var(--fg-2); }
+.w-cgroup-h > * { flex: none; }
+.w-cgroup-n { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+.w-rcard {
+  display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 18px; text-align: left; color: var(--fg);
+  border-radius: 12px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); transition: box-shadow 150ms;
+}
+a.w-rcard:hover, button.w-rcard:hover, .w-rcard:focus-visible { outline: none; box-shadow: 0 0 0 1px var(--line-2), 0 8px 24px -12px rgba(0, 0, 0, .18); }
+:root[data-style='pop'] .w-rcard { border-radius: var(--radius-card); }
+:root[data-style='pop'] a.w-rcard:hover, :root[data-style='pop'] button.w-rcard:hover { box-shadow: 0 0 0 1px var(--faint), 0 2px 0 var(--lip); }
+.w-rcard-head { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.w-rcard-head > .w-logo, .w-rcard-head > .w-av { flex: none; }
+.w-rcard-t { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.w-rcard-title, .w-rcard-cap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w-rcard-title b { font-weight: 500; }
+.w-rcard-sub { color: var(--muted); }
+.w-rcard-cap { font-size: 12px; color: var(--muted); }
+.w-rcard-body { display: block; height: 44px; margin: 0 -2px; }
+.w-rcard-body .w-spark { width: 100%; height: 44px; }
+.w-rcard-foot { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--fg-2); }
+.w-rcard-foot > * { flex: none; }
+.w-rcard-foot > .ml-auto { margin-left: auto; color: var(--fg); font-weight: 500; font-variant-numeric: tabular-nums; }
+.w-rcard-meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+
+@media (max-width: 760px) { .w-cgrid { grid-template-columns: minmax(0, 1fr); } }

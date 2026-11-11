@@ -1,0 +1,15 @@
+/* Loaders. Brand sequence in logo order: W green · L violet · D pink · D yellow. */
+:root { --wl-ink: #141414; }
+:root[data-theme='dark'], :root[data-style='kajal'] { --wl-ink: #000; }
+
+.w-loader { display: inline-flex; align-items: center; justify-content: center; flex: none; line-height: 0; }
+.ld-svg { display: block; overflow: visible; }
+
+/* WLDD wordmark */
+.wl { display: block; overflow: visible; flex: none; }
+.wl-ink { fill: var(--wl-ink); stroke: var(--wl-ink); }
+.wl-face { stroke: var(--wl-ink); }
+
+/* WlddLogo: the coded wordmark in the sidebar header */
+.w-wlogo { display: block; flex: none; }
+.w-wlogo .wl { height: 100%; width: auto; }

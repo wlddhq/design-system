@@ -1,0 +1,15 @@
+/* ═════════ Kajal — dark-first, sharp corners, mono numerals. Ignores data-theme. ═════════ */
+
+:root[data-style='kajal'] {
+  --bg: #08080a; --surface: #0c0c0e; --sunken: #141417; --hover: rgba(255, 255, 255, .05); --press: rgba(255, 255, 255, .08);
+  --line: #1c1c20; --line-2: #2a2a30; --fg: #f4f4f5; --fg-2: #a8a8b0; --muted: #6a6a73; --faint: #3a3a40;
+  --ink: #f4f4f5; --ink-fg: #08080a;
+  --green: #5fcf86; --violet: #c88af5; --pink: #f26b88; --yellow: #f2bd2f;
+  --green-soft: rgba(95, 207, 134, .12); --violet-soft: rgba(200, 138, 245, .12); --pink-soft: rgba(242, 107, 136, .12); --yellow-soft: rgba(242, 189, 47, .12);
+  --pop: #121215; --overlay: rgba(0, 0, 0, .6); --tip-bg: #f4f4f5; --tip-fg: #08080a;
+  --shadow-1: 0 0 #0000; /* not 'none': it's combined into other shadows, and 'none' in a list voids the whole value */ --shadow-pop: 0 0 0 1px #26262c, 0 20px 50px -12px rgba(0, 0, 0, .8);
+  color-scheme: dark;
+
+  --radius-control: 6px; --radius-control-sm: 6px; --radius-card: 6px;
+  --lip: #000000; --cta: var(--fg); --cta-fg: var(--ink-fg); --cta-lip: #9a9aa2;
+}

@@ -1,0 +1,3 @@
+.w-empty { padding: 56px 0; text-align: center; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.w-empty b { color: var(--fg); font-weight: 600; }
+.w-empty p { margin: 0; font-size: 13px; }

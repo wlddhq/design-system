@@ -1,0 +1,86 @@
+/* @wldd/tailwind — Tailwind v4 theme built from @wldd/tokens.
+
+   Usage (app.css):
+     @import "tailwindcss";
+     @import "@wldd/tailwind";
+
+   Tailwind's default palette, fonts, radii and shadows are REMOVED. Only WLDD tokens exist,
+   so bg-blue-500 or rounded-3xl simply don't compile — off-brand values are impossible.
+   Spacing keeps Tailwind's standard scale for layout. */
+
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --text-*: initial;
+  --ease-*: initial;
+}
+
+@theme inline {
+  /* Surfaces */
+  --color-canvas: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-popover: var(--pop);
+  --color-panel: var(--panel);
+  --color-hover: var(--hover);
+  --color-press: var(--press);
+  --color-overlay: var(--overlay);
+
+  /* Text */
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+
+  /* Lines */
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+
+  /* Emphasis */
+  --color-ink: var(--ink);
+  --color-ink-fg: var(--ink-fg);
+  --color-cta: var(--cta, var(--ink));
+  --color-cta-fg: var(--cta-fg, var(--ink-fg));
+  --color-hl: var(--hl);
+
+  /* Status — the four logo colours. Use for meaning only, never decoration. */
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
+  --color-pink: var(--pink);
+  --color-pink-soft: var(--pink-soft);
+  --color-yellow: var(--yellow);
+  --color-yellow-soft: var(--yellow-soft);
+
+  /* Type */
+  --font-sans: var(--font);
+  --font-display: var(--display);
+  --font-mono: var(--mono);
+  --text-2xs: var(--text-2xs);
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-md: var(--text-md);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+
+  /* Shape */
+  --radius-control: var(--radius-control);
+  --radius-chip: var(--radius-chip, var(--radius-control-sm));
+  --radius-card: var(--radius-card);
+  --radius-pop: var(--radius-pop);
+  --radius-full: 9999px;
+
+  /* Depth */
+  --shadow-1: var(--shadow-1);
+  --shadow-pop: var(--shadow-pop);
+
+  /* Motion */
+  --ease-out: var(--ease-out);
+  --ease-drawer: var(--ease-drawer);
+}

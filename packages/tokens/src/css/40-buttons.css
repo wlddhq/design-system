@@ -1,0 +1,31 @@
+/* ═════════ Buttons and corners ═════════
+   Lip is the only button style, in every style: a 2px lip under each control that presses flat.
+   Every style supplies --lip, --cta, --cta-fg and --cta-lip for it.
+   Corners (data-corners) is Pop only. */
+
+/* Lip */
+:root {
+  --btn-weight: 600;
+  --btn-fg: var(--fg-2);
+  --btn-bg: var(--surface);
+  --btn-bg-hover: color-mix(in oklab, var(--surface) 92%, var(--fg));
+  --btn-shadow: inset 0 0 0 1px var(--line-2), 0 2px 0 var(--lip);
+  --btn-shadow-active: inset 0 0 0 1px var(--line-2), 0 0 0 var(--lip);
+  --btn-press: translateY(2px);
+  --btn-ghost-press: scale(.96);
+  --btn-primary-bg: var(--cta);
+  --btn-primary-fg: var(--cta-fg);
+  --btn-primary-bg-hover: color-mix(in oklab, var(--cta) 90%, #fff);
+  --btn-primary-shadow: inset 0 0 0 1px var(--cta-lip), 0 2px 0 var(--cta-lip);
+  --btn-primary-shadow-active: inset 0 0 0 1px var(--cta-lip), 0 0 0 var(--cta-lip);
+}
+
+/* Pop keeps its quicker press and dark-on-yellow shortcut keys */
+:root[data-style='pop'] { --dur-press: 100ms; --kbd-on-primary: rgba(0, 0, 0, .08); }
+:root[data-style='pop'][data-tone]:not([data-tone='haldi']):not([data-tone='jamun']) { --kbd-on-primary: rgba(255, 255, 255, .18); }
+
+/* Corners — Pop only. Default 6px. */
+:root[data-style='pop'] { --radius-control: 6px; --radius-control-sm: 6px; --radius-chip: 5px; --radius-card: 6px; --radius-pop: 8px; --radius-base: 6px; --radius-tag: 5px; --radius-item: var(--radius-base); }
+:root[data-style='pop'][data-corners='4']  { --radius-control: 4px;  --radius-control-sm: 4px;  --radius-chip: 3px;  --radius-card: 4px;  --radius-pop: 6px;  --radius-base: 4px;  --radius-tag: 3px; }
+:root[data-style='pop'][data-corners='10'] { --radius-control: 10px; --radius-control-sm: 10px; --radius-chip: 7px;  --radius-card: 10px; --radius-pop: 12px; --radius-base: 10px; --radius-tag: 7px; }
+:root[data-style='pop'][data-corners='14'] { --radius-control: 14px; --radius-control-sm: 14px; --radius-chip: 10px; --radius-card: 14px; --radius-pop: 16px; --radius-base: 14px; --radius-tag: 10px; }

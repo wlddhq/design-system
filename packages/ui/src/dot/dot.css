@@ -1,0 +1,7 @@
+.w-dot { display: inline-block; flex: none; width: 6px; height: 6px; border-radius: 99px; background: var(--muted); }
+.w-dot[data-shape='square'] { width: 8px; height: 8px; border-radius: 3px; }
+.w-dot[data-tone='green'] { background: var(--green); }
+.w-dot[data-tone='violet'] { background: var(--violet); }
+.w-dot[data-tone='pink'] { background: var(--pink); }
+.w-dot[data-tone='yellow'] { background: var(--yellow); }
+.w-dot-label { display: inline-flex; align-items: center; gap: 6px; color: var(--fg-2); font-weight: 500; white-space: nowrap; }

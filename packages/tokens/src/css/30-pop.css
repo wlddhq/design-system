@@ -1,0 +1,29 @@
+/* ═════════ Pop — warm, tactile, calm. Base tone is Haldi.
+   Hairlines, tunable radii, and a 2px "lip" under controls that presses flat.
+   The tone's colour lands only on the primary action and small accents (--cta). ═════════ */
+
+:root[data-style='pop'] {
+  --bg: #eeefe9; --surface: #fdfdf8; --sunken: #e5e7e0; --hover: rgba(21, 21, 21, .045); --press: rgba(21, 21, 21, .07);
+  --line: #d6d7cf; --line-2: #bfc1b7; --fg: #151515; --fg-2: #4d4f46; --muted: #73756b; --faint: #a3a59b;
+  --ink: #151515; --ink-fg: #fdfdf8;
+  --green: #2f9a5a; --violet: #8e4fd0; --pink: #d6395e; --yellow: #e0a40b;
+  --green-soft: #dff0e3; --violet-soft: #ece2f7; --pink-soft: #f8e1e6; --yellow-soft: #f8ecc9;
+  --lip: #bfc1b7; --cta: #f2bd2f; --cta-fg: #151515; --cta-lip: #c4920c;
+  --pop: #fdfdf8; --overlay: rgba(21, 21, 21, .28); --shadow-1: 0 0 #0000; /* not 'none': it's combined into other shadows, and 'none' in a list voids the whole value */
+  --shadow-pop: 0 0 0 1px #bfc1b7, 0 10px 28px -10px rgba(40, 38, 30, .22);
+  --font: 'IBM Plex Sans', 'Inter', system-ui, sans-serif; --display: 'IBM Plex Sans', 'Inter', sans-serif;
+  --hl: var(--cta);
+  color-scheme: light;
+}
+
+:root[data-style='pop'][data-theme='dark'] {
+  --bg: #1d1f27; --surface: #23252f; --sunken: #2a2d38; --hover: rgba(238, 239, 233, .05); --press: rgba(238, 239, 233, .08);
+  --line: #343744; --line-2: #464a59; --fg: #eeefe9; --fg-2: #c3c5bc; --muted: #8f9289; --faint: #5d6070;
+  --ink: #eeefe9; --ink-fg: #1d1f27;
+  --green: #6fcf8f; --violet: #b994ef; --pink: #f07c97; --yellow: #f2bd2f;
+  --green-soft: rgba(111, 207, 143, .13); --violet-soft: rgba(185, 148, 239, .14); --pink-soft: rgba(240, 124, 151, .13); --yellow-soft: rgba(242, 189, 47, .13);
+  --lip: #14151b; --cta: #f2bd2f; --cta-fg: #1d1f27; --cta-lip: #a87c08;
+  --pop: #262833; --overlay: rgba(0, 0, 0, .5);
+  --shadow-pop: 0 0 0 1px #464a59, 0 14px 36px -12px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}

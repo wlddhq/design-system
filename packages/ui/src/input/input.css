@@ -1,0 +1,13 @@
+.w-input { display: flex; align-items: center; gap: 8px; height: var(--control-h); padding: 0 10px; min-width: 0; border-radius: var(--radius-control); background: var(--sunken); box-shadow: inset 0 0 0 1px transparent; transition: box-shadow 150ms, background 150ms; cursor: text; }
+.w-input:focus-within { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line-2), 0 0 0 3px color-mix(in oklab, var(--fg) 7%, transparent); }
+.w-input input { flex: 1; min-width: 0; height: 100%; padding: 0; border: 0; outline: 0; background: none; color: var(--fg); }
+.w-input input::placeholder { color: var(--muted); }
+.w-input > svg { color: var(--muted); flex: none; }
+:root[data-style='pop'] .w-input { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line-2); }
+:root[data-style='pop'] .w-input:focus-within { box-shadow: inset 0 0 0 1px var(--fg-2), 0 0 0 3px color-mix(in oklab, var(--hl) 28%, transparent); }
+/* Disabled: dimmed, no focus ring. Invalid (aria-invalid): a pink ring that says what's wrong without words. */
+.w-input:has(input:disabled) { opacity: .5; cursor: not-allowed; }
+.w-input:has(input[aria-invalid='true']) { box-shadow: inset 0 0 0 1px var(--pink); }
+.w-input:has(input[aria-invalid='true']):focus-within { box-shadow: inset 0 0 0 1px var(--pink), 0 0 0 3px color-mix(in oklab, var(--pink) 18%, transparent); }
+/* The shortcut hint steps aside once you're typing. */
+.w-input:focus-within > .w-kbd { display: none; }

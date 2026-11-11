@@ -1,0 +1,31 @@
+/* ═════════ Khadi — the default style. Neutral paper + ink.
+   The four logo colours are reserved for module identity and meaning (status). ═════════ */
+
+:root {
+  --bg: #fafaf9; --surface: #ffffff; --sunken: #f4f4f2; --hover: rgba(24, 24, 27, .045); --press: rgba(24, 24, 27, .07);
+  --line: #ececea; --line-2: #e2e2df; --fg: #18181b; --fg-2: #46464c; --muted: #8b8b92; --faint: #b8b8bd;
+  --ink: #18181b; --ink-fg: #ffffff;
+  --green: #2fa866; --violet: #a24fe0; --pink: #e23d63; --yellow: #d99b12;
+  --green-soft: #e9f7ef; --violet-soft: #f5ecfd; --pink-soft: #fdecf0; --yellow-soft: #fdf5e1;
+  --accent: #18181b; --hl: var(--ink);
+  --overlay: rgba(20, 20, 24, .28); --pop: #ffffff; --panel: #ffffff;
+  --tip-bg: #18181b; --tip-fg: #fff;
+  --shadow-1: 0 1px 2px rgba(24, 24, 27, .05);
+  --lip: #e2e2df; --cta: var(--ink); --cta-fg: var(--ink-fg); --cta-lip: #000000;
+  --shadow-pop: 0 0 0 1px rgba(24, 24, 27, .06), 0 12px 32px -8px rgba(24, 24, 27, .18);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f0f10; --surface: #151516; --sunken: #121213; --hover: rgba(255, 255, 255, .045); --press: rgba(255, 255, 255, .08);
+  --line: #232325; --line-2: #2c2c2f; --fg: #ececee; --fg-2: #b4b4ba; --muted: #7d7d85; --faint: #4a4a50;
+  --ink: #ececee; --ink-fg: #111;
+  --green: #5fcf86; --violet: #c88af5; --pink: #f26b88; --yellow: #f2bd2f;
+  --green-soft: rgba(95, 207, 134, .12); --violet-soft: rgba(200, 138, 245, .12); --pink-soft: rgba(242, 107, 136, .12); --yellow-soft: rgba(242, 189, 47, .12);
+  --overlay: rgba(0, 0, 0, .55); --pop: #1a1a1c; --panel: #151516;
+  --tip-bg: #ececee; --tip-fg: #111;
+  --shadow-1: 0 0 #0000; /* not 'none': it's combined into other shadows, and 'none' in a list voids the whole value */
+  --lip: #050506; --cta-lip: #a9a9ae;
+  --shadow-pop: 0 0 0 1px rgba(255, 255, 255, .07), 0 16px 40px -10px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}

@@ -1,0 +1,34 @@
+/* Button. All look comes from --btn-* and --control-* tokens; styles and Pop axes re-tune those. */
+.w-btn {
+  height: var(--control-h); padding: 0 var(--control-pad); border-radius: var(--radius-control);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex: none;
+  font-weight: var(--btn-weight); white-space: nowrap; color: var(--btn-fg);
+  background: var(--btn-bg); box-shadow: var(--btn-shadow);
+  transition: background var(--dur-fast), color var(--dur-fast), box-shadow var(--dur-fast), transform var(--dur-press) var(--ease-out);
+  -webkit-tap-highlight-color: transparent; position: relative; max-width: 100%;
+}
+.w-btn-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.w-btn > svg { flex: none; }
+.w-btn-dot { position: absolute; top: 7px; right: 8px; width: 7px; height: 7px; border-radius: 9px; background: var(--pink); box-shadow: 0 0 0 2px var(--surface); }
+.w-btn[data-size='sm'] .w-btn-dot { top: 4px; right: 5px; }
+.w-btn:hover { color: var(--fg); background: var(--btn-bg-hover); }
+.w-btn:active { transform: var(--btn-press); box-shadow: var(--btn-shadow-active); }
+.w-btn > svg { flex: none; }
+
+.w-btn[data-size='sm'] { height: var(--control-h-sm); padding: 0 var(--control-pad-sm); border-radius: var(--radius-control-sm); font-size: var(--text-sm); }
+.w-btn[data-icon-only] { width: var(--control-h); padding: 0; }
+.w-btn[data-icon-only][data-size='sm'] { width: var(--control-h-sm); }
+
+.w-btn[data-variant='primary'] { background: var(--btn-primary-bg); color: var(--btn-primary-fg); box-shadow: var(--btn-primary-shadow); }
+.w-btn[data-variant='primary']:hover { background: var(--btn-primary-bg-hover); }
+.w-btn[data-variant='primary']:active { box-shadow: var(--btn-primary-shadow-active); }
+.w-btn[data-variant='primary'] .w-kbd { background: var(--kbd-on-primary); box-shadow: none; color: inherit; opacity: .8; }
+
+.w-btn[data-variant='ghost'] { background: transparent; box-shadow: none; }
+.w-btn[data-variant='ghost']:hover { background: var(--hover); }
+.w-btn[data-variant='ghost']:active { transform: var(--btn-ghost-press); box-shadow: none; }
+
+.w-btn[aria-pressed='true'] { background: var(--sunken); color: var(--fg); }
+.w-btn[data-variant='ghost'][aria-pressed='true'] { background: var(--hover); }
+
+.w-btn:disabled, .w-btn[aria-disabled='true'] { opacity: .45; pointer-events: none; }

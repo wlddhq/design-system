@@ -1,0 +1,45 @@
+{
+  "name": "@wldd/ui",
+  "version": "0.0.1",
+  "description": "WLDD React components. Import styles once: import '@wldd/ui/styles.css'",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./meta/*": "./dist/meta/*",
+    "./rules/*": "./dist/rules/*",
+    "./AGENTS.md": "./dist/AGENTS.md"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && node scripts/fix-imports.mjs && node scripts/build-css.mjs && node scripts/build-meta.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@wldd/tokens": "*",
+    "lucide-react": ">=0.400.0",
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0",
+    "motion": ">=11.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@wldd/tokens": "*",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-docgen-typescript": "^2.2.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "motion": "^11.15.0"
+  }
+}

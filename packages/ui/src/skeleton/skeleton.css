@@ -1,0 +1,18 @@
+/* Skeleton: the prototype's shimmer. A lighter band sweeps across the sunken fill. */
+.w-skel {
+  display: inline-block; vertical-align: middle; flex: none; width: 100%; height: 10px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--sunken) 0%, var(--hover) 50%, var(--sunken) 100%);
+  background-size: 200% 100%; animation: w-skel 1.1s linear infinite;
+}
+.w-skel[data-shape='circle'] { border-radius: 99px; }
+.w-skel[data-shape='block'] { height: 64px; border-radius: var(--radius-base); }
+@keyframes w-skel { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+/* Reduced motion: hold still. The shape alone says "loading". */
+:root[data-motion='reduced'] .w-skel { animation: none; }
+@media (prefers-reduced-motion: reduce) { .w-skel { animation: none; } }
+
+/* Table and RecordCell loading */
+.w-record-skel { pointer-events: none; }
+/* Same size as .w-check. Two classes so it beats the block shape's default height. */
+.w-skel.w-skel-check { width: 15px; height: 15px; border-radius: 4px; }

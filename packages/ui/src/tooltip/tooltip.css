@@ -1,0 +1,14 @@
+.w-tipw { display: inline-flex; }
+.w-tip {
+  position: fixed; z-index: 120; pointer-events: none; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px; height: 26px; padding: 0 8px; border-radius: 7px;
+  background: var(--tip-bg); color: var(--tip-fg); font: 500 12px/1 var(--font);
+  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, .3);
+  animation: w-tip-in 125ms var(--ease-out);
+}
+.w-tip-bottom { translate: -50% 0; transform-origin: top center; }
+.w-tip-top { translate: -50% -100%; transform-origin: bottom center; }
+.w-tip-right { translate: 0 -50%; transform-origin: left center; }
+.w-tip.instant { animation: none; }
+.w-tip-k { opacity: .55; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; }
+@keyframes w-tip-in { from { opacity: 0; scale: .97; } }

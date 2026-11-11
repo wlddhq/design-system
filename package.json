@@ -1,0 +1,15 @@
+{
+  "name": "wldd-library",
+  "private": true,
+  "workspaces": [
+    "packages/tokens",
+    "packages/tailwind",
+    "packages/ui",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @wldd/tokens -w @wldd/tailwind -w @wldd/ui",
+    "dev": "npm run build && npm run dev -w docs",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  }
+}

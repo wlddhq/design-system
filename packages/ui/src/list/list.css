@@ -1,0 +1,49 @@
+/* List: the prototype's grouped list (Velin). Full-bleed group bands, 40px rows, hairlines between rows. */
+.w-list { display: flex; flex-direction: column; min-width: 0; }
+.w-lgroup-h {
+  display: flex; align-items: center; gap: 8px; width: 100%; height: 36px; padding: 0 18px; text-align: left;
+  font-weight: 600; font-size: 12.5px; color: var(--fg-2);
+  background: color-mix(in oklab, var(--sunken) 75%, var(--surface)); border-bottom: 1px solid var(--line);
+}
+.w-lgroup-c { color: var(--muted); flex: none; transition: rotate 180ms var(--ease-out); }
+.w-lgroup[data-open] .w-lgroup-c { rotate: 90deg; }
+.w-lgroup-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w-lgroup-n { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+.w-lgroup-a { margin-left: auto; color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.w-lgroup-h > svg:not(.w-lgroup-c), .w-lgroup-h > .w-dot, .w-lgroup-h > .w-av, .w-lgroup-h > .w-progress { flex: none; }
+
+.w-li {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 40px; padding: 0 18px 0 22px; position: relative;
+  color: var(--fg); text-align: left; outline: none;
+}
+.w-li + .w-li::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: color-mix(in oklab, var(--line) 60%, transparent); }
+.w-li:hover, .w-li:focus-visible, .w-li[data-selected] { background: color-mix(in oklab, var(--fg) 4.5%, transparent); }
+.w-li:hover::before, .w-li:hover + .w-li::before, .w-li:focus-visible::before, .w-li:focus-visible + .w-li::before,
+.w-li[data-selected]::before, .w-li[data-selected] + .w-li::before { opacity: 0; }
+.w-li > svg, .w-li > .w-logo, .w-li > .w-av, .w-li > .w-tipw, .w-li > .w-progress { flex: none; }
+.w-li .w-logo { width: 20px !important; height: 20px !important; }
+
+.w-li-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.w-li-title b { font-weight: 500; }
+.w-li-sub { color: var(--muted); }
+.w-li-grow { flex: 1; }
+.w-li-cell { flex: none; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.w-li-cell[data-kind='code'] { width: 58px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.w-li-cell[data-kind='num'] { width: 60px; text-align: right; color: var(--fg-2); }
+.w-li-cell[data-kind='date'] { width: 44px; text-align: right; font-size: 12.5px; color: var(--muted); }
+
+/* "Show 14 more": a quiet row in the same rhythm. */
+.w-li.w-li-more { color: var(--muted); font-size: 12.5px; font-weight: 500; min-height: 36px; }
+.w-li.w-li-more:hover { color: var(--fg); }
+
+.w-li-skel { pointer-events: none; }
+.w-li-skel:hover { background: none; }
+
+:root[data-density='compact'] .w-li { min-height: 34px; }
+
+@media (max-width: 760px) {
+  .w-li, .w-lgroup-h { padding: 0 14px; }
+  .w-li { gap: 10px; }
+  /* Phones keep the name and one number: codes, tags, tracks, dates and teams step aside. */
+  .w-li > .w-li-cell[data-kind='code'], .w-li > .w-li-cell[data-kind='date'], .w-li > .w-tags, .w-li > .w-track, .w-li > .w-av-group, .w-li > .w-dot-label { display: none; }
+}

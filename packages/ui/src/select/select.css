@@ -1,0 +1,5 @@
+.w-select { gap: 6px; }
+.w-select-chev { color: var(--muted); margin-right: -2px; }
+.w-select-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.w-select-ph { color: var(--muted); }
+.w-select-chev { flex: none; }

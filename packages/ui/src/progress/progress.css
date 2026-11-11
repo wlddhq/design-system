@@ -1,0 +1,3 @@
+.w-progress { display: block; flex: none; }
+/* Fills on change (a stage moved), never on load. */
+.w-progress-fill { transition: stroke-dasharray 300ms var(--ease-out); }
