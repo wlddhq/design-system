@@ -47,6 +47,12 @@ import EmptyClear from './empty/clear'
 import ShellFrame from './shell/frame'
 import CommandMenuEx from './command/menu'
 import CommandServer from './command/server'
+import MetricTiles from './metric/tiles'
+import MetricSide from './metric/side'
+import ChartArea from './chart/area'
+import ChartBars from './chart/bars'
+import ChartShare from './chart/share'
+import TickerCount from './ticker/count'
 import ShowcaseCampaigns from './showcase/campaigns'
 import LoaderSave from './loader/save'
 import LoaderInline from './loader/inline'
@@ -101,6 +107,12 @@ export const EXAMPLES = {
   'shell/frame': ShellFrame,
   'command/menu': CommandMenuEx,
   'command/server': CommandServer,
+  'metric/tiles': MetricTiles,
+  'metric/side': MetricSide,
+  'chart/area': ChartArea,
+  'chart/bars': ChartBars,
+  'chart/share': ChartShare,
+  'ticker/count': TickerCount,
   'showcase/campaigns': ShowcaseCampaigns,
   'loader/save': LoaderSave,
   'loader/inline': LoaderInline,

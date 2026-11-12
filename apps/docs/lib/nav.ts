@@ -44,7 +44,7 @@ export const NAV: Group[] = [
   },
   {
     id: 'data', label: 'Data display', icon: Table2, color: 'var(--pink)',
-    pages: [c('track', 'Track'), c('sparkline', 'Sparkline'), c('skeleton', 'Skeleton'), c('selection', 'Selection bar'), c('empty', 'Empty')],
+    pages: [c('metric', 'Metrics'), c('chart', 'Charts'), c('track', 'Track'), c('sparkline', 'Sparkline'), c('skeleton', 'Skeleton'), c('selection', 'Selection bar'), c('empty', 'Empty')],
   },
   {
     id: 'views', label: 'Views', icon: LayoutList, color: 'var(--green)',
@@ -60,7 +60,7 @@ export const NAV: Group[] = [
   },
   {
     id: 'motion', label: 'Motion', icon: Sparkles, color: 'var(--violet)',
-    pages: [c('loader', 'Loaders'), c('textmorph', 'Text morph')],
+    pages: [c('loader', 'Loaders'), c('textmorph', 'Text morph'), c('ticker', 'Ticker')],
   },
   {
     id: 'showcase', label: 'Showcase', icon: LayoutTemplate, color: 'var(--green)',

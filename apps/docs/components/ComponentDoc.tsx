@@ -22,10 +22,10 @@ export async function Example({ id, title, note, frame }: { id: keyof typeof EXA
   )
 }
 
-export function PropsTable({ props }: { props: PropMeta[] }) {
+export function PropsTable({ props, name }: { props: PropMeta[]; name: string }) {
   if (!props.length) return <p className="ex-d">No props of its own. Takes the standard HTML attributes of its element.</p>
   return (
-    <div className="tbl-w" tabIndex={0} role="region" aria-label="Table">
+    <div className="tbl-w" tabIndex={0} role="region" aria-label={name + ' props'}>
       <table className="tbl">
         <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
         <tbody>
@@ -87,10 +87,10 @@ export async function ComponentDoc({ id, href, examples, children }: {
             <section key={p.name}>
               <h3 className="ex-t" id={'props-' + p.name.toLowerCase()}><code>{p.name}</code></h3>
               {p.description && <p className="ex-d">{p.description}</p>}
-              <PropsTable props={p.props} />
+              <PropsTable props={p.props} name={p.name} />
             </section>
           ))
-        : <PropsTable props={meta.props} />}
+        : <PropsTable props={meta.props} name={meta.name} />}
 
       {rest.map((r) => (
         <section key={r.title}><H2>{r.title}</H2><div dangerouslySetInnerHTML={md(r.body)} /></section>

@@ -5,7 +5,7 @@
      data-theme    light | dark                         (default light)
      data-style    khadi | kajal | pop                  (default khadi)
      data-tone     haldi | tulsi | baingani | …          Pop only (default haldi)
-     data-corners  4 | 6 | 10 | 14                       Pop only (default 6)
+     data-corners  4 | 6 | 10 | 14                       every style (absent = the style's own)
      data-font     inter | geist | plex | manrope | bricolage | system   (default: the style's own)
      data-density  comfortable | compact                (default comfortable)
      data-motion   full | reduced                       (default full)
@@ -45,4 +45,15 @@
 
   /* Button recipes live in 40-buttons.css (Lip, the only button style). */
   --kbd-on-primary: rgba(255, 255, 255, .14);
+}
+
+/* Chart series, in this fixed order (never cycled; a 5th series folds into "Other").
+   Validated (dataviz six checks): light = the brand hues; dark = the same hues stepped to L .66 so fills sit in
+   the dark band and pass CVD separation on every dark surface. Text never wears these; a legend always names them. */
+:root {
+  --chart-1: #2fa866; --chart-2: #a24fe0; --chart-3: #d99b12; --chart-4: #e23d63;
+  --chart-other: var(--faint); /* "Other", the rest */
+}
+:root[data-theme='dark'], :root[data-style='kajal'] {
+  --chart-1: #37ab65; --chart-2: #b072db; --chart-3: #bc8900; --chart-4: #e45e7c;
 }

@@ -54,3 +54,17 @@ export const CAMPAIGNS: Campaign[] = RAW.map((c, i) => {
 })
 
 export const inr = (lakh: number) => `₹${lakh}L`
+
+/** Twelve months of numbers for dashboards, oldest first. Values in lakhs (₹L) unless noted. */
+export const MONTHS = ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov']
+export const MONTHLY = {
+  billing: [22, 25, 24, 29, 31, 28, 34, 33, 37, 36, 41, 38],
+  closed: [8, 11, 9, 14, 12, 16, 15, 19, 17, 22, 20, 24],
+  paid: [14, 16, 15, 19, 18, 21, 20, 24, 23, 26, 25, 28],
+  /** Views, in lakhs of views. */
+  views: [180, 210, 205, 260, 240, 300, 320, 310, 360, 390, 420, 455],
+}
+/** ₹ lakhs, crores past 100L: 38 → ₹38L, 412 → ₹4.12Cr. */
+export const money = (lakh: number) => (lakh >= 100 ? `₹${(lakh / 100).toFixed(2).replace(/\.?0+$/, '')}Cr` : `₹${Math.round(lakh * 10) / 10}L`)
+/** Views: 455 lakh → 45.5M. */
+export const views = (lakh: number) => `${(lakh / 10).toFixed(1).replace(/\.0$/, '')}M`

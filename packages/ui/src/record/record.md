@@ -1,7 +1,7 @@
 ---
 name: Record page
 component: RecordHeader
-parts: Stepper, Metrics, Metric, PropertyList, Property, PropertySeparator, RecordLayout
+parts: Stepper, PropertyList, Property, PropertySeparator, RecordLayout
 summary: The parts of a record's own page. Header, stage stepper, key numbers, properties.
 status: stable
 group: records

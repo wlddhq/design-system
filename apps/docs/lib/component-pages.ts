@@ -58,6 +58,16 @@ export const COMPONENT_PAGES: Record<string, Ex[]> = {
   selection: [{ id: 'selection/bar', title: 'Three selected', frame: 120 }],
   empty: [{ id: 'empty/clear', title: 'Empty states' }],
   shell: [{ id: 'shell/frame', title: 'The frame', frame: 420 }],
+  metric: [
+    { id: 'metric/tiles', title: 'A dashboard row', note: 'Switch the range and watch the numbers roll. Scheduled, Paid and Billing are buttons; the pressed one is what a chart below would show.' },
+    { id: 'metric/side', title: 'Stacked, beside the work', note: 'Home’s side panel. Margin is green because it beat the plan, and the note says so.' },
+  ],
+  chart: [
+    { id: 'chart/area', title: 'Trend over time', note: 'Hover, or focus the chart and use ←/→. The total rolls when the range changes.' },
+    { id: 'chart/bars', title: 'Amounts side by side' },
+    { id: 'chart/share', title: 'How one whole splits', note: 'Hover a part or its legend entry. Disqualified uses the “Other” colour.' },
+  ],
+  ticker: [{ id: 'ticker/count', title: 'A total that updates', note: 'Approve one: the count rolls down, the paid total rolls up.' }],
   command: [
     { id: 'command/menu', title: 'The app menu', note: 'Type “zep”, a code like “2419”, or “theme”. Theme rows stay open and show a check.' },
     { id: 'command/server', title: 'Searching on a server', note: 'Thousands of records: you search, it shows the matches and a loader while they arrive.' },

@@ -54,31 +54,6 @@ export function Stepper({ steps, value, className }: StepperProps) {
   )
 }
 
-/** A strip of two to four key numbers in one frame: Budget · Plan cost · Margin. */
-export function Metrics({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cx('w-metrics', className)}>{children}</div>
-}
-
-export type MetricProps = {
-  label: ReactNode
-  /** The number, already formatted: "₹22L", "31%". */
-  value: ReactNode
-  /** green when the number is good news. */
-  tone?: 'green' | 'pink'
-  /** A small line under the value: "+12% this week". */
-  note?: ReactNode
-}
-
-export function Metric({ label, value, tone, note }: MetricProps) {
-  return (
-    <div className="w-metric">
-      <span className="w-metric-l">{label}</span>
-      <span className="w-metric-v" data-tone={tone}>{value}</span>
-      {note != null && <span className="w-metric-n">{note}</span>}
-    </div>
-  )
-}
-
 /** Label-value rows down the side of a record: Lead, Team, Started, Drive… */
 export function PropertyList({ children, className }: { children: ReactNode; className?: string }) {
   return <div className={cx('w-props', className)}>{children}</div>

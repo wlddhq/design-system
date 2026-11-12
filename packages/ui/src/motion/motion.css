@@ -2,3 +2,12 @@
 .w-morph { position: relative; display: inline-flex; white-space: pre; }
 /* Visually hidden, still read by screen readers. */
 .w-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Ticker: each digit is a 0–9 column that slides to its value. */
+.w-roll { display: inline-flex; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.w-roll > span { display: inline-block; height: 1.2em; line-height: 1.2em; margin: -0.1em 0; }
+.w-roll-d { overflow: hidden; vertical-align: top; }
+.w-roll-s { display: flex; flex-direction: column; transition: transform 550ms var(--ease-out, cubic-bezier(.23, 1, .32, 1)); }
+.w-roll-s > span { height: 1.2em; }
+@media (prefers-reduced-motion: reduce) { .w-roll-s { transition: none; } }
+:root[data-motion='reduced'] .w-roll-s { transition: none; }
