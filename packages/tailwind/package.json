@@ -1,7 +1,7 @@
 {
   "name": "@wldd/tailwind",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tailwind v4 theme for WLDD. Replaces Tailwind's defaults with WLDD tokens only.",
   "type": "module",
   "sideEffects": [

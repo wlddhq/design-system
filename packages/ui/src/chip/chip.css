@@ -1,9 +1,12 @@
 .w-chip { max-width: 100%; min-width: 0; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 7px; border-radius: var(--radius-chip); font-size: 12px; font-weight: 500; color: var(--fg-2); background: color-mix(in oklab, var(--fg) 6.5%, transparent); white-space: nowrap; }
-.w-chip[data-tone='green'] { background: var(--green-soft); color: var(--green); }
-.w-chip[data-tone='violet'] { background: var(--violet-soft); color: var(--violet); }
-.w-chip[data-tone='pink'] { background: var(--pink-soft); color: var(--pink); }
-.w-chip[data-tone='yellow'] { background: var(--yellow-soft); color: var(--yellow); }
-:root[data-style='pop'] .w-chip[data-tone='yellow'] { color: color-mix(in oklab, var(--yellow) 75%, var(--fg)); }
+.w-chip[data-tone='green'] { --c: var(--green); background: var(--green-soft); }
+.w-chip[data-tone='violet'] { --c: var(--violet); background: var(--violet-soft); }
+.w-chip[data-tone='pink'] { --c: var(--pink); background: var(--pink-soft); }
+.w-chip[data-tone='yellow'] { --c: var(--yellow); background: var(--yellow-soft); }
+/* Light: the hue pulled toward the text colour, so every tone reads at 4.5:1 on its tint (pure yellow was 2.2:1).
+   Dark: the bright hues already pass on their faint tints, so they stay pure. */
+.w-chip[data-tone] { color: color-mix(in oklab, var(--c) 55%, var(--fg)); }
+:root[data-theme='dark'] .w-chip[data-tone], :root[data-style='kajal'] .w-chip[data-tone] { color: var(--c); }
 :root[data-style='pop'][data-tone='ujala'] .w-chip { box-shadow: inset 0 0 0 1px currentColor; }
 
 .w-tags { display: inline-flex; gap: 3px; }

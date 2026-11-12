@@ -1,7 +1,7 @@
 {
   "name": "@wldd/ui",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "WLDD React components. Import styles once: import '@wldd/ui/styles.css'",
   "type": "module",
   "sideEffects": [

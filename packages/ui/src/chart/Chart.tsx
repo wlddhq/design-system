@@ -241,7 +241,7 @@ export type ChartPanelProps = {
 /** The frame for one chart: title (and total) on the left, controls on the right, the chart below. */
 export function ChartPanel({ title, total, format, actions, children, className }: ChartPanelProps) {
   return (
-    <section className={cx('w-panel', className)} aria-label={title}>
+    <section className={cx('w-panel', className)}>
       <header className="w-panel-h">
         <h3>{title}</h3>
         {total != null && <span className="w-panel-t"><Ticker value={total} format={format} /></span>}
