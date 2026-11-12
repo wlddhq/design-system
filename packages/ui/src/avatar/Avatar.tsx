@@ -28,7 +28,7 @@ export type AvatarProps = {
     })
 )
 
-/** A person: photo or initials on their colour. */
+/** A person: photo or initials on their colour. The colour is deep enough that white initials pass 4.5:1 for every hue. */
 export function Avatar(props: AvatarProps) {
   if (props.loading) return <Skeleton shape="circle" size={props.size ?? 20} className={props.className} />
   return <AvatarFace {...props} />
@@ -43,7 +43,7 @@ function AvatarFace({ name, hue, src, size = 20, className }: Person & { size?: 
   useEffect(() => { const i = img.current; if (src && i?.complete && i.naturalWidth === 0) setFailed(src) }, [src])
   const style = {
     width: size, height: size, fontSize: Math.max(8, size * 0.42),
-    background: photo ? undefined : `oklch(0.62 0.13 ${hue ?? hueOf(name)})`,
+    background: photo ? undefined : `oklch(0.52 0.12 ${hue ?? hueOf(name)})`,
   } as CSSProperties
   return (
     <span className={cx('w-av', className)} style={style} title={name} role="img" aria-label={name}>
