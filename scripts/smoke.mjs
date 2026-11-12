@@ -2,9 +2,10 @@
 // Builds the packages, packs them as npm would, installs the tarballs into a blank app in a temp folder
 // (latest Next.js, strict TypeScript, library types checked), follows the README's setup, and runs `next build`.
 // It catches what a workspace hides: missing dependencies, files left out of "files", broken exports or types.
-//   npm run smoke
+//   npm run smoke              before publishing: the packed tarballs
+//   npm run smoke -- --registry  after publishing: the versions now on npm
 import { execSync } from 'node:child_process'
-import { mkdtempSync, mkdirSync, writeFileSync, readdirSync, rmSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, writeFileSync, readdirSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
@@ -14,10 +15,18 @@ const dir = mkdtempSync(join(tmpdir(), 'wldd-smoke-'))
 const pack = join(dir, 'pack'), app = join(dir, 'app')
 mkdirSync(pack); mkdirSync(join(app, 'app'), { recursive: true })
 
+let fromRegistry = false
 try {
-  run('npm run build', root)
-  run(`npm pack -w @wldd/tokens -w @wldd/tailwind -w @wldd/ui --pack-destination "${pack}"`, root)
-  const tgz = readdirSync(pack).map((f) => `"${join(pack, f)}"`).join(' ')
+  fromRegistry = process.argv.includes('--registry')
+  let tgz
+  if (fromRegistry) {
+    const v = JSON.parse(readFileSync(join(root, 'packages/ui/package.json'), 'utf8')).version
+    tgz = ['tokens', 'tailwind', 'ui'].map((p) => `@wldd/${p}@${v}`).join(' ')
+  } else {
+    run('npm run build', root)
+    run(`npm pack -w @wldd/tokens -w @wldd/tailwind -w @wldd/ui --pack-destination "${pack}"`, root)
+    tgz = readdirSync(pack).map((f) => `"${join(pack, f)}"`).join(' ')
+  }
 
   const files = {
     'package.json': JSON.stringify({ name: 'wldd-smoke', private: true }),
