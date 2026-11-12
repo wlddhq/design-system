@@ -45,6 +45,8 @@ import SkeletonPieces from './skeleton/pieces'
 import SelectionBar from './selection/bar'
 import EmptyClear from './empty/clear'
 import ShellFrame from './shell/frame'
+import CommandMenuEx from './command/menu'
+import CommandServer from './command/server'
 import ShowcaseCampaigns from './showcase/campaigns'
 import LoaderSave from './loader/save'
 import LoaderInline from './loader/inline'
@@ -97,6 +99,8 @@ export const EXAMPLES = {
   'selection/bar': SelectionBar,
   'empty/clear': EmptyClear,
   'shell/frame': ShellFrame,
+  'command/menu': CommandMenuEx,
+  'command/server': CommandServer,
   'showcase/campaigns': ShowcaseCampaigns,
   'loader/save': LoaderSave,
   'loader/inline': LoaderInline,

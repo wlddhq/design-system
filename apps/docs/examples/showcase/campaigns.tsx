@@ -262,7 +262,7 @@ export default function CampaignsScreen() {
       <TopBar>
         <TopBarTitle icon={Megaphone} title="Campaigns" count={base.length} />
         <TopBarActions>
-          <Tooltip label="Search" kbd="⌘K"><Button variant="ghost" icon={Search} aria-label="Search" /></Tooltip>
+          <Tooltip label="Search" kbd="mod+k"><Button variant="ghost" icon={Search} aria-label="Search" /></Tooltip>
           <Tooltip label="Notifications"><Button variant="ghost" icon={Bell} aria-label="Notifications" dot /></Tooltip>
           <Tooltip label="New campaign" kbd="C"><Button variant="primary" icon={Plus}>New</Button></Tooltip>
         </TopBarActions>

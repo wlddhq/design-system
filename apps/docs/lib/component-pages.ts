@@ -58,6 +58,10 @@ export const COMPONENT_PAGES: Record<string, Ex[]> = {
   selection: [{ id: 'selection/bar', title: 'Three selected', frame: 120 }],
   empty: [{ id: 'empty/clear', title: 'Empty states' }],
   shell: [{ id: 'shell/frame', title: 'The frame', frame: 420 }],
+  command: [
+    { id: 'command/menu', title: 'The app menu', note: 'Type “zep”, a code like “2419”, or “theme”. Theme rows stay open and show a check.' },
+    { id: 'command/server', title: 'Searching on a server', note: 'Thousands of records: you search, it shows the matches and a loader while they arrive.' },
+  ],
   loader: [
     { id: 'loader/save', title: 'In a button', note: 'Click Save. The loader settles into a check while the label morphs.' },
     { id: 'loader/inline', title: 'Inline' },

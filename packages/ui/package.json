@@ -44,6 +44,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "cmdk": "^1.1.1",
     "sonner": "^1.7.4"
   }
 }

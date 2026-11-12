@@ -56,7 +56,7 @@ export const NAV: Group[] = [
   },
   {
     id: 'shell', label: 'App shell', icon: PanelsTopLeft, color: 'var(--fg)',
-    pages: [c('shell', 'App shell')],
+    pages: [c('shell', 'App shell'), c('command', 'Command menu')],
   },
   {
     id: 'motion', label: 'Motion', icon: Sparkles, color: 'var(--violet)',

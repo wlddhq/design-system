@@ -2,6 +2,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { cx } from '../cx'
+import { useKeys } from '../kbd/keys'
 
 // Once one tooltip has shown, the next appears instantly (moving along a toolbar).
 let warmUntil = 0
@@ -9,7 +10,7 @@ let warmUntil = 0
 export type TooltipProps = {
   /** One or two words: what the control does. */
   label: ReactNode
-  /** Shortcut shown after the label, e.g. "⌘K" */
+  /** Shortcut shown after the label, written once for every platform: "mod+k" shows ⌘K on a Mac, Ctrl K on Windows. */
   kbd?: string
   /** @default 'bottom' */
   side?: 'bottom' | 'top' | 'right'
@@ -21,6 +22,7 @@ export type TooltipProps = {
 
 /** Names a control on hover. Delayed the first time, instant after. Press and hold on touch. */
 export function Tooltip({ label, kbd, side = 'bottom', delay = 450, children, className }: TooltipProps) {
+  const keys = useKeys()
   const ref = useRef<HTMLSpanElement>(null)
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
   const tip = useRef<HTMLSpanElement>(null)
@@ -84,7 +86,7 @@ export function Tooltip({ label, kbd, side = 'bottom', delay = 450, children, cl
       {children}
       {state && createPortal(
         <span ref={tip} role="tooltip" className={cx('w-tip', `w-tip-${state.side}`, state.instant && 'instant')} style={{ left: state.x + dx, top: state.y }}>
-          {label}{kbd && <span className="w-tip-k">{kbd}</span>}
+          {label}{kbd && <span className="w-tip-k">{keys(kbd)}</span>}
         </span>,
         document.body,
       )}
