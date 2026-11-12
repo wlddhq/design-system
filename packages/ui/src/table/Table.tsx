@@ -21,6 +21,11 @@ export type TableProps = {
   empty?: ReactNode
   /** Names the scroll area for screen readers, e.g. "Campaigns". @default 'Table' */
   label?: string
+  /**
+   * Inside a padded page (a dashboard, a record): a rounded frame with all four edges.
+   * Leave off when the table fills the page edge to edge (a list view straight in PageScroll); the screen edges are its frame. @default false
+   */
+  framed?: boolean
 } & HTMLAttributes<HTMLTableElement>
 
 type El = ReturnType<typeof Children.toArray>[number]
@@ -29,10 +34,10 @@ const part = (children: ReactNode, tag: string) => Children.toArray(children).fi
 
 /**
  * A full-bleed grid of records: sticky header, sticky select + first column, hairlines between cells,
- * and a filler column so the grid always reaches the right edge. Compose it from the parts below.
+ * and a filler column so the grid always reaches the right edge. Inside a padded page, use `framed`. Compose it from the parts below.
  * One component covers every size: all rows at once, or batches loaded as people scroll (`hasMore`).
  */
-export function Table({ loading, rows = 8, hasMore, onLoadMore, empty, label = 'Table', children, className, ...rest }: TableProps) {
+export function Table({ loading, rows = 8, hasMore, onLoadMore, empty, label = 'Table', framed, children, className, ...rest }: TableProps) {
   const head = part(children, 'thead')
   const body = part(children, 'tbody')
   const cols = columnsOf(head)
@@ -40,7 +45,7 @@ export function Table({ loading, rows = 8, hasMore, onLoadMore, empty, label = '
   const isEmpty = !loading && !hasMore && empty != null && rowCount === 0
   return (
     // Focusable so keyboard users can scroll it sideways when it doesn't fit (phones, many columns).
-    <div className={cx('w-table-wrap', className)} tabIndex={0} role="region" aria-label={label}>
+    <div className={cx('w-table-wrap', className)} data-framed={framed || undefined} tabIndex={0} role="region" aria-label={label}>
       <table className="w-table" aria-busy={loading || undefined} aria-rowcount={hasMore ? -1 : undefined} {...rest}>
         {loading ? <>{head}<SkeletonRows cols={cols} rows={rows} /></>
           : isEmpty ? <>{head}<tbody><tr><td className="w-table-empty" colSpan={Math.max(cols.length, 1)}>{empty}</td></tr></tbody></>

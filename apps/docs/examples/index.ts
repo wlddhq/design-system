@@ -53,6 +53,7 @@ import ChartArea from './chart/area'
 import ChartBars from './chart/bars'
 import ChartShare from './chart/share'
 import TickerCount from './ticker/count'
+import TableFramed from './table/framed'
 import ShowcaseCampaigns from './showcase/campaigns'
 import LoaderSave from './loader/save'
 import LoaderInline from './loader/inline'
@@ -113,6 +114,7 @@ export const EXAMPLES = {
   'chart/bars': ChartBars,
   'chart/share': ChartShare,
   'ticker/count': TickerCount,
+  'table/framed': TableFramed,
   'showcase/campaigns': ShowcaseCampaigns,
   'loader/save': LoaderSave,
   'loader/inline': LoaderInline,

@@ -16,6 +16,8 @@ group: data
 ## Do
 
 - Start with a `select` column (Checkbox) and a `primary` column (RecordCell). End with a `fill` column.
+- A list view fills the page edge to edge, straight in PageScroll: no frame, the screen edges are its edges.
+- Inside a padded page (a dashboard under charts, a section of a record), set `framed`: a rounded frame with all four edges. Skip the `fill` column there.
 - Give every header an icon and a one-word label.
 - Make sortable headers clickable with `onSort`, and mark the current one with `sorted`.
 - Edit values in place with a CellButton that opens a Popover.

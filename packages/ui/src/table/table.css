@@ -58,4 +58,10 @@
   .w-table .w-col-primary { left: 0; min-width: 0; width: 46vw; max-width: 46vw; }
   .w-record-sub, .w-record-open { display: none; }
 }
+/* Framed: inside a padded page. The frame draws the outer edges, so the cells drop theirs on the last column and row. */
+.w-table-wrap[data-framed] { border-radius: var(--radius-card); box-shadow: 0 0 0 1px var(--line); background: var(--surface); }
+.w-table-wrap[data-framed] .w-table { width: 100%; }
+.w-table-wrap[data-framed] tr > :last-child { border-right: 0; }
+.w-table-wrap[data-framed] tbody:last-of-type > tr:last-child > td, .w-table-wrap[data-framed] tfoot td { border-bottom-color: transparent; }
+.w-table-wrap[data-framed]:focus-visible { outline-offset: 2px; border-radius: var(--radius-card); }
 .w-table-wrap:focus-visible { outline: 2px solid var(--fg-2); outline-offset: -2px; }

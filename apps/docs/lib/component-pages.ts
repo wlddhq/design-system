@@ -37,6 +37,7 @@ export const COMPONENT_PAGES: Record<string, Ex[]> = {
     { id: 'table/campaigns', title: 'Campaigns', note: 'Select rows, hover a record to open it. The full screen is in Showcase › Campaigns.', frame: 300 },
     { id: 'table/infinite', title: 'Loads as you scroll', note: '240 invoices, 40 at a time. Scroll to the end and the next batch loads. Select a row, then "Select all 240". The footer totals cover all 240 from the start.', frame: 360 },
     { id: 'table/empty', title: 'Nothing matches', note: 'The header stays so the columns still make sense.' },
+    { id: 'table/framed', title: 'Inside a padded page', note: 'Under charts on a dashboard, or in a record: framed, with all four edges. List views stay edge to edge.' },
     { id: 'table/long', title: 'More rows than fit', note: 'Scroll it. The header and the footer stay put; a line above the footer separates the rows passing under it.', frame: 300 },
   ],
   skeleton: [
