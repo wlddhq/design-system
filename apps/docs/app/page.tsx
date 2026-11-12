@@ -3,7 +3,7 @@ import { DocPage, H2 } from '@/components/Doc'
 import { Code } from '@/components/Code'
 import { HeroCanvas } from '@/components/HeroCanvas'
 
-export const metadata = { title: 'Introduction' }
+export const metadata = { title: { absolute: 'WLDD Design System' } } // the home tab: the name alone
 
 export default function Page() {
   return (
