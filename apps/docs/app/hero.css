@@ -3,7 +3,9 @@
 .hero { --sel: var(--violet); position: relative; height: 240px; margin: 8px 0 28px; overflow: hidden; }
 /* The scene is a fixed stage, centred in the hero; phones scale it down. */
 .hc-stage { position: relative; margin: 0 auto; }
-@media (max-width: 720px) { .hc-stage { transform: scale(.52); transform-origin: top center; } .hero { height: 130px; } }
+/* Smaller screens: the 680px stage is centred on the hero's middle, then scaled down around that point. */
+@media (max-width: 720px) { .hc-stage { margin: 0; left: 50%; transform: translateX(-50%) scale(.52); transform-origin: top center; } .hero { height: 130px; } }
+@media (max-width: 420px) { .hc-stage { transform: translateX(-50%) scale(.47); } .hero { height: 116px; } }
 .hero * { pointer-events: none; }
 
 /* Canvas dots, fading out towards the edges */

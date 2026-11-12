@@ -32,8 +32,8 @@
   --shiki-token-parameter: var(--fg-2); --shiki-token-punctuation: color-mix(in oklab, var(--muted) 80%, var(--fg)); --shiki-token-link: var(--fg);
 }
 .code { position: relative; border-radius: var(--radius-card); background: var(--sunken); box-shadow: inset 0 0 0 1px var(--line); margin: 14px 0; }
-.code pre { margin: 0; padding: 14px 16px; overflow: auto; font: 12.5px/1.65 var(--mono); letter-spacing: -0.01em; background: transparent !important; }
-.code .copy { position: absolute; top: 7px; right: 7px; opacity: 0; transition: opacity var(--dur-fast); }
+.code pre { margin: 0; padding: 14px 46px 14px 16px; overflow: auto; font: 12.5px/1.65 var(--mono); letter-spacing: -0.01em; background: transparent !important; }
+.code .copy { position: absolute; top: 7px; right: 7px; opacity: 0; transition: opacity var(--dur-fast); background: var(--sunken); box-shadow: -8px 0 8px -2px var(--sunken), 8px 0 0 0 var(--sunken); } /* its own ground, so it never sits on code */
 .code:hover .copy, .code .copy:focus-visible { opacity: 1; }
 @media (hover: none) { .code .copy { opacity: 1; } }
 
