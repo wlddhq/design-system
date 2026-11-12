@@ -10,8 +10,9 @@ export default function Page() {
       <Code lang="bash" code={`npm install @wldd/ui @wldd/tokens @wldd/tailwind lucide-react motion`} />
 
       <H2>Styles</H2>
-      <p>Import everything once, in your global stylesheet. The order matters: Tailwind, then the WLDD theme, then tokens and components.</p>
+      <p>Import everything once, in your global stylesheet. The order matters: fonts first, then Tailwind, the WLDD theme, tokens and components.</p>
       <Code lang="css" code={`/* app/globals.css */
+@import "@wldd/tokens/fonts.css";
 @import "tailwindcss";
 @import "@wldd/tailwind";
 @import "@wldd/tokens/tokens.css";
@@ -19,7 +20,7 @@ export default function Page() {
       <p><code>@wldd/tailwind</code> removes Tailwind’s default colours, fonts, radii and shadows. Classes like <code>bg-blue-500</code> stop existing; use <code>bg-surface</code>, <code>text-muted</code>, <code>border-line</code> and the rest from <a href="/foundations/colours">Colours</a>.</p>
 
       <H2>Fonts</H2>
-      <p>Themes can ask for Inter, Inter Tight, Geist, Geist Mono, IBM Plex Sans, Manrope and Bricolage Grotesque. Load them in your root layout, or import <code>@wldd/tokens/fonts.css</code> before Tailwind.</p>
+      <p>Themes can ask for Inter, Inter Tight, Geist, Geist Mono, IBM Plex Sans, Manrope and Bricolage Grotesque. <code>@wldd/tokens/fonts.css</code> brings them all, self-hosted: your build includes the font files, nothing is fetched from Google, and browsers download only the weights and scripts a page uses. Keep it as the first import.</p>
 
       <H2>Theme</H2>
       <p>Khadi in light mode is the default and needs no setup. To change it, call <code>applyTheme</code> whenever the user’s setting changes. It writes attributes on <code>&lt;html&gt;</code> and every component follows.</p>

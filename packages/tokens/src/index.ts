@@ -59,11 +59,11 @@ export const CORNERS: { id: Corners; label: string }[] = [
   { id: '4', label: '4px' }, { id: '6', label: '6px' }, { id: '10', label: '10px' }, { id: '14', label: '14px' },
 ]
 export const FONTS: { id: Font; label: string; family: string }[] = [
-  { id: 'inter', label: 'Inter', family: "'Inter'" },
-  { id: 'geist', label: 'Geist', family: "'Geist'" },
-  { id: 'plex', label: 'Plex', family: "'IBM Plex Sans'" },
-  { id: 'manrope', label: 'Manrope', family: "'Manrope'" },
-  { id: 'bricolage', label: 'Bricolage', family: "'Bricolage Grotesque'" },
+  { id: 'inter', label: 'Inter', family: "'Inter Variable', 'Inter'" },
+  { id: 'geist', label: 'Geist', family: "'Geist Variable', 'Geist'" },
+  { id: 'plex', label: 'Plex', family: "'IBM Plex Sans Variable', 'IBM Plex Sans'" },
+  { id: 'manrope', label: 'Manrope', family: "'Manrope Variable', 'Manrope'" },
+  { id: 'bricolage', label: 'Bricolage', family: "'Bricolage Grotesque Variable', 'Bricolage Grotesque'" },
   { id: 'system', label: 'System', family: 'system-ui' },
 ]
 

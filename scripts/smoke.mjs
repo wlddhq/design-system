@@ -65,6 +65,12 @@ export default function Page() {
 
   run(`npm install --no-audit --no-fund next@latest react@latest react-dom@latest tailwindcss@4 @tailwindcss/postcss@4 lucide-react motion typescript @types/react @types/react-dom @types/node ${tgz}`, app)
   run('npx next build', app)
+  // The build must carry the fonts: @font-face for Inter and the font files themselves (a lost import fails here).
+  const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]))
+  const out = walk(join(app, '.next', 'static'))
+  const css = out.filter((f) => f.endsWith('.css')).map((f) => readFileSync(f, 'utf8')).join('')
+  if (!/font-family:\s*["']?Inter Variable/.test(css) || !out.some((f) => f.endsWith('.woff2'))) throw new Error('fonts missing from the build: check @wldd/tokens/fonts.css')
+  console.log(`fonts: ${out.filter((f) => f.endsWith('.woff2')).length} font files in the build`)
   console.log('\n✓ smoke: a blank Next.js app builds with only the published packages')
 } finally {
   rmSync(dir, { recursive: true, force: true })

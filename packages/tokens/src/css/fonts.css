@@ -1,2 +1,11 @@
-/* Every face the themes can ask for. Import once, before tokens.css. */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500;600;700&family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&family=Manrope:wght@400..800&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&display=swap');
+/* Every face the themes can ask for, self-hosted (Fontsource, all SIL Open Font License).
+   Import once, first:  @import "@wldd/tokens/fonts.css";
+   Your bundler copies the font files into your build, so nothing is fetched from Google: it works offline and
+   behind company firewalls, and browsers download only the weights and scripts a page actually uses. */
+@import "@fontsource-variable/inter/opsz.css";
+@import "@fontsource-variable/inter-tight";
+@import "@fontsource-variable/geist-mono";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource-variable/manrope";
+@import "@fontsource-variable/bricolage-grotesque/opsz.css";

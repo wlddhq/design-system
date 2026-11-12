@@ -1,10 +1,10 @@
 /* ═════════ Preferences — font, density, motion. Beat every style's own value. ═════════ */
 
-:root[data-font='inter']     { --font: 'Inter', system-ui, sans-serif; --display: 'Inter Tight', 'Inter', sans-serif; }
-:root[data-font='geist']     { --font: 'Geist', 'Inter', system-ui, sans-serif; --display: 'Geist', 'Inter', sans-serif; }
-:root[data-font='plex']      { --font: 'IBM Plex Sans', 'Inter', system-ui, sans-serif; --display: 'IBM Plex Sans', 'Inter', sans-serif; }
-:root[data-font='manrope']   { --font: 'Manrope', 'Inter', system-ui, sans-serif; --display: 'Manrope', 'Inter', sans-serif; }
-:root[data-font='bricolage'] { --font: 'Inter', system-ui, sans-serif; --display: 'Bricolage Grotesque', 'Inter', sans-serif; }
+:root[data-font='inter']     { --font: 'Inter Variable', 'Inter', system-ui, sans-serif; --display: 'Inter Tight Variable', 'Inter Tight', 'Inter Variable', 'Inter', sans-serif; }
+:root[data-font='geist']     { --font: 'Geist Variable', 'Geist', 'Inter Variable', 'Inter', system-ui, sans-serif; --display: 'Geist Variable', 'Geist', 'Inter Variable', 'Inter', sans-serif; }
+:root[data-font='plex']      { --font: 'IBM Plex Sans Variable', 'IBM Plex Sans', 'Inter Variable', 'Inter', system-ui, sans-serif; --display: 'IBM Plex Sans Variable', 'IBM Plex Sans', 'Inter Variable', 'Inter', sans-serif; }
+:root[data-font='manrope']   { --font: 'Manrope Variable', 'Manrope', 'Inter Variable', 'Inter', system-ui, sans-serif; --display: 'Manrope Variable', 'Manrope', 'Inter Variable', 'Inter', sans-serif; }
+:root[data-font='bricolage'] { --font: 'Inter Variable', 'Inter', system-ui, sans-serif; --display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', 'Inter Variable', 'Inter', sans-serif; }
 :root[data-font='system']    { --font: system-ui, -apple-system, 'Segoe UI', sans-serif; --display: system-ui, -apple-system, 'Segoe UI', sans-serif; }
 :root[data-font='bricolage'] { --btn-weight: 550; }
 
