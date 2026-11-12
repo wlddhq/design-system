@@ -1,6 +1,6 @@
 /* Loaders. Brand sequence in logo order: W green · L violet · D pink · D yellow. */
 :root { --wl-ink: #141414; }
-:root[data-theme='dark'], :root[data-style='kajal'] { --wl-ink: #000; }
+:root:not([data-theme='light']), :root[data-style='kajal'] { --wl-ink: #000; }
 
 .w-loader { display: inline-flex; align-items: center; justify-content: center; flex: none; line-height: 0; }
 .ld-svg { display: block; overflow: visible; }

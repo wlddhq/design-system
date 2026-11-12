@@ -16,7 +16,7 @@
   color-scheme: light;
 }
 
-:root[data-theme='dark'] {
+:root:not([data-theme='light']) {
   --bg: #0f0f10; --surface: #151516; --sunken: #121213; --hover: rgba(255, 255, 255, .045); --press: rgba(255, 255, 255, .08);
   --line: #232325; --line-2: #2c2c2f; --fg: #ececee; --fg-2: #b4b4ba; --muted: #7f7f87; --faint: #4a4a50;
   --ink: #ececee; --ink-fg: #111;

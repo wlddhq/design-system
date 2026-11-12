@@ -55,7 +55,7 @@ Shortcuts are written once for every platform: `kbd="mod+k"` shows ⌘K on a Mac
 
 ## Themes
 
-`applyTheme()` sets the theme on `<html>`; every component follows. The default is Khadi, light.
+`applyTheme()` sets the theme on `<html>`; every component follows. The default is Khadi, dark, with no setup at all.
 
 ```ts
 import { applyTheme } from '@wldd/tokens'

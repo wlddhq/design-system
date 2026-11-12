@@ -26,9 +26,9 @@ export interface Theme {
   accent: string | null
 }
 
-/** The approved default (buttons are always Lip): Khadi, light, comfortable, full motion. */
+/** The approved default (buttons are always Lip): Khadi, dark, comfortable, full motion. */
 export const DEFAULT_THEME: Theme = {
-  mode: 'light', style: 'khadi', tone: 'haldi', corners: 'default',
+  mode: 'dark', style: 'khadi', tone: 'haldi', corners: 'default',
   font: null, density: 'comfortable', motion: 'full', accent: null,
 }
 

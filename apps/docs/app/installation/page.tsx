@@ -23,7 +23,7 @@ export default function Page() {
       <p>Themes can ask for Inter, Inter Tight, Geist, Geist Mono, IBM Plex Sans, Manrope and Bricolage Grotesque. <code>@wldd/tokens/fonts.css</code> brings them all, self-hosted: your build includes the font files, nothing is fetched from Google, and browsers download only the weights and scripts a page uses. Keep it as the first import.</p>
 
       <H2>Theme</H2>
-      <p>Khadi in light mode is the default and needs no setup. To change it, call <code>applyTheme</code> whenever the user’s setting changes. It writes attributes on <code>&lt;html&gt;</code> and every component follows.</p>
+      <p>Khadi in dark mode is the default and needs no setup. To change it, call <code>applyTheme</code> whenever the user’s setting changes. It writes attributes on <code>&lt;html&gt;</code> and every component follows.</p>
       <Code code={`'use client'
 import { useEffect } from 'react'
 import { applyTheme, type Theme } from '@wldd/tokens'

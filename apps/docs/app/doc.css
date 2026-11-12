@@ -161,8 +161,8 @@
 .chg-k { flex: none; width: 62px; font-size: 11px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); }
 .chg-k[data-tone='green'] { color: color-mix(in oklab, var(--green) 55%, var(--fg)); }
 .chg-k[data-tone='violet'] { color: color-mix(in oklab, var(--violet) 55%, var(--fg)); }
-:root[data-theme='dark'] .chg-k[data-tone='green'], :root[data-style='kajal'] .chg-k[data-tone='green'] { color: var(--green); }
-:root[data-theme='dark'] .chg-k[data-tone='violet'], :root[data-style='kajal'] .chg-k[data-tone='violet'] { color: var(--violet); }
+:root:not([data-theme='light']) .chg-k[data-tone='green'], :root[data-style='kajal'] .chg-k[data-tone='green'] { color: var(--green); }
+:root:not([data-theme='light']) .chg-k[data-tone='violet'], :root[data-style='kajal'] .chg-k[data-tone='violet'] { color: var(--violet); }
 .chg-t { min-width: 0; color: var(--fg-2); }
 .chg-tag { font-weight: 600; color: var(--fg); text-decoration: none; }
 .chg-tag:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -171,4 +171,4 @@
 .chg-ver:hover { text-decoration: underline; }
 .chg-badge { display: inline-flex; align-items: center; vertical-align: 2px; margin-left: 6px; padding: 1px 8px; border-radius: 99px; font-size: 11.5px; font-weight: 500; line-height: 1.6; text-decoration: none;
   color: color-mix(in oklab, var(--green) 55%, var(--fg)); background: var(--green-soft); }
-:root[data-theme='dark'] .chg-badge, :root[data-style='kajal'] .chg-badge { color: var(--green); }
+:root:not([data-theme='light']) .chg-badge, :root[data-style='kajal'] .chg-badge { color: var(--green); }

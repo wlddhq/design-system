@@ -6,7 +6,7 @@
 .w-selbar-l { opacity: .6; margin-right: 8px; }
 .w-selbar .w-btn { background: rgba(255, 255, 255, .1); color: inherit; box-shadow: none; }
 .w-selbar .w-btn:hover { background: rgba(255, 255, 255, .18); }
-:root[data-theme='dark'] .w-selbar .w-btn, :root[data-style='kajal'] .w-selbar .w-btn { background: rgba(0, 0, 0, .08); }
+:root:not([data-theme='light']) .w-selbar .w-btn, :root[data-style='kajal'] .w-selbar .w-btn { background: rgba(0, 0, 0, .08); }
 @media (max-width: 760px) { .w-selbar { left: 8px; right: 8px; translate: none; bottom: calc(12px + env(safe-area-inset-bottom)); overflow-x: auto; } }
 .w-selbar-all { height: 28px; padding: 0 8px; margin: 0 4px 0 -6px; border-radius: 8px; font-weight: 500; color: inherit; opacity: .8; text-decoration: underline; text-decoration-color: color-mix(in oklab, currentColor 35%, transparent); text-underline-offset: 3px; white-space: nowrap; }
 .w-selbar-all:hover { opacity: 1; background: rgba(255, 255, 255, .1); }

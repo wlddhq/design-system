@@ -2,7 +2,7 @@
    One source of truth. Every component and every Tailwind utility reads these variables.
 
    The page is themed with attributes on <html> (see applyTheme in @wldd/tokens):
-     data-theme    light | dark                         (default light)
+     data-theme    light | dark                         (default dark: dark unless set to light)
      data-style    khadi | kajal | pop                  (default khadi)
      data-tone     haldi | tulsi | baingani | …          Pop only (default haldi)
      data-corners  4 | 6 | 10 | 14                       every style (absent = the style's own)
@@ -54,6 +54,6 @@
   --chart-1: #2fa866; --chart-2: #a24fe0; --chart-3: #d99b12; --chart-4: #e23d63;
   --chart-other: var(--faint); /* "Other", the rest */
 }
-:root[data-theme='dark'], :root[data-style='kajal'] {
+:root:not([data-theme='light']), :root[data-style='kajal'] {
   --chart-1: #37ab65; --chart-2: #b072db; --chart-3: #bc8900; --chart-4: #e45e7c;
 }

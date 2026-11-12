@@ -2,7 +2,7 @@
    Haldi is the Pop base in pop.css. Light selectors exclude dark so dark blocks never fight them. */
 
 /* ── Tulsi ── */
-:root[data-style='pop'][data-tone='tulsi']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='tulsi']:not(:not([data-theme='light'])) {
   --bg: #e8ece6;
   --surface: #fbfcf9;
   --sunken: #dfe4dc;
@@ -25,7 +25,7 @@
   --shadow-pop: 0 0 0 1px #b8c0b3, 0 10px 28px -10px rgba(25,35,28,.22);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='tulsi'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='tulsi']:not([data-theme='light']) {
   --bg: #121815;
   --surface: #182019;
   --sunken: #1e2720;
@@ -50,7 +50,7 @@
 }
 
 /* ── Baingani ── */
-:root[data-style='pop'][data-tone='baingani']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='baingani']:not(:not([data-theme='light'])) {
   --bg: #ecebf2;
   --surface: #fcfcfe;
   --sunken: #e3e1ec;
@@ -73,7 +73,7 @@
   --shadow-pop: 0 0 0 1px #c1bdd2, 0 10px 28px -10px rgba(40,30,70,.22);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='baingani'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='baingani']:not([data-theme='light']) {
   --bg: #15141c;
   --surface: #1b1a24;
   --sunken: #22202d;
@@ -98,7 +98,7 @@
 }
 
 /* ── Gulabi ── */
-:root[data-style='pop'][data-tone='gulabi']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='gulabi']:not(:not([data-theme='light'])) {
   --bg: #f2ece8;
   --surface: #fffcfa;
   --sunken: #eae2dc;
@@ -121,7 +121,7 @@
   --shadow-pop: 0 0 0 1px #cbbdb4, 0 10px 28px -10px rgba(60,35,25,.22);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='gulabi'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='gulabi']:not([data-theme='light']) {
   --bg: #1b1513;
   --surface: #221b18;
   --sunken: #2a211e;
@@ -146,7 +146,7 @@
 }
 
 /* ── Neel ── */
-:root[data-style='pop'][data-tone='neel']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='neel']:not(:not([data-theme='light'])) {
   --bg: #eceef2;
   --surface: #fcfcfd;
   --sunken: #e2e5eb;
@@ -169,7 +169,7 @@
   --shadow-pop: 0 0 0 1px #bcc2ce, 0 10px 28px -10px rgba(20,30,60,.22);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='neel'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='neel']:not([data-theme='light']) {
   --bg: #12151b;
   --surface: #181c23;
   --sunken: #1e232c;
@@ -194,7 +194,7 @@
 }
 
 /* ── Kesar ── */
-:root[data-style='pop'][data-tone='kesar']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='kesar']:not(:not([data-theme='light'])) {
   --bg: #f3eee6;
   --surface: #fffdf9;
   --sunken: #ebe4d8;
@@ -217,7 +217,7 @@
   --shadow-pop: 0 0 0 1px #cbbea9, 0 10px 28px -10px rgba(60,40,20,.22);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='kesar'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='kesar']:not([data-theme='light']) {
   --bg: #1a1612;
   --surface: #211c17;
   --sunken: #29231c;
@@ -242,7 +242,7 @@
 }
 
 /* ── Mor ── */
-:root[data-style='pop'][data-tone='mor']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='mor']:not(:not([data-theme='light'])) {
   --bg: #e7eeee;
   --surface: #fbfdfd;
   --sunken: #dde6e6;
@@ -265,7 +265,7 @@
   --shadow-pop: 0 0 0 1px #b5c6c6, 0 10px 28px -10px rgba(15,50,50,.22);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='mor'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='mor']:not([data-theme='light']) {
   --bg: #101818;
   --surface: #152020;
   --sunken: #1b2828;
@@ -290,7 +290,7 @@
 }
 
 /* ── Koyla ── */
-:root[data-style='pop'][data-tone='koyla']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='koyla']:not(:not([data-theme='light'])) {
   --bg: #efefef;
   --surface: #fdfdfd;
   --sunken: #e6e6e6;
@@ -313,7 +313,7 @@
   --shadow-pop: 0 0 0 1px #c4c4c4, 0 10px 28px -10px rgba(0,0,0,.22);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='koyla'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='koyla']:not([data-theme='light']) {
   --bg: #111111;
   --surface: #171717;
   --sunken: #1d1d1d;
@@ -338,7 +338,7 @@
 }
 
 /* ── Jamun ── */
-:root[data-style='pop'][data-tone='jamun']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='jamun']:not(:not([data-theme='light'])) {
   --bg: #f6f2ea;
   --surface: #fffdf8;
   --sunken: #eee8dc;
@@ -363,7 +363,7 @@
   --side-hi: rgba(255,255,255,.15);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='jamun'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='jamun']:not([data-theme='light']) {
   --bg: #17141b;
   --surface: #1d1922;
   --sunken: #241f2a;
@@ -390,7 +390,7 @@
 }
 
 /* ── Ujala ── */
-:root[data-style='pop'][data-tone='ujala']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='ujala']:not(:not([data-theme='light'])) {
   --bg: #ffffff;
   --surface: #ffffff;
   --sunken: #f0f0f0;
@@ -421,7 +421,7 @@
   --shadow-pop: 0 0 0 2px #000, 0 10px 28px -10px rgba(0,0,0,.3);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='ujala'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='ujala']:not([data-theme='light']) {
   --bg: #000000;
   --surface: #000000;
   --sunken: #141414;
@@ -454,7 +454,7 @@
 }
 
 /* ── Drishti ── */
-:root[data-style='pop'][data-tone='drishti']:not([data-theme='dark']) {
+:root[data-style='pop'][data-tone='drishti']:not(:not([data-theme='light'])) {
   --bg: #f6f6f4;
   --surface: #ffffff;
   --sunken: #ecece9;
@@ -485,7 +485,7 @@
   --shadow-pop: 0 0 0 1px #cacac4, 0 10px 28px -10px rgba(24,24,27,.2);
   color-scheme: light;
 }
-:root[data-style='pop'][data-tone='drishti'][data-theme='dark'] {
+:root[data-style='pop'][data-tone='drishti']:not([data-theme='light']) {
   --bg: #121316;
   --surface: #18191d;
   --sunken: #1e2025;

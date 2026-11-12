@@ -15,7 +15,7 @@
   color-scheme: light;
 }
 
-:root[data-style='pop'][data-theme='dark'] {
+:root[data-style='pop']:not([data-theme='light']) {
   --bg: #1d1f27; --surface: #23252f; --sunken: #2a2d38; --hover: rgba(238, 239, 233, .05); --press: rgba(238, 239, 233, .08);
   --line: #343744; --line-2: #464a59; --fg: #eeefe9; --fg-2: #c3c5bc; --muted: #94978e; --faint: #5d6070;
   --ink: #eeefe9; --ink-fg: #1d1f27;

@@ -9,9 +9,10 @@ How to write an entry:
 - Start a line with the component it touches in brackets, e.g. `[table]`, using the component's page id (as in /components/table). Use `[tokens]`, `[fonts]` or `[tailwind]` for those packages.
 - Say what changed for the person using it, in one line. Name the prop in backticks.
 
-## Unreleased
+## 0.1.3 — 2026-11-12
 
 ### Changed
+- [tokens] Dark mode is the default. With no setup (or `applyTheme()` with no mode), apps start in Khadi dark; light is `applyTheme({ mode: 'light' })`.
 - npm pages link to the source on GitHub (Repository and Issues).
 
 ## 0.1.2 — 2026-11-12

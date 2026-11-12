@@ -1,6 +1,6 @@
 # @wldd/tokens
 
-WLDD's design tokens as CSS variables: colour, type, radius, motion and every theme (Khadi, Kajal, Pop and its tones). Khadi light is the default.
+WLDD's design tokens as CSS variables: colour, type, radius, motion and every theme (Khadi, Kajal, Pop and its tones). Khadi in dark mode is the default.
 
 ```css
 @import "@wldd/tokens/fonts.css";  /* first: every font the themes use, self-hosted */
