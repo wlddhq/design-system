@@ -7,7 +7,7 @@ import { FaviconCycle } from '@/components/FaviconCycle'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: { default: 'WLDD Library', template: '%s · WLDD Library' },
+  title: { default: 'WLDD Design System', template: '%s · WLDD Design System' },
   description: 'Components, tokens and rules for building WLDD products.',
 }
 

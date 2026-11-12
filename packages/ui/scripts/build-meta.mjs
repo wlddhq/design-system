@@ -1,4 +1,4 @@
-// Builds the machine-readable side of the library, shipped inside the npm package:
+// Builds the machine-readable side of the design system, shipped inside the npm package:
 //   dist/meta/components.json — every component page: summary, group, and props for each part (from TypeScript)
 //   dist/rules/<id>.md        — each component's usage rules (the same text the docs site shows)
 //   dist/AGENTS.md            — the entry point an AI tool reads first

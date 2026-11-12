@@ -5,7 +5,7 @@ export const metadata = { title: 'Campaigns' }
 
 export default function Page() {
   return (
-    <DocPage wide href="/showcase/campaigns" lead="The DMS Campaigns screen, rebuilt with nothing but @wldd/ui. If this matches the prototype, the library can build the product.">
+    <DocPage wide href="/showcase/campaigns" lead="The DMS Campaigns screen, rebuilt with nothing but @wldd/ui. If this matches the prototype, the design system can build the product.">
       <H2>Live screen</H2>
       <p>Open Display to switch between List, Board, Table, Timeline and Grid, and to change grouping, ordering and properties. Click a campaign to peek at it. Drag cards on the Board; click a stage in the Table to change it; select rows to see the selection bar.</p>
       <Example id="showcase/campaigns" frame={720} />

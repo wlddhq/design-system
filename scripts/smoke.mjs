@@ -1,6 +1,6 @@
 // Release check: does a brand-new Next.js app work with ONLY what we'd publish?
 // Builds the packages, packs them as npm would, installs the tarballs into a blank app in a temp folder
-// (latest Next.js, strict TypeScript, library types checked), follows the README's setup, and runs `next build`.
+// (latest Next.js, strict TypeScript, package types checked), follows the README's setup, and runs `next build`.
 // It catches what a workspace hides: missing dependencies, files left out of "files", broken exports or types.
 //   npm run smoke              before publishing: the packed tarballs
 //   npm run smoke -- --registry  after publishing: the versions now on npm

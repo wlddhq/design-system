@@ -1,6 +1,6 @@
 import { marked } from 'marked'
 import { Check, X } from 'lucide-react'
-import { componentMeta, componentRules, exampleSource, type PropMeta } from '@/lib/library'
+import { componentMeta, componentRules, exampleSource, type PropMeta } from '@/lib/meta'
 import { EXAMPLES } from '@/examples'
 import { Code } from './Code'
 import { DocPage, H2 } from './Doc'

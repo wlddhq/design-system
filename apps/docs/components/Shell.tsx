@@ -78,7 +78,7 @@ function Sidebar({ path, open, version }: { path: string; open: boolean; version
   return (
     <aside className={'d-side sb-stack' + (open ? ' open' : '')}>
       <div className="d-brand">
-        <Link href="/" aria-label="WLDD Library home">
+        <Link href="/" aria-label="WLDD Design System home">
           <WlddMark height={26} />
         </Link>
         <span className="sb-tools">

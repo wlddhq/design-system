@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { ComponentDoc } from '@/components/ComponentDoc'
 import { COMPONENT_PAGES } from '@/lib/component-pages'
-import { componentMeta } from '@/lib/library'
+import { componentMeta } from '@/lib/meta'
 import { H2 } from '@/components/Doc'
 import { LoaderGallery } from '@/components/LoaderGallery'
 
