@@ -34,5 +34,14 @@
     "react",
     "tailwind",
     "tokens"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wlddhq/design-system.git",
+    "directory": "packages/tailwind"
+  },
+  "bugs": {
+    "url": "https://github.com/wlddhq/design-system/issues"
+  },
+  "homepage": "https://github.com/wlddhq/design-system#readme"
 }
