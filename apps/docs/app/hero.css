@@ -11,9 +11,8 @@
 .hc-tools { position: absolute; left: 6px; top: 46px; display: grid; gap: 2px; padding: 3px; border-radius: 9px; background: var(--pop); box-shadow: 0 0 0 1px var(--line), 0 6px 16px -8px rgba(0, 0, 0, .25); }
 .hc-tool { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 6px; color: var(--muted); }
 
-/* The logo: frames, extrusion, fills, outlines, selection */
+/* The logo: extrusion, fills, outlines, selection */
 .hc-logo { position: absolute; overflow: visible; }
-.hc-box { fill: none; stroke: var(--sel); stroke-width: 1.6; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: 0 0; opacity: 0; }
 .hc-extrude { fill: var(--wl-ink); stroke: var(--wl-ink); stroke-width: 6.83; stroke-linejoin: round; opacity: 0; }
 .hc-fill { opacity: 0; }
 .hc-line { fill: none; stroke: var(--fg); stroke-linejoin: round; opacity: 0; }
@@ -35,6 +34,12 @@
 .hc-pen { position: absolute; left: 0; top: 0; display: inline-flex; align-items: flex-start; gap: 4px; offset-rotate: 0deg; opacity: 0; }
 .hc-pen svg { display: block; fill: var(--surface); stroke: currentColor; stroke-width: 2; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25)); }
 .hc-pen b { margin-top: 30px; padding: 2px 10px; border-radius: 7px 7px 7px 2px; background: var(--sel); color: #fff; font-weight: 600; line-height: 1.5; white-space: nowrap; }
+
+/* Dragging letters home: the held letter's selection box, and its move cursor (an arrow in the letter's colour) */
+.hc-held { fill: none; stroke: var(--sel); stroke-width: 1.2; vector-effect: non-scaling-stroke; opacity: 0; }
+.hc-mc { position: absolute; left: 0; top: 0; display: inline-flex; align-items: flex-start; gap: 2px; opacity: 0; }
+.hc-mc svg { display: block; fill: currentColor; stroke: var(--surface); stroke-width: 1.5; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .2)); }
+.hc-mc b { margin-top: 13px; padding: 1px 6px; border-radius: 4px 4px 4px 1px; background: var(--sel); color: #fff; font: 600 10.5px/1.5 var(--font); }
 
 /* Palette and eyedropper */
 .hc-pal { position: absolute; width: 132px; padding: 6px; border-radius: 10px; background: var(--pop); box-shadow: 0 0 0 1px var(--line), 0 10px 26px -10px rgba(0, 0, 0, .3); opacity: 0; transform-origin: 0 0; }
