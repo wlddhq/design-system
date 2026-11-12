@@ -7,11 +7,13 @@ import { GLYPHS, EX, EY, OUT } from '@/lib/wlddGlyphs'
     1 · Pen: four cursors build W, L, D, D apart, point by point, all at once. Click → an anchor lands;
         move → the segment stretches to the next point; curves get their handles; shapes close and deselect.
     2 · Move: each letter's cursor grabs it and drags it home into the logo.
-    3 · Magic: a wand touches the logo; sparkles, and the 3D shadow grows in layer by layer.
-    4 · Colour: a palette opens; the eyedropper picks each brand colour and drops it into its letter.
-    5 · Sati selects the finished logo.
+    3 · Colour: a palette opens; the eyedropper picks each brand colour and drops it into its letter.
+    4 · Magic: a wand touches the logo; sparkles, and the 3D shadow grows in layer by layer.
+    5 · The logo comes alive: each letter presses into its shadow, W → L → D → D (the Press loader).
   The toolbar only appears when a tool changes. Every cursor moves like a hand: a slight arc, easing in and
   out, a small overshoot on arrival, a press on every click. Positions come from the real glyph paths.
+  Every cursor is placed by its hotspot (the pen's nib, the arrow's tip, the wand's tip), computed from the
+  same geometry as the path being drawn, so the line and the nib never part.
   Reduced motion holds the finished logo.
 */
 const T = 19 // seconds per loop
@@ -26,7 +28,21 @@ const py = (v: number) => r2(T0 + (v + 10) * S)
 
 /* ── Paths → segments ── */
 type P = [number, number]
-type Seg = { a: P; b: P; arc?: { r: number; sweep: number }; len: number; sub: number }
+type Arc = { r: number; sweep: number; c: P; th: number; dth: number }
+type Seg = { a: P; b: P; arc?: Arc; len: number; sub: number }
+/** SVG arc (no rotation, small arc) → centre, start angle, sweep angle. */
+function arcOf(a: P, b: P, r: number, sweep: number): Arc {
+  const x1 = (a[0] - b[0]) / 2, y1 = (a[1] - b[1]) / 2
+  const k = (sweep === 1 ? 1 : -1) * Math.sqrt(Math.max(0, (r * r - x1 * x1 - y1 * y1) / (x1 * x1 + y1 * y1)))
+  const cx = k * y1, cy = -k * x1
+  const th = Math.atan2(y1 - cy, x1 - cx)
+  let dth = Math.atan2(-y1 - cy, -x1 - cx) - th
+  if (sweep === 0 && dth > 0) dth -= 2 * Math.PI
+  if (sweep === 1 && dth < 0) dth += 2 * Math.PI
+  return { r, sweep, c: [cx + (a[0] + b[0]) / 2, cy + (a[1] + b[1]) / 2], th, dth }
+}
+/** The point a fraction u along a segment. */
+const at = (s: Seg, u: number): P => s.arc ? [s.arc.c[0] + s.arc.r * Math.cos(s.arc.th + u * s.arc.dth), s.arc.c[1] + s.arc.r * Math.sin(s.arc.th + u * s.arc.dth)] : [s.a[0] + (s.b[0] - s.a[0]) * u, s.a[1] + (s.b[1] - s.a[1]) * u]
 function segments(d: string): Seg[] {
   const tok = d.match(/[MLHVAZ]|-?\d*\.?\d+(?:e-?\d+)?/gi) ?? []
   const out: Seg[] = []
@@ -41,7 +57,8 @@ function segments(d: string): Seg[] {
     else if (c === 'V') line([cur[0], num()])
     else if (c === 'A') {
       const r = num(); num(); num(); num(); const sweep = num(); const b: P = [num(), num()]
-      out.push({ a: cur, b, arc: { r, sweep }, len: (Math.PI * r) / 2, sub }); cur = b
+      const arc = arcOf(cur, b, r, sweep)
+      out.push({ a: cur, b, arc, len: Math.abs(arc.dth) * r, sub }); cur = b
     } else if (c === 'Z' || c === 'z') line(start)
   }
   return out
@@ -62,11 +79,13 @@ const PEN = [[3.5, 29], [6, 25.5], [8.5, 37], [11, 40]] // each letter built, ap
 const HOLD = 0.5 // a click
 const grab = (i: number) => 44 + 2.6 * i
 const drop = (i: number) => grab(i) + 5
-const MAGIC = 61 // the wand touches the logo
-const pick = (i: number) => [68 + 4.8 * i, 70.6 + 4.8 * i] // dropper at swatch i, then at letter i
-const SEL = 91 // Sati selects the finished logo
+const TRAVEL = 0.9 // the pen moving to a new subpath (a D's counter)
+const pick = (i: number) => [60.6 + 4.4 * i, 63 + 4.4 * i] // dropper at swatch i, then at letter i
+const MAGIC = 82 // the wand touches the coloured logo
+const PRESS = 86, PRESS_D = (0.34 / T) * 100, PRESS_P = (1.29 / T) * 100, PRESS_S = (0.17 / T) * 100 // the Press loader's timing
+const END = 97.6 // everything fades, ready for the next loop
 // Tool changes: the toolbar pops up only around these, and the new tool gets pressed.
-const SWITCH = [{ at: 1.2, tool: 1 }, { at: 42.2, tool: 0 }, { at: 58.6, tool: 2 }, { at: 65.6, tool: 3 }, { at: 88.6, tool: 0 }]
+const SWITCH = [{ at: 1.2, tool: 1 }, { at: 42.2, tool: 0 }, { at: 57.8, tool: 3 }, { at: 79.2, tool: 2 }]
 const TOOLS = [MousePointer2, PenTool, WandSparkles, Pipette]
 const PAL = { x: Math.round(px(382) + 22), y: 40 }
 const swatch = (i: number): P => [PAL.x + 18, PAL.y + 40 + i * 26]
@@ -78,7 +97,18 @@ const kf = (name: string, frames: F) => {
   frames.forEach(([p, c]) => seen.set(r2(Math.min(100, Math.max(0, p))), c))
   return `@keyframes ${name}{${[...seen.entries()].sort((a, b) => a[0] - b[0]).map(([p, css]) => `${p}%{${css}}`).join('')}}`
 }
-const EASE_SEG = 'animation-timing-function:cubic-bezier(.45,.05,.3,1)' // a pen stroke: accelerate, then settle on the point
+/** cubic-bezier(x1,y1,x2,y2) as a function: the pen stroke's pace (accelerate, then settle on the point). */
+function bezier(x1: number, y1: number, x2: number, y2: number) {
+  const f = (a: number, b: number, t: number) => 3 * a * t * (1 - t) * (1 - t) + 3 * b * t * t * (1 - t) + t * t * t
+  return (x: number) => { let lo = 0, hi = 1; for (let k = 0; k < 30; k++) { const m = (lo + hi) / 2; if (f(x1, x2, m) < x) lo = m; else hi = m } return f(y1, y2, (lo + hi) / 2) }
+}
+const stroke = bezier(0.45, 0.05, 0.3, 1)
+/** Hotspots: where each cursor actually points, in px from its icon's top-left. */
+const NIB: P = [1.6, 1.6] // PenTool at 18px
+const TIP: P = [3, 3] // MousePointer2 at 18px
+const WAND: P = [17, 3] // WandSparkles at 20px, the wand's far end
+const DROP: P = [2, 16] // Pipette at 18px
+const neg = (p: P): P => [-p[0], -p[1]]
 
 /** A hand-like move: a gentle arc (bend × distance, to one side), eased in and out, a little overshoot at the end. */
 type K = { t: number; x: number; y: number; s?: number; o?: number }
@@ -108,12 +138,13 @@ function plan(gi: number): Plan {
   const segs = segments(GLYPHS[gi]!.d)
   const [start, end] = PEN[gi]!
   const total = segs.reduce((a, s) => a + s.len, 0)
-  const clicks = segs.filter((s) => !tiny(s)).length + new Set(segs.map((s) => s.sub)).size
-  const move = end - start - clicks * HOLD
+  const subs = new Set(segs.map((s) => s.sub)).size
+  const clicks = segs.filter((s) => !tiny(s)).length + subs
+  const move = end - start - clicks * HOLD - (subs - 1) * TRAVEL
   const t: Plan['t'] = [], anchors: Plan['anchors'] = []
   let now = start, sub = -1
   segs.forEach((s, k) => {
-    if (s.sub !== sub) { sub = s.sub; anchors.push({ p: s.a, t: now }); now += HOLD }
+    if (s.sub !== sub) { if (sub !== -1) now += TRAVEL; sub = s.sub; anchors.push({ p: s.a, t: now }); now += HOLD }
     const s0 = now, s1 = now + (move * s.len) / total
     t.push({ s0, s1 })
     const last = k === segs.length - 1 || segs[k + 1]!.sub !== s.sub
@@ -123,6 +154,9 @@ function plan(gi: number): Plan {
   return { segs, t, anchors, close: now, total }
 }
 const PLANS = GLYPHS.map((_, i) => plan(i))
+
+/** Points along a segment as [time fraction, distance fraction]: eased for strokes, even for corner roundings. */
+const samples = (s: Seg): [number, number][] => { const n = tiny(s) ? 2 : 8; return Array.from({ length: n + 1 }, (_, j): [number, number] => [j / n, tiny(s) ? j / n : stroke(j / n)]) }
 
 function keyframes() {
   const out: string[] = []
@@ -134,7 +168,7 @@ function keyframes() {
     // Pen: segments stretch with the cursor (same easing), anchors land on each click, handles on curves.
     pl.segs.forEach((s, k) => {
       const { s0, s1 } = pl.t[k]!
-      out.push(kf(`hc-seg-${i}-${k}`, [[0, 'stroke-dashoffset:1;opacity:0'], [s0 - 0.01, 'stroke-dashoffset:1;opacity:0'], [s0, `stroke-dashoffset:1;opacity:1;${tiny(s) ? '' : EASE_SEG}`], [s1, 'stroke-dashoffset:0;opacity:1'],
+      out.push(kf(`hc-seg-${i}-${k}`, [[0, 'stroke-dashoffset:1;opacity:0'], [s0 - 0.01, 'stroke-dashoffset:1;opacity:0'], ...samples(s).map(([tau, u]): [number, string] => [s0 + (s1 - s0) * tau, `stroke-dashoffset:${(1 - u).toFixed(4)};opacity:1`]),
         [pl.close + 1.5, 'stroke-dashoffset:0;opacity:1'], [pl.close + 3, 'stroke-dashoffset:0;opacity:0'], [100, 'stroke-dashoffset:0;opacity:0']]))
     })
     pl.anchors.forEach((a, k) => {
@@ -149,21 +183,35 @@ function keyframes() {
     })
     // The closed shape: a plain outline; the wand turns it into the mark's ink outline.
     const pen0 = 'stroke:var(--fg);stroke-width:2.2', ink = `stroke:var(--wl-ink);stroke-width:${OUT.toFixed(2)}`
-    out.push(kf(`hc-line-${i}`, [[0, `${pen0};opacity:0`], [pl.close + 1, `${pen0};opacity:0`], [pl.close + 2.5, `${pen0};opacity:1`], [MAGIC + 0.6, `${pen0};opacity:1`], [MAGIC + 2.6, `${ink};opacity:1`], [96, `${ink};opacity:1`], [99, `${ink};opacity:0`], [100, `${pen0};opacity:0`]]))
+    out.push(kf(`hc-line-${i}`, [[0, `${pen0};opacity:0`], [pl.close + 1, `${pen0};opacity:0`], [pl.close + 2.5, `${pen0};opacity:1`], [MAGIC + 0.6, `${pen0};opacity:1`], [MAGIC + 2.6, `${ink};opacity:1`], [END, `${ink};opacity:1`], [99, `${ink};opacity:0`], [100, `${pen0};opacity:0`]]))
+    // Alive: the Press loader, each letter pushing into its shadow in turn.
+    const press: F = [[0, 'transform:translate(0px,0px)']]
+    for (let c = 0; c < 2; c++) {
+      const a = PRESS + c * PRESS_P + i * PRESS_S, e = 'animation-timing-function:ease-in-out'
+      press.push([a, `transform:translate(0px,0px);${e}`], [a + PRESS_D / 2, `transform:translate(${r2(EX * 0.75)}px,${r2(EY * 0.75)}px);${e}`], [a + PRESS_D, 'transform:translate(0px,0px)'])
+    }
+    press.push([100, 'transform:translate(0px,0px)'])
+    out.push(kf(`hc-press-${i}`, press))
 
-    // The pen cursor rides its path: eased glide along each segment, a press on each click.
-    const cur: F = [[0, 'offset-distance:0%;opacity:0;scale:1'], [pl.t[0]!.s0 - HOLD - 1.4, 'offset-distance:0%;opacity:0;scale:1.4'], [pl.t[0]!.s0 - HOLD - 0.3, 'offset-distance:0%;opacity:1;scale:1']]
-    let dist = 0, sub = -1
-    const press = (t: number, d: number) => { cur.push([t, `offset-distance:${r2(d)}%;opacity:1;scale:1`], [t + 0.2, `offset-distance:${r2(d)}%;opacity:1;scale:.84`], [t + HOLD - 0.02, `offset-distance:${r2(d)}%;opacity:1;scale:1`]) }
+    // The pen cursor: its nib sits on the exact point being drawn (same samples as the segment), a press on each click.
+    const pos = (p: P): P => [px(p[0] + dx), py(p[1] + dy)]
+    const first = pos(pl.segs[0]!.a), penIn: P = [first[0] + 34, first[1] + 46], t0 = pl.anchors[0]!.t
+    const ks: K[] = [hidden(penIn, 0), hidden(penIn, t0 - 1.7), { t: t0 - 1.6, x: penIn[0], y: penIn[1] }, ...glide(penIn, first, t0 - 1.6, t0 - 0.04)]
+    let here = first, sub = -1
     pl.segs.forEach((s, k) => {
-      const d0 = (dist / pl.total) * 100
-      if (s.sub !== sub) { sub = s.sub; press(pl.t[k]!.s0 - HOLD, d0) }
-      dist += s.len
-      cur.push([pl.t[k]!.s0, `offset-distance:${r2(d0)}%;opacity:1;scale:1;${tiny(s) ? '' : EASE_SEG}`], [pl.t[k]!.s1, `offset-distance:${r2((dist / pl.total) * 100)}%;opacity:1;scale:1`])
-      if (!tiny(s)) press(pl.t[k]!.s1, (dist / pl.total) * 100)
+      const { s0, s1 } = pl.t[k]!
+      if (s.sub !== sub) {
+        const a = pos(s.a), ta = s0 - HOLD
+        if (sub !== -1) ks.push(...glide(here, a, ta - TRAVEL + 0.04, ta - 0.04, 0.12))
+        ks.push(...click(a, ta)); sub = s.sub
+      }
+      samples(s).forEach(([tau, u]) => { const p = pos(at(s, u)); ks.push({ t: s0 + (s1 - s0) * tau, x: p[0], y: p[1] }) })
+      here = pos(s.b)
+      if (!tiny(s)) ks.push(...click(here, s1))
     })
-    cur.push([pl.close + 1.4, 'offset-distance:100%;opacity:1;scale:1'], [pl.close + 3, 'offset-distance:100%;opacity:0;scale:1'], [100, 'offset-distance:100%;opacity:0;scale:1'])
-    out.push(kf(`hc-pen-${i}`, cur))
+    const away: P = [here[0] + 30, here[1] + 40]
+    ks.push(...rest(here, pl.close, pl.close + 1.2), ...glide(here, away, pl.close + 1.2, pl.close + 2.6), { t: pl.close + 2.9, x: away[0], y: away[1], o: 0 }, hidden(penIn, 100))
+    out.push(kf(`hc-pen-${i}`, frames(ks, neg(NIB))))
 
     // Move: the letter waits apart, then is dragged home on the same eased path as its cursor.
     const [cx, cy] = [(g.box[0] + g.box[2]) / 2, g.box[1] + (g.box[3] - g.box[1]) * 0.4]
@@ -177,19 +225,17 @@ function keyframes() {
     out.push(kf(`hc-mc-${i}`, frames([hidden(enter, 0), hidden(enter, grab(i) - 2.6), { t: grab(i) - 2.3, x: enter[0], y: enter[1], o: 1 },
       ...glide(enter, from, grab(i) - 2.3, grab(i) - 0.1), ...click(from, grab(i) - 0.1).slice(0, 2),
       ...drag.map((k) => ({ ...k, s: 0.84 })), { t: drop(i) + 0.3, x: to[0], y: to[1], s: 1 },
-      ...glide(to, leave, drop(i) + 0.5, drop(i) + 2), { t: drop(i) + 2.8, x: leave[0], y: leave[1], o: 0 }, hidden(enter, 100)])))
+      ...glide(to, leave, drop(i) + 0.5, drop(i) + 2), { t: drop(i) + 2.8, x: leave[0], y: leave[1], o: 0 }, hidden(enter, 100)], neg(TIP))))
   })
 
   // Magic: the wand arcs in, hovers, taps the logo; sparkles burst; the shadow grows layer by layer.
   const tap: P = [px(186), py(108)], wIn: P = [W - 60, H + 30], wOut: P = [px(330), py(250)]
   out.push(kf('hc-wand', frames([hidden(wIn, 0), hidden(wIn, MAGIC - 2.6), { t: MAGIC - 2.4, x: wIn[0], y: wIn[1] },
     ...glide(wIn, [tap[0] + 14, tap[1] - 18], MAGIC - 2.4, MAGIC - 0.7, -0.18), ...glide([tap[0] + 14, tap[1] - 18], tap, MAGIC - 0.7, MAGIC - 0.1, 0, 0),
-    ...click(tap, MAGIC - 0.1), ...rest(tap, MAGIC + 0.5, MAGIC + 1.4), ...glide(tap, wOut, MAGIC + 1.4, MAGIC + 3), { t: MAGIC + 3.6, x: wOut[0], y: wOut[1], o: 0 }, hidden(wIn, 100)])))
-  // The letters' faces, in the paper colour, so the new shadow reads as depth before any colour arrives.
-  out.push(kf('hc-face', [[0, 'opacity:0'], [MAGIC + 0.2, 'opacity:0'], [MAGIC + 0.8, 'opacity:1'], [96, 'opacity:1'], [99, 'opacity:0'], [100, 'opacity:0']]))
+    ...click(tap, MAGIC - 0.1), ...rest(tap, MAGIC + 0.5, MAGIC + 1.4), ...glide(tap, wOut, MAGIC + 1.4, MAGIC + 3), { t: MAGIC + 3.6, x: wOut[0], y: wOut[1], o: 0 }, hidden(wIn, 100)], neg(WAND))))
   for (let k = 0; k < STEPS; k++) {
     const a = MAGIC + 0.4 + k * 0.32
-    out.push(kf(`hc-ex-${k}`, [[0, 'opacity:0'], [a, 'opacity:0'], [a + 0.5, 'opacity:1'], [96, 'opacity:1'], [99, 'opacity:0'], [100, 'opacity:0']]))
+    out.push(kf(`hc-ex-${k}`, [[0, 'opacity:0'], [a, 'opacity:0'], [a + 0.5, 'opacity:1'], [END, 'opacity:1'], [99, 'opacity:0'], [100, 'opacity:0']]))
   }
   SPARKS.forEach((sp, k) => {
     const a = MAGIC + 0.1 + sp.d
@@ -200,27 +246,21 @@ function keyframes() {
   // Colour: palette, then the eyedropper from swatch to letter, four times.
   GLYPHS.forEach((g, i) => {
     const [ps, pl] = pick(i)
-    out.push(kf(`hc-fill-${i}`, [[0, 'opacity:0'], [pl + 0.4, 'opacity:0'], [pl + 1.6, 'opacity:1'], [96, 'opacity:1'], [99, 'opacity:0'], [100, 'opacity:0']]))
+    out.push(kf(`hc-fill-${i}`, [[0, 'opacity:0'], [pl + 0.4, 'opacity:0'], [pl + 1.6, 'opacity:1'], [END, 'opacity:1'], [99, 'opacity:0'], [100, 'opacity:0']]))
     out.push(kf(`hc-sw-${i}`, [[0, 'box-shadow:0 0 0 0 transparent'], [ps - 0.2, 'box-shadow:0 0 0 0 transparent'], [ps + 0.2, 'box-shadow:0 0 0 2px var(--fg)'], [ps + 2.2, 'box-shadow:0 0 0 2px var(--fg)'], [ps + 3, 'box-shadow:0 0 0 0 transparent'], [100, 'box-shadow:0 0 0 0 transparent']]))
   })
-  const tip: P = [-2, -17] // the dropper's nib is its bottom-left
-  const dIn: P = [W - 40, H + 30]
-  const dk: K[] = [hidden(dIn, 0), hidden(dIn, 66.4), { t: 66.6, x: dIn[0], y: dIn[1] }]
+  const dIn: P = [W - 40, H + 30], d0 = pick(0)[0] - 2.2
+  const dk: K[] = [hidden(dIn, 0), hidden(dIn, d0 - 0.2), { t: d0, x: dIn[0], y: dIn[1] }]
   let last = dIn
   GLYPHS.forEach((g, i) => {
     const [ps, pl] = pick(i), sw = swatch(i), lt: P = [px((g.box[0] + g.box[2]) / 2), py((g.box[1] + g.box[3]) / 2)]
-    dk.push(...glide(last, sw, i === 0 ? 66.6 : pick(i - 1)[1] + 0.6, ps - 0.1, 0.12), ...click(sw, ps - 0.1), ...glide(sw, lt, ps + 0.5, pl - 0.1, -0.16), ...click(lt, pl - 0.1))
+    dk.push(...glide(last, sw, i === 0 ? d0 : pick(i - 1)[1] + 0.6, ps - 0.1, 0.12), ...click(sw, ps - 0.1), ...glide(sw, lt, ps + 0.5, pl - 0.1, -0.16), ...click(lt, pl - 0.1))
     last = lt
   })
-  dk.push(...glide(last, dIn, pick(3)[1] + 0.6, 88), hidden(dIn, 88.4), hidden(dIn, 100))
-  out.push(kf('hc-drop', frames(dk, tip)))
+  dk.push(...glide(last, dIn, pick(3)[1] + 0.6, pick(3)[1] + 3), hidden(dIn, pick(3)[1] + 3.3), hidden(dIn, 100))
+  out.push(kf('hc-drop', frames(dk, neg(DROP))))
 
-  // Sati selects the finished logo.
-  const corner: P = [px(358), py(228)], sIn: P = [W - 50, H + 20]
-  out.push(kf('hc-sati', frames([hidden(sIn, 0), hidden(sIn, SEL - 2.4), { t: SEL - 2.2, x: sIn[0], y: sIn[1] }, ...glide(sIn, corner, SEL - 2.2, SEL - 0.2, 0.12), ...click(corner, SEL - 0.2),
-    ...rest(corner, SEL + 0.4, 96), { t: 97.5, x: corner[0], y: corner[1], o: 0 }, hidden(sIn, 100)])))
-  out.push(kf('hc-sel', [[0, 'opacity:0'], [SEL + 0.1, 'opacity:0'], [SEL + 0.5, 'opacity:1'], [96, 'opacity:1'], [98, 'opacity:0'], [100, 'opacity:0']]))
-  out.push(kf('hc-pal', [[0, 'opacity:0;transform:translateY(6px) scale(.96)'], [66.2, 'opacity:0;transform:translateY(6px) scale(.96)'], [67.2, 'opacity:1;transform:none'], [87, 'opacity:1;transform:none'], [88.5, 'opacity:0;transform:translateY(4px)'], [100, 'opacity:0;transform:translateY(6px) scale(.96)']]))
+  out.push(kf('hc-pal', [[0, 'opacity:0;transform:translateY(6px) scale(.96)'], [d0 - 0.4, 'opacity:0;transform:translateY(6px) scale(.96)'], [d0 + 0.6, 'opacity:1;transform:none'], [pick(3)[1] + 1.8, 'opacity:1;transform:none'], [pick(3)[1] + 3.2, 'opacity:0;transform:translateY(4px)'], [100, 'opacity:0;transform:translateY(6px) scale(.96)']]))
 
   // Toolbar: pops up only around a tool change; the new tool is pressed and lights up.
   const bar: F = [[0, 'opacity:1;transform:none']]
@@ -246,12 +286,11 @@ function keyframes() {
 const SPARKS = [[-46, -30], [40, -36], [58, 6], [-60, 10], [-22, 44], [30, 42], [6, -54], [70, -20]].map(([x, y], k) => ({ x: x!, y: y!, d: (k % 4) * 0.12 }))
 
 const step = (k: number) => `translate(${r2((EX * (k + 1)) / STEPS)} ${r2((EY * (k + 1)) / STEPS)})`
-const A = 9 / S
+const A = 6 / S // anchor squares: 6px
 
 export function HeroCanvas() {
   const css = keyframes()
   const anim = (name: string): CSSProperties => ({ animation: `${name} ${T}s linear infinite` })
-  const icon = 18 / S
   const tap: P = [px(186), py(108)]
   return (
     <div className="hero" aria-hidden>
@@ -270,14 +309,15 @@ export function HeroCanvas() {
               <g key={k} style={anim(`hc-ex-${STEPS - 1 - k}`)}>{GLYPHS.map((g, i) => <path key={i} d={g.d} transform={step(STEPS - 1 - k)} fillRule="evenodd" />)}</g>
             ))}
           </g>
-          <g className="hc-face" style={anim('hc-face')}>{GLYPHS.map((g, i) => <path key={i} d={g.d} fillRule="evenodd" />)}</g>
-          {GLYPHS.map((g, i) => <path key={'f' + i} d={g.d} fill={g.c} fillRule="evenodd" style={anim(`hc-fill-${i}`)} className="hc-fill" />)}
 
           {PLANS.map((pl, i) => {
             const g = GLYPHS[i]!
             return (
               <g key={'g' + i} className="hc-letter" style={anim(`hc-mv-${i}`)}>
-                <path d={g.d} className="hc-line" style={anim(`hc-line-${i}`)} />
+                <g style={anim(`hc-press-${i}`)}>
+                  <path d={g.d} fill={g.c} fillRule="evenodd" className="hc-fill" style={anim(`hc-fill-${i}`)} />
+                  <path d={g.d} className="hc-line" style={anim(`hc-line-${i}`)} />
+                </g>
                 {pl.segs.map((s, k) => <path key={`s${k}`} d={segD(s)} pathLength={1} className="hc-seg" style={anim(`hc-seg-${i}-${k}`)} />)}
                 {pl.segs.map((s, k) => {
                   if (!s.arc || tiny(s)) return null
@@ -289,7 +329,7 @@ export function HeroCanvas() {
                   return (
                     <g key={`h${k}`} className="hc-hd" style={anim(`hc-hd-${i}-${k}`)}>
                       <line x1={p1[0]} y1={p1[1]} x2={p2[0]} y2={p2[1]} />
-                      <circle cx={p1[0]} cy={p1[1]} r={3.4 / S} /><circle cx={p2[0]} cy={p2[1]} r={3.4 / S} />
+                      <circle cx={p1[0]} cy={p1[1]} r={2.6 / S} /><circle cx={p2[0]} cy={p2[1]} r={2.6 / S} />
                     </g>
                   )
                 })}
@@ -299,38 +339,27 @@ export function HeroCanvas() {
             )
           })}
 
-          <g className="hc-sel" style={anim('hc-sel')}>
-            <rect x={-2} y={-6} width={362} height={232} />
-            {[[-2, -6], [360, -6], [-2, 226], [360, 226]].map(([x, y], i) => <rect key={i} className="hc-handle" x={x! - 5} y={y! - 5} width={10} height={10} />)}
-          </g>
         </svg>
-        <span className="hc-size" style={{ ...anim('hc-sel'), left: px(174), top: py(234) }}>WLDD · {Math.round(372 * S)} × {Math.round(242 * S)}</span>
 
         {/* sparkles from the wand's touch */}
         {SPARKS.map((_, k) => <span key={k} className="hc-spark" style={{ ...anim(`hc-spk-${k}`), left: tap[0], top: tap[1], color: GLYPHS[k % 4]!.c }}><Sparkle size={k % 3 === 0 ? 14 : 10} /></span>)}
 
-        <div className="hc-pens" style={{ left: L0, top: T0, transform: `scale(${S}) translate(10px, 10px)` }}>
-          {GLYPHS.map((g, i) => (
-            <span key={i} className="hc-pen" style={{ ...anim(`hc-pen-${i}`), offsetPath: `path('${g.d}')`, offsetAnchor: `${r2((icon * 2) / 24)}px ${r2((icon * 2) / 24)}px`, translate: `${APART[i]![0]}px ${APART[i]![1]}px`, color: g.c } as CSSProperties}>
-              <PenTool size={icon} />
-              {i === 0 && <b style={{ fontSize: 10.5 / S }}>Sati</b>}
-            </span>
-          ))}
-        </div>
-
         {GLYPHS.map((g, i) => (
-          <span key={'m' + i} className="hc-mc" style={{ ...anim(`hc-mc-${i}`), color: g.c }}><MousePointer2 size={18} />{i === 0 && <b>Sati</b>}</span>
+          <span key={'p' + i} className="hc-pen" style={{ ...anim(`hc-pen-${i}`), color: g.c, transformOrigin: `${NIB[0]}px ${NIB[1]}px` }}><PenTool size={18} />{i === 0 && <b>Sati</b>}</span>
         ))}
 
-        <span className="hc-wand" style={anim('hc-wand')}><WandSparkles size={20} /><b>Sati</b></span>
+        {GLYPHS.map((g, i) => (
+          <span key={'m' + i} className="hc-mc" style={{ ...anim(`hc-mc-${i}`), color: g.c, transformOrigin: `${TIP[0]}px ${TIP[1]}px` }}><MousePointer2 size={18} />{i === 0 && <b>Sati</b>}</span>
+        ))}
+
+        <span className="hc-wand" style={{ ...anim('hc-wand'), transformOrigin: `${WAND[0]}px ${WAND[1]}px` }}><WandSparkles size={20} /><b>Sati</b></span>
 
         <div className="hc-pal" style={{ ...anim('hc-pal'), left: PAL.x, top: PAL.y }}>
           <div className="hc-pal-h">Fill</div>
           {GLYPHS.map((g, i) => <div key={i} className="hc-pal-r"><i style={{ background: g.c, ...anim(`hc-sw-${i}`) }} /><span>{g.c}</span><em>{g.ch}</em></div>)}
         </div>
-        <span className="hc-drop" style={anim('hc-drop')}><Pipette size={18} /></span>
+        <span className="hc-drop" style={{ ...anim('hc-drop'), transformOrigin: `${DROP[0]}px ${DROP[1]}px` }}><Pipette size={18} /></span>
 
-        <span className="hc-sati" style={anim('hc-sati')}><MousePointer2 size={20} /><b>Sati</b></span>
       </div>
     </div>
   )
