@@ -16,7 +16,13 @@
 .hc-box { fill: none; stroke: var(--sel); stroke-width: 1.6; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: 0 0; opacity: 0; }
 .hc-extrude { fill: var(--wl-ink); stroke: var(--wl-ink); stroke-width: 6.83; stroke-linejoin: round; opacity: 0; }
 .hc-fill { opacity: 0; }
-.hc-line { fill: none; stroke: var(--wl-ink); stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.hc-line { fill: none; stroke: var(--fg); stroke-linejoin: round; opacity: 0; }
+/* The path being edited, as in a design tool: selection-coloured segments, square anchors, round handle knobs. */
+.hc-seg { fill: none; stroke: var(--sel); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.hc-an { stroke: var(--sel); stroke-width: 1.3; vector-effect: non-scaling-stroke; fill: var(--surface); transform-box: fill-box; transform-origin: center; opacity: 0; }
+.hc-hd { transform-box: fill-box; transform-origin: center; opacity: 0; }
+.hc-hd line { stroke: var(--sel); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.hc-hd circle { fill: var(--surface); stroke: var(--sel); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
 .hc-sel rect { fill: none; stroke: var(--sel); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
 .hc-sel .hc-handle { fill: var(--surface); }
 .hc-sel { opacity: 0; }
@@ -26,9 +32,9 @@
 
 /* Pen cursors: one per letter, in its colour, riding the outline (scaled with the logo, icons counter-scaled) */
 .hc-pens { position: absolute; width: 392px; height: 240px; transform-origin: 0 0; }
-.hc-pen { position: absolute; left: 0; top: 0; display: inline-flex; align-items: flex-start; gap: 4px; offset-rotate: 0deg; offset-anchor: 3px calc(100% - 3px); opacity: 0; }
+.hc-pen { position: absolute; left: 0; top: 0; display: inline-flex; align-items: flex-start; gap: 4px; offset-rotate: 0deg; opacity: 0; }
 .hc-pen svg { display: block; fill: var(--surface); stroke: currentColor; stroke-width: 2; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25)); }
-.hc-pen b { margin-top: 40px; padding: 2px 10px; border-radius: 7px 7px 7px 2px; background: var(--sel); color: #fff; font-weight: 600; line-height: 1.5; white-space: nowrap; }
+.hc-pen b { margin-top: 30px; padding: 2px 10px; border-radius: 7px 7px 7px 2px; background: var(--sel); color: #fff; font-weight: 600; line-height: 1.5; white-space: nowrap; }
 
 /* Palette and eyedropper */
 .hc-pal { position: absolute; width: 132px; padding: 6px; border-radius: 10px; background: var(--pop); box-shadow: 0 0 0 1px var(--line), 0 10px 26px -10px rgba(0, 0, 0, .3); opacity: 0; transform-origin: 0 0; }
@@ -49,8 +55,8 @@
 @media (prefers-reduced-motion: reduce) {
   .hero * { animation: none !important; }
   .hc-fill, .hc-extrude { opacity: 1; }
-  .hc-line { opacity: 1; stroke-dashoffset: 0; stroke-width: 6.83; }
+  .hc-line { opacity: 1; stroke: var(--wl-ink); stroke-width: 6.83; }
 }
 :root[data-motion='reduced'] .hero * { animation: none !important; }
 :root[data-motion='reduced'] .hc-fill, :root[data-motion='reduced'] .hc-extrude { opacity: 1; }
-:root[data-motion='reduced'] .hc-line { opacity: 1; stroke-dashoffset: 0; stroke-width: 6.83; }
+:root[data-motion='reduced'] .hc-line { opacity: 1; stroke: var(--wl-ink); stroke-width: 6.83; }
