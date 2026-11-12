@@ -17,7 +17,7 @@
 
 /* The logo: extrusion, fills, outlines, selection */
 .hc-logo { position: absolute; overflow: visible; }
-.hc-extrude { fill: var(--wl-ink); stroke: var(--wl-ink); stroke-width: 6.83; stroke-linejoin: round; }
+.hc-extrude { fill: var(--wl-ink); stroke: var(--wl-ink); stroke-width: 3.42; stroke-linejoin: round; }
 .hc-extrude > g { opacity: 0; } /* each layer grows in after the wand's touch */
 .hc-fill { opacity: 0; }
 .hc-line { fill: none; stroke: var(--fg); stroke-linejoin: round; opacity: 0; }
@@ -59,8 +59,8 @@
 @media (prefers-reduced-motion: reduce) {
   .hero * { animation: none !important; }
   .hc-fill, .hc-extrude > g { opacity: 1; }
-  .hc-line { opacity: 1; stroke: var(--wl-ink); stroke-width: 6.83; }
+  .hc-line { opacity: 1; stroke: var(--wl-ink); stroke-width: 3.42; }
 }
 :root[data-motion='reduced'] .hero * { animation: none !important; }
 :root[data-motion='reduced'] .hc-fill, :root[data-motion='reduced'] .hc-extrude > g { opacity: 1; }
-:root[data-motion='reduced'] .hc-line { opacity: 1; stroke: var(--wl-ink); stroke-width: 6.83; }
+:root[data-motion='reduced'] .hc-line { opacity: 1; stroke: var(--wl-ink); stroke-width: 3.42; }

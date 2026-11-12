@@ -21,7 +21,7 @@ const W = 680, H = 240 // the stage, centred in the hero
 const S = 0.64 // logo units → px
 const LOGO_W = 392 * S
 const L0 = Math.round((W - LOGO_W) / 2) - 20, T0 = 34 // logo viewBox origin (-10 -10), in stage px
-const STEPS = 7
+const STEPS = 14 // shadow layers: close enough that the thin outline leaves no steps
 const r2 = (n: number) => +n.toFixed(2)
 const px = (u: number) => r2(L0 + (u + 10) * S)
 const py = (v: number) => r2(T0 + (v + 10) * S)
@@ -182,7 +182,7 @@ function keyframes() {
       out.push(kf(`hc-hd-${i}-${k}`, [[0, 'opacity:0;transform:scale(0)'], [s0 + (s1 - s0) * 0.5, 'opacity:0;transform:scale(0)'], [s1, 'opacity:1;transform:scale(1)'], [s1 + HOLD + 1.2, 'opacity:1;transform:scale(1)'], [s1 + HOLD + 2.2, 'opacity:0;transform:scale(1)'], [100, 'opacity:0;transform:scale(0)']]))
     })
     // The closed shape: a plain outline; the wand turns it into the mark's ink outline.
-    const pen0 = 'stroke:var(--fg);stroke-width:2.2', ink = `stroke:var(--wl-ink);stroke-width:${OUT.toFixed(2)}`
+    const pen0 = 'stroke:var(--fg);stroke-width:2.2', ink = `stroke:var(--wl-ink);stroke-width:${(OUT / 2).toFixed(2)}` // the hero uses a lighter outline (⅙x) than the mark
     out.push(kf(`hc-line-${i}`, [[0, `${pen0};opacity:0`], [pl.close + 1, `${pen0};opacity:0`], [pl.close + 2.5, `${pen0};opacity:1`], [MAGIC + 0.6, `${pen0};opacity:1`], [MAGIC + 2.6, `${ink};opacity:1`], [99.6, `${ink};opacity:1`], [99.7, `${ink};opacity:0`], [100, `${pen0};opacity:0`]]))
     // Alive: the Press loader, each letter pushing into its shadow in turn.
     const press: F = [[0, 'transform:translate(0px,0px)']]
@@ -234,7 +234,7 @@ function keyframes() {
     ...glide(wIn, [tap[0] + 14, tap[1] - 18], MAGIC - 2.4, MAGIC - 0.7, -0.18), ...glide([tap[0] + 14, tap[1] - 18], tap, MAGIC - 0.7, MAGIC - 0.1, 0, 0),
     ...click(tap, MAGIC - 0.1), ...rest(tap, MAGIC + 0.5, MAGIC + 1.4), ...glide(tap, wOut, MAGIC + 1.4, MAGIC + 3), { t: MAGIC + 3.6, x: wOut[0], y: wOut[1], o: 0 }, hidden(wIn, 100)], neg(WAND))))
   for (let k = 0; k < STEPS; k++) {
-    const a = MAGIC + 0.4 + k * 0.32
+    const a = MAGIC + 0.4 + k * 0.16
     out.push(kf(`hc-ex-${k}`, [[0, 'opacity:0'], [a, 'opacity:0'], [a + 0.12, 'opacity:1'], [99.6, 'opacity:1'], [99.7, 'opacity:0'], [100, 'opacity:0']]))
   }
   SPARKS.forEach((sp, k) => {
