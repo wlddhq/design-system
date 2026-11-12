@@ -183,7 +183,7 @@ function keyframes() {
     })
     // The closed shape: a plain outline; the wand turns it into the mark's ink outline.
     const pen0 = 'stroke:var(--fg);stroke-width:2.2', ink = `stroke:var(--wl-ink);stroke-width:${OUT.toFixed(2)}`
-    out.push(kf(`hc-line-${i}`, [[0, `${pen0};opacity:0`], [pl.close + 1, `${pen0};opacity:0`], [pl.close + 2.5, `${pen0};opacity:1`], [MAGIC + 0.6, `${pen0};opacity:1`], [MAGIC + 2.6, `${ink};opacity:1`], [END, `${ink};opacity:1`], [99, `${ink};opacity:0`], [100, `${pen0};opacity:0`]]))
+    out.push(kf(`hc-line-${i}`, [[0, `${pen0};opacity:0`], [pl.close + 1, `${pen0};opacity:0`], [pl.close + 2.5, `${pen0};opacity:1`], [MAGIC + 0.6, `${pen0};opacity:1`], [MAGIC + 2.6, `${ink};opacity:1`], [99.6, `${ink};opacity:1`], [99.7, `${ink};opacity:0`], [100, `${pen0};opacity:0`]]))
     // Alive: the Press loader, each letter pushing into its shadow in turn.
     const press: F = [[0, 'transform:translate(0px,0px)']]
     for (let c = 0; c < 2; c++) {
@@ -235,7 +235,7 @@ function keyframes() {
     ...click(tap, MAGIC - 0.1), ...rest(tap, MAGIC + 0.5, MAGIC + 1.4), ...glide(tap, wOut, MAGIC + 1.4, MAGIC + 3), { t: MAGIC + 3.6, x: wOut[0], y: wOut[1], o: 0 }, hidden(wIn, 100)], neg(WAND))))
   for (let k = 0; k < STEPS; k++) {
     const a = MAGIC + 0.4 + k * 0.32
-    out.push(kf(`hc-ex-${k}`, [[0, 'opacity:0'], [a, 'opacity:0'], [a + 0.5, 'opacity:1'], [END, 'opacity:1'], [99, 'opacity:0'], [100, 'opacity:0']]))
+    out.push(kf(`hc-ex-${k}`, [[0, 'opacity:0'], [a, 'opacity:0'], [a + 0.12, 'opacity:1'], [99.6, 'opacity:1'], [99.7, 'opacity:0'], [100, 'opacity:0']]))
   }
   SPARKS.forEach((sp, k) => {
     const a = MAGIC + 0.1 + sp.d
@@ -246,7 +246,7 @@ function keyframes() {
   // Colour: palette, then the eyedropper from swatch to letter, four times.
   GLYPHS.forEach((g, i) => {
     const [ps, pl] = pick(i)
-    out.push(kf(`hc-fill-${i}`, [[0, 'opacity:0'], [pl + 0.4, 'opacity:0'], [pl + 1.6, 'opacity:1'], [END, 'opacity:1'], [99, 'opacity:0'], [100, 'opacity:0']]))
+    out.push(kf(`hc-fill-${i}`, [[0, 'opacity:0'], [pl + 0.4, 'opacity:0'], [pl + 1.6, 'opacity:1'], [99.6, 'opacity:1'], [99.7, 'opacity:0'], [100, 'opacity:0']]))
     out.push(kf(`hc-sw-${i}`, [[0, 'box-shadow:0 0 0 0 transparent'], [ps - 0.2, 'box-shadow:0 0 0 0 transparent'], [ps + 0.2, 'box-shadow:0 0 0 2px var(--fg)'], [ps + 2.2, 'box-shadow:0 0 0 2px var(--fg)'], [ps + 3, 'box-shadow:0 0 0 0 transparent'], [100, 'box-shadow:0 0 0 0 transparent']]))
   })
   const dIn: P = [W - 40, H + 30], d0 = pick(0)[0] - 2.2
@@ -262,6 +262,8 @@ function keyframes() {
 
   out.push(kf('hc-pal', [[0, 'opacity:0;transform:translateY(6px) scale(.96)'], [d0 - 0.4, 'opacity:0;transform:translateY(6px) scale(.96)'], [d0 + 0.6, 'opacity:1;transform:none'], [pick(3)[1] + 1.8, 'opacity:1;transform:none'], [pick(3)[1] + 3.2, 'opacity:0;transform:translateY(4px)'], [100, 'opacity:0;transform:translateY(6px) scale(.96)']]))
 
+  // The ending: the whole logo fades as one layer, so the solid shadow never turns see-through layer over layer.
+  out.push(kf('hc-out', [[0, 'opacity:1'], [END, 'opacity:1'], [99, 'opacity:0'], [99.9, 'opacity:0'], [100, 'opacity:1']]))
   // Toolbar: pops up only around a tool change; the new tool is pressed and lights up.
   const bar: F = [[0, 'opacity:1;transform:none']]
   SWITCH.forEach(({ at }) => bar.push([at - 1.6, 'opacity:0;transform:translateX(-6px)'], [at - 1, 'opacity:1;transform:none'], [at + 1.4, 'opacity:1;transform:none'], [at + 2.1, 'opacity:0;transform:translateX(-6px)']))
@@ -302,7 +304,7 @@ export function HeroCanvas() {
           {TOOLS.map((I, i) => <span key={i} className="hc-tool" style={anim(`hc-tool-${i}`)}><I size={14} /></span>)}
         </div>
 
-        <svg className="hc-logo" viewBox="-10 -10 392 240" width={LOGO_W} height={240 * S} style={{ left: L0, top: T0 }}>
+        <svg className="hc-logo" viewBox="-10 -10 392 240" width={LOGO_W} height={240 * S} style={{ ...anim('hc-out'), left: L0, top: T0 }}>
           {/* the shadow, grown in by the wand: one layer at a time */}
           <g className="hc-extrude">
             {Array.from({ length: STEPS }, (_, k) => (
