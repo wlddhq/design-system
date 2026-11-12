@@ -1,3 +1,4 @@
+import { published } from '@/lib/changelog'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { Shell } from '@/components/Shell'
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <FaviconCycle />
-        <Shell>{children}</Shell>
+        <Shell version={published()[0]?.version ?? '0.0.0'}>{children}</Shell>
       </body>
     </html>
   )

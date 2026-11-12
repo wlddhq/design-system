@@ -4,6 +4,8 @@ import { componentMeta, componentRules, exampleSource, type PropMeta } from '@/l
 import { EXAMPLES } from '@/examples'
 import { Code } from './Code'
 import { DocPage, H2 } from './Doc'
+import { ChangeLine, UpdatedBadge } from './Changes'
+import { historyOf, updatedIn } from '@/lib/changelog'
 
 const md = (s: string) => ({ __html: marked.parse(s, { async: false }) as string })
 
@@ -58,9 +60,11 @@ export async function ComponentDoc({ id, href, examples, children }: {
   const lead = rules.filter((r) => ['When to use', 'Anatomy'].includes(r.title))
   const rest = rules.filter((r) => !['Do', "Don't", 'When to use', 'Anatomy'].includes(r.title))
   const many = meta.parts.length > 1
+  const history = historyOf(id)
+  const updated = updatedIn(id)
 
   return (
-    <DocPage href={href} lead={meta.summary}>
+    <DocPage href={href} lead={<>{meta.summary}{updated && <> <UpdatedBadge version={updated} /></>}</>}>
       <Code code={`import { ${meta.exports.join(', ')} } from '@wldd/ui'`} />
 
       <H2>Examples</H2>
@@ -95,6 +99,17 @@ export async function ComponentDoc({ id, href, examples, children }: {
       {rest.map((r) => (
         <section key={r.title}><H2>{r.title}</H2><div dangerouslySetInnerHTML={md(r.body)} /></section>
       ))}
+
+      {history.length > 0 && (
+        <section>
+          <H2>Changes</H2>
+          <ul className="chg-list">
+            {history.map((c, i) => (
+              <li key={i} className="chg-v"><a href={`/changelog#v${c.version.replace(/\./g, '-')}`} className="chg-ver">{c.version}</a><ul><ChangeLine c={c} showTag={false} /></ul></li>
+            ))}
+          </ul>
+        </section>
+      )}
     </DocPage>
   )
 }

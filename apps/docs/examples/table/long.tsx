@@ -5,7 +5,7 @@ import { CAMPAIGNS, STAGES, stageTone, logo, inr } from '../data'
 /** More rows than fit: the header and the footer stay put, and rows scroll between them. */
 export default function LongTable() {
   return (
-    <Table className="h-full w-full">
+    <Table label="All campaigns" className="h-full w-full">
       <thead>
         <tr>
           <Th kind="primary" icon={Megaphone}>Campaign</Th>

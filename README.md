@@ -77,8 +77,11 @@ npm run typecheck
 
 ## Release
 
+Every fix or addition gets a line in [CHANGELOG.md](CHANGELOG.md) under `## Unreleased` when it's merged, tagged with the component it touches (`- [table] ...`). The docs site reads that file: the What's new page, the version in the sidebar, and the "Updated in" badge and history on each component page.
+
 ```bash
 # 1. bump "version" in packages/*/package.json (all three together)
+# 2. in CHANGELOG.md, rename "## Unreleased" to "## X.Y.Z — YYYY-MM-DD" (publishing refuses without it)
 npm run smoke                  # a blank Next.js app must build with the packed packages, fonts included
 npm publish -w @wldd/tokens -w @wldd/tailwind -w @wldd/ui --auth-type=web
 npm run smoke -- --registry    # once npm has processed it: the same check against the published versions

@@ -10,7 +10,7 @@ const config: NextConfig = {
     { source: '/patterns/:path*', destination: '/showcase/:path*', permanent: true },
     { source: '/screens/:path*', destination: '/showcase/:path*', permanent: true },
   ],
-  outputFileTracingIncludes: { '/**': ['./examples/**/*', '../../packages/ui/dist/**/*'] },
+  outputFileTracingIncludes: { '/**': ['./examples/**/*', '../../packages/ui/dist/**/*', '../../CHANGELOG.md', '../../packages/ui/package.json'] },
 }
 
 export default config

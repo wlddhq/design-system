@@ -12,11 +12,11 @@ import { WlddMark } from './WlddMark'
 
 const OPEN_KEY = 'wldd-docs-open-groups'
 
-export function Shell({ children }: { children: ReactNode }) {
-  return <ThemeProvider><Frame>{children}</Frame></ThemeProvider>
+export function Shell({ children, version }: { children: ReactNode; version: string }) {
+  return <ThemeProvider><Frame version={version}>{children}</Frame></ThemeProvider>
 }
 
-function Frame({ children }: { children: ReactNode }) {
+function Frame({ children, version }: { children: ReactNode; version: string }) {
   const path = usePathname()
   const page = findPage(path)
   const [open, setOpen] = useState(false)
@@ -38,7 +38,7 @@ function Frame({ children }: { children: ReactNode }) {
   const G = page?.group
   return (
     <div className="d">
-      <Sidebar path={path} open={open} />
+      <Sidebar path={path} open={open} version={version} />
       <div className={'m-scrim' + (open ? ' open' : '')} onClick={() => setOpen(false)} />
       <main className="d-main">
         <header className="d-top">
@@ -56,7 +56,7 @@ function Frame({ children }: { children: ReactNode }) {
   )
 }
 
-function Sidebar({ path, open }: { path: string; open: boolean }) {
+function Sidebar({ path, open, version }: { path: string; open: boolean; version: string }) {
   const { setTheme } = useTheme()
   const { dark } = useHtmlTheme()
   const current = findPage(path)?.group.id
@@ -116,7 +116,7 @@ function Sidebar({ path, open }: { path: string; open: boolean }) {
       </div>
 
       <div className="d-side-f">
-        <span className="d-ver grow">v0.0.1</span>
+        <Link href="/changelog" className="d-ver grow" title="What’s new in this version">v{version}</Link>
         <Appearance />
       </div>
     </aside>

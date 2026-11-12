@@ -10,7 +10,7 @@ const ROWS = [
 /** Inside a padded page (a dashboard, under the charts): framed, all four edges. */
 export default function Framed() {
   return (
-    <Table framed label="Invoices" className="w-full">
+    <Table framed label="Invoices this week" className="w-full">
       <thead><Tr><Th kind="primary" icon={Receipt}>Invoice</Th><Th icon={Megaphone}>Campaign</Th><Th icon={IndianRupee} align="right">Amount</Th><Th icon={CircleDashed}>Stage</Th></Tr></thead>
       <tbody>
         {ROWS.map((r) => (

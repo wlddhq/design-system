@@ -9,7 +9,7 @@ export default function CampaignTable() {
   const [sel, setSel] = useState<string[]>([])
   const all = sel.length === rows.length
   return (
-    <Table className="w-full">
+    <Table label="Campaigns" className="w-full">
       <thead>
         <tr>
           <Th kind="select"><Checkbox label="Select all" checked={all} indeterminate={!all && sel.length > 0} onChange={() => setSel(all ? [] : rows.map((r) => r.id))} /></Th>

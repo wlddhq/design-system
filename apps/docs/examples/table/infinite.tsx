@@ -31,7 +31,7 @@ export default function InfiniteTable() {
 
   return (
     <>
-      <Table className="h-full w-full" loading={loading} rows={8} hasMore={rows.length < TOTALS.count} onLoadMore={more}>
+      <Table label="All invoices" className="h-full w-full" loading={loading} rows={8} hasMore={rows.length < TOTALS.count} onLoadMore={more}>
         <thead>
           <tr>
             <Th kind="select"><Checkbox label="Select loaded" checked={allLoaded} indeterminate={!allLoaded && count > 0}

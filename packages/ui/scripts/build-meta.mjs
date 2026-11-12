@@ -3,7 +3,7 @@
 //   dist/rules/<id>.md        — each component's usage rules (the same text the docs site shows)
 //   dist/AGENTS.md            — the entry point an AI tool reads first
 // The docs site and the future MCP both read these files, so they can never disagree.
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs'
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, statSync, copyFileSync } from 'node:fs'
 import { join, dirname, basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import docgen from 'react-docgen-typescript'
@@ -86,6 +86,8 @@ You are building UI for WLDD. Use only these components and tokens. Never invent
 ## Components
 ${byGroup}
 
-Props for every component and part: \`meta/components.json\`.
+Props for every component and part: \`meta/components.json\`. What changed in each version: \`CHANGELOG.md\`.
 `)
+// The changelog ships with the package, so tools can see what changed between versions.
+copyFileSync(join(root, '../../CHANGELOG.md'), join(dist, 'CHANGELOG.md'))
 console.log(`meta ← ${components.length} pages, ${components.reduce((n, c) => n + c.parts.length, 0)} documented exports`)

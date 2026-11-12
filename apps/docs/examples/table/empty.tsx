@@ -4,7 +4,7 @@ import { Table, Th, Empty } from '@wldd/ui'
 /** Nothing matches: the header stays, one quiet line sits where the rows would be. */
 export default function EmptyTable() {
   return (
-    <Table className="w-full" empty={<Empty icon={Search} title="No campaigns">Nothing matches these filters.</Empty>}>
+    <Table label="Filtered campaigns" className="w-full" empty={<Empty icon={Search} title="No campaigns">Nothing matches these filters.</Empty>}>
       <thead>
         <tr>
           <Th kind="primary" icon={Megaphone}>Campaign</Th>

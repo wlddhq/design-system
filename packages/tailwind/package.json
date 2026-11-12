@@ -23,7 +23,8 @@
     "tailwindcss": "^4.0.0"
   },
   "scripts": {
-    "build": "node -e \"\""
+    "build": "node -e \"\"",
+    "prepublishOnly": "node ../../scripts/release-check.mjs"
   },
   "publishConfig": {
     "access": "public"

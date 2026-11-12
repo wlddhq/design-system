@@ -22,7 +22,8 @@
   ],
   "scripts": {
     "build": "tsup && node scripts/fix-imports.mjs && node scripts/build-css.mjs && node scripts/build-meta.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "node ../../scripts/release-check.mjs"
   },
   "peerDependencies": {
     "@wldd/tokens": "^0.1.0",

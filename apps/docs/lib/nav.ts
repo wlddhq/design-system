@@ -14,6 +14,7 @@ export const NAV: Group[] = [
       { title: 'Installation', href: '/installation' },
       { title: 'Theming', href: '/theming' },
       { title: 'Building with AI', href: '/ai' },
+      { title: 'What’s new', href: '/changelog' },
     ],
   },
   {
