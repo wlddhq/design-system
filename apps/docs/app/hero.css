@@ -1,111 +1,56 @@
-/* ═════════ Landing hero: the mark on a live design canvas (components/HeroCanvas.tsx) ═════════
-   One shared 10s clock. Every piece reads --t so they stay in step. */
-.hero { --t: 10s; --sel: var(--violet); position: relative; height: 210px; max-width: 560px; margin: 8px 0 28px; overflow: hidden; }
+/* ═════════ Landing hero: the WLDD logo being made (components/HeroCanvas.tsx) ═════════
+   Keyframes are generated in the component from the real glyph geometry; this file holds the look. */
+.hero { --sel: var(--violet); position: relative; height: 230px; max-width: 560px; margin: 8px 0 28px; overflow: hidden; }
 .hero * { pointer-events: none; }
 
 /* Canvas dots, fading out towards the edges */
 .hero-grid { position: absolute; inset: 0; background-image: radial-gradient(circle, color-mix(in oklab, var(--fg) 14%, transparent) 1px, transparent 1.2px); background-size: 16px 16px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 35% 50%, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 35% 50%, #000 30%, transparent 75%); }
+  -webkit-mask-image: radial-gradient(ellipse 72% 85% at 45% 50%, #000 30%, transparent 78%); mask-image: radial-gradient(ellipse 72% 85% at 45% 50%, #000 30%, transparent 78%); }
 
-.hero-mark, .hero-fill { position: absolute; left: 40px; top: 56px; }
-.hero-mark .wm { --wm-bg: var(--surface); }
-.hero-fill { opacity: 0; animation: hero-fill var(--t) var(--ease-out) infinite; }
+/* Tools */
+.hc-tools { position: absolute; left: 6px; top: 46px; display: grid; gap: 2px; padding: 3px; border-radius: 9px; background: var(--pop); box-shadow: 0 0 0 1px var(--line), 0 6px 16px -8px rgba(0, 0, 0, .25); }
+.hc-tool { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 6px; color: var(--muted); }
 
-/* Selection */
-.hero-sel { position: absolute; left: 33px; top: 49px; width: 171px; height: 110px; box-shadow: inset 0 0 0 1px var(--sel); opacity: 0; transform-origin: 30% 60%; animation: hero-sel var(--t) var(--ease-out) infinite; }
-.hero-sel i { position: absolute; width: 7px; height: 7px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--sel); }
-.hero-size { position: absolute; left: 50%; bottom: -24px; translate: -50% 0; padding: 2px 6px; border-radius: 4px; background: var(--sel); color: #fff; font: 500 10.5px/1.3 var(--mono); white-space: nowrap; }
+/* The logo: frames, extrusion, fills, outlines, selection */
+.hc-logo { position: absolute; overflow: visible; }
+.hc-box { fill: none; stroke: var(--sel); stroke-width: 1.6; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: 0 0; opacity: 0; }
+.hc-extrude { fill: var(--wl-ink); stroke: var(--wl-ink); stroke-width: 6.83; stroke-linejoin: round; opacity: 0; }
+.hc-fill { opacity: 0; }
+.hc-line { fill: none; stroke: var(--wl-ink); stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.hc-sel rect { fill: none; stroke: var(--sel); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.hc-sel .hc-handle { fill: var(--surface); }
+.hc-sel { opacity: 0; }
+.hc-size { position: absolute; translate: -50% 0; padding: 2px 6px; border-radius: 4px; background: var(--sel); color: #fff; font: 500 10.5px/1.3 var(--mono); white-space: nowrap; opacity: 0; }
+@keyframes hc-extrude { 0%, 84% { opacity: 0; } 87%, 95% { opacity: 1; } 99%, 100% { opacity: 0; } }
+@keyframes hc-sel { 0%, 87.5% { opacity: 0; } 88.5%, 94% { opacity: 1; } 96%, 100% { opacity: 0; } }
 
-/* Pen */
-.hero-pen { position: absolute; left: 0; top: 0; overflow: visible; }
-.hero-path { fill: none; stroke: var(--green); stroke-width: 1.5; stroke-dasharray: 1; stroke-dashoffset: 1; animation: hero-draw var(--t) linear infinite; }
-.hero-anchor { fill: var(--surface); stroke: var(--green); stroke-width: 1.25; opacity: 0; animation: hero-anchor-0 var(--t) linear infinite; }
-.hero-anchor:nth-of-type(2) { animation-name: hero-anchor-1; }
-.hero-anchor:nth-of-type(3) { animation-name: hero-anchor-2; }
-.hero-handles { stroke: color-mix(in oklab, var(--green) 70%, transparent); stroke-width: 1; fill: var(--green); opacity: 0; animation: hero-handles var(--t) linear infinite; }
-.hero-pen-tool { position: absolute; left: 0; top: 0; color: var(--fg); offset-anchor: 2px 2px; offset-rotate: 0deg; offset-distance: 0%; opacity: 0; animation: hero-pentool var(--t) linear infinite; }
-.hero-pen-tool svg { display: block; transform: translate(-1px, -1px); }
+/* Pen cursors: one per letter, in its colour, riding the outline (scaled with the logo, icons counter-scaled) */
+.hc-pens { position: absolute; width: 392px; height: 240px; transform-origin: 0 0; }
+.hc-pen { position: absolute; left: 0; top: 0; display: inline-flex; align-items: flex-start; gap: 4px; offset-rotate: 0deg; offset-anchor: 3px calc(100% - 3px); opacity: 0; }
+.hc-pen svg { display: block; fill: var(--surface); stroke: currentColor; stroke-width: 2; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .25)); }
+.hc-pen b { margin-top: 40px; padding: 2px 10px; border-radius: 7px 7px 7px 2px; background: var(--sel); color: #fff; font-weight: 600; line-height: 1.5; white-space: nowrap; }
 
-/* Eyedropper and the picked colour */
-.hero-dropper { position: absolute; left: 0; top: 0; color: var(--fg); animation: hero-dropper var(--t) var(--ease-out) infinite; }
-.hero-dropper svg { display: block; }
-.hero-chip { position: absolute; left: 186px; top: 132px; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px 0 4px; border-radius: 6px; background: var(--pop); box-shadow: var(--shadow-pop); color: var(--fg); font: 500 11px/1 var(--mono); opacity: 0; transform-origin: 0 0; animation: hero-chip var(--t) var(--ease-out) infinite; }
-.hero-chip i { width: 14px; height: 14px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); }
+/* Palette and eyedropper */
+.hc-pal { position: absolute; width: 132px; padding: 6px; border-radius: 10px; background: var(--pop); box-shadow: 0 0 0 1px var(--line), 0 10px 26px -10px rgba(0, 0, 0, .3); opacity: 0; transform-origin: 0 0; }
+.hc-pal-h { padding: 2px 6px 6px; font: 600 11px/1.2 var(--font); color: var(--fg-2); }
+.hc-pal-r { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 6px; font: 500 10.5px/1 var(--mono); color: var(--fg-2); }
+.hc-pal-r i { width: 14px; height: 14px; border-radius: 4px; flex: none; }
+.hc-pal-r em { margin-left: auto; font: 600 10.5px/1 var(--font); color: var(--muted); font-style: normal; }
+@keyframes hc-pal { 0%, 55% { opacity: 0; transform: scale(.94); } 57%, 85% { opacity: 1; transform: none; } 88%, 100% { opacity: 0; transform: none; } }
+.hc-drop { position: absolute; left: 0; top: 0; color: var(--fg); opacity: 0; }
+.hc-drop svg { display: block; }
 
-/* Cursors */
-.hero-cursor { position: absolute; left: 0; top: 0; display: inline-flex; align-items: flex-start; gap: 2px; color: var(--fg); animation: hero-cursor var(--t) var(--ease-out) infinite; }
-.hero-cursor b { margin-top: 14px; padding: 1px 6px; border-radius: 4px 4px 4px 1px; background: var(--sel); color: #fff; font: 600 10.5px/1.5 var(--font); }
-.hero-cursor svg { display: block; fill: var(--fg); stroke: var(--surface); stroke-width: 1.5; }
+/* Sati's arrow */
+.hc-sati { position: absolute; left: 0; top: 0; display: inline-flex; align-items: flex-start; gap: 2px; color: var(--fg); opacity: 0; }
+.hc-sati svg { display: block; fill: var(--fg); stroke: var(--surface); stroke-width: 1.5; }
+.hc-sati b { margin-top: 14px; padding: 1px 6px; border-radius: 4px 4px 4px 1px; background: var(--sel); color: #fff; font: 600 10.5px/1.5 var(--font); }
 
-/* ── Timeline (percent of 10s) ──
-   0–14 cursor travels to the mark · 15 click · 16–46 selected · 22–56 pen draws · 50–78 eyedropper picks · loop */
-@keyframes hero-cursor {
-  0% { transform: translate(440px, 176px); }
-  14% { transform: translate(118px, 104px); }
-  15.5% { transform: translate(118px, 104px) scale(.86); }
-  17% { transform: translate(118px, 104px); }
-  24% { transform: translate(120px, 108px); }
-  34% { transform: translate(300px, 28px); }
-  80% { transform: translate(310px, 30px); }
-  100% { transform: translate(440px, 176px); }
-}
-@keyframes hero-sel {
-  0%, 15% { opacity: 0; transform: scale(.98); }
-  17%, 46% { opacity: 1; transform: none; }
-  50%, 100% { opacity: 0; transform: none; }
-}
-@keyframes hero-draw {
-  0%, 22% { stroke-dashoffset: 1; opacity: 1; }
-  56%, 88% { stroke-dashoffset: 0; opacity: 1; }
-  96%, 100% { stroke-dashoffset: 0; opacity: 0; }
-}
-/* Anchors land as the pen passes them: start (22%), middle (~39%), end (56%). */
-@keyframes hero-anchor-0 { 0%, 22% { opacity: 0; } 23%, 86% { opacity: 1; } 92%, 100% { opacity: 0; } }
-@keyframes hero-anchor-1 { 0%, 38% { opacity: 0; } 39%, 86% { opacity: 1; } 92%, 100% { opacity: 0; } }
-@keyframes hero-anchor-2 { 0%, 55% { opacity: 0; } 56%, 86% { opacity: 1; } 92%, 100% { opacity: 0; } }
-@keyframes hero-handles {
-  0%, 38% { opacity: 0; }
-  42%, 86% { opacity: 1; }
-  92%, 100% { opacity: 0; }
-}
-@keyframes hero-pentool {
-  0%, 20% { offset-distance: 0%; opacity: 0; }
-  22% { offset-distance: 0%; opacity: 1; }
-  56% { offset-distance: 100%; opacity: 1; }
-  88% { offset-distance: 100%; opacity: 1; }
-  94%, 100% { offset-distance: 100%; opacity: 0; }
-}
-@keyframes hero-dropper {
-  0%, 46% { transform: translate(516px, 168px) rotate(0deg); }
-  56% { transform: translate(164px, 99px) rotate(-8deg); }
-  57.5% { transform: translate(164px, 101px) rotate(-8deg); }
-  76% { transform: translate(164px, 99px) rotate(-8deg); }
-  90%, 100% { transform: translate(516px, 168px) rotate(0deg); }
-}
-@keyframes hero-fill {
-  0%, 57% { opacity: 0; }
-  60%, 82% { opacity: .92; }
-  90%, 100% { opacity: 0; }
-}
-@keyframes hero-chip {
-  0%, 58% { opacity: 0; transform: scale(.93); }
-  61%, 80% { opacity: 1; transform: none; }
-  86%, 100% { opacity: 0; transform: none; }
-}
-
-/* Reduced motion: hold one composed frame — selected, curve drawn, colour picked. */
-@media (prefers-reduced-motion: reduce) { .hero * { animation: none !important; } }
-:root[data-motion='reduced'] .hero * { animation: none !important; }
+/* Reduced motion: hold the finished logo. */
 @media (prefers-reduced-motion: reduce) {
-  .hero-sel, .hero-anchor, .hero-handles, .hero-fill, .hero-chip { opacity: 1; }
-  .hero-path { stroke-dashoffset: 0; }
-  .hero-cursor { transform: translate(300px, 28px); }
-  .hero-dropper { transform: translate(164px, 99px) rotate(-8deg); }
-  .hero-pen-tool { opacity: 1; offset-distance: 100%; }
+  .hero * { animation: none !important; }
+  .hc-fill, .hc-extrude { opacity: 1; }
+  .hc-line { opacity: 1; stroke-dashoffset: 0; stroke-width: 6.83; }
 }
-:root[data-motion='reduced'] .hero-sel, :root[data-motion='reduced'] .hero-anchor, :root[data-motion='reduced'] .hero-handles,
-:root[data-motion='reduced'] .hero-fill, :root[data-motion='reduced'] .hero-chip { opacity: 1; }
-:root[data-motion='reduced'] .hero-path { stroke-dashoffset: 0; }
-:root[data-motion='reduced'] .hero-cursor { transform: translate(300px, 28px); }
-:root[data-motion='reduced'] .hero-dropper { transform: translate(164px, 99px) rotate(-8deg); }
-:root[data-motion='reduced'] .hero-pen-tool { opacity: 1; offset-distance: 100%; }
+:root[data-motion='reduced'] .hero * { animation: none !important; }
+:root[data-motion='reduced'] .hc-fill, :root[data-motion='reduced'] .hc-extrude { opacity: 1; }
+:root[data-motion='reduced'] .hc-line { opacity: 1; stroke-dashoffset: 0; stroke-width: 6.83; }
