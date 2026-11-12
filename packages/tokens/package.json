@@ -1,16 +1,23 @@
 {
   "name": "@wldd/tokens",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "WLDD design tokens: colours, type, radii and motion for every theme, as CSS variables.",
   "type": "module",
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
     "./tokens.css": "./dist/tokens.css",
     "./fonts.css": "./dist/fonts.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean && node scripts/build-css.mjs",
     "typecheck": "tsc --noEmit"
@@ -18,5 +25,15 @@
   "devDependencies": {
     "tsup": "^8.3.5",
     "typescript": "^5.7.2"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "wldd",
+    "design-system",
+    "react",
+    "tailwind",
+    "tokens"
+  ]
 }

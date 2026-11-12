@@ -8,6 +8,7 @@ npm install @wldd/ui @wldd/tokens @wldd/tailwind lucide-react motion
 
 ```css
 /* app/globals.css */
+@import "@wldd/tokens/fonts.css"; /* first: the fonts the themes use */
 @import "tailwindcss";
 @import "@wldd/tailwind";
 @import "@wldd/tokens/tokens.css";

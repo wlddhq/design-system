@@ -11,6 +11,7 @@
   "scripts": {
     "build": "npm run build -w @wldd/tokens -w @wldd/tailwind -w @wldd/ui",
     "dev": "npm run build && npm run dev -w docs",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "smoke": "node scripts/smoke.mjs"
   }
 }
