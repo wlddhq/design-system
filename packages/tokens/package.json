@@ -1,5 +1,6 @@
 {
   "name": "@wldd/tokens",
+  "license": "MIT",
   "version": "0.0.1",
   "description": "WLDD design tokens: colours, type, radii and motion for every theme, as CSS variables.",
   "type": "module",

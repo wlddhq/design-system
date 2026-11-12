@@ -1,5 +1,6 @@
 {
   "name": "wldd-library",
+  "license": "MIT",
   "private": true,
   "workspaces": [
     "packages/tokens",
