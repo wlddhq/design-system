@@ -8,6 +8,7 @@ import { NAV, findPage } from '@/lib/nav'
 import { ThemeProvider, useTheme } from '@/lib/theme'
 import { useHtmlTheme } from '@/lib/useHtmlTheme'
 import { Appearance } from './Appearance'
+import { DocsSearch } from './DocsSearch'
 import { WlddMark } from './WlddMark'
 
 const OPEN_KEY = 'wldd-docs-open-groups'
@@ -49,6 +50,7 @@ function Frame({ children, version }: { children: ReactNode; version: string }) 
               <span className="cur">{G.label}</span>
             </Link>
           )}
+          <div className="d-top-r"><DocsSearch /></div>
         </header>
         <div className="d-scroll" ref={scroller} id="scroller">{children}</div>
       </main>

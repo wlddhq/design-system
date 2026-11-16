@@ -65,6 +65,8 @@ a.d-ver:hover { color: var(--fg); }
 .d-crumb { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--muted); min-width: 0; }
 .d-crumb .cur { color: var(--fg); }
 .d-crumb a:hover { color: var(--fg); }
+.d-search-t { color: var(--muted); }
+@media (max-width: 640px) { .d-search-t, .d-top-r kbd { display: none; } }
 .d-top-r { margin-left: auto; display: flex; align-items: center; gap: 4px; }
 .d-scroll { flex: 1; overflow: auto; min-height: 0; }
 .d-page { max-width: 1120px; margin: 0 auto; padding: 20px 32px 96px; }
