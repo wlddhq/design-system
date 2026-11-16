@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Search } from 'lucide-react'
-import { Button, CommandMenu, CommandGroup, CommandItem, Kbd } from '@wldd/ui'
+import { Button, CommandMenu, CommandGroup, CommandItem } from '@wldd/ui'
 import { NAV } from '@/lib/nav'
 
 /** Words people use for a component that its name doesn't say. */
@@ -37,9 +37,7 @@ export function DocsSearch() {
   const router = useRouter()
   return (
     <>
-      <Button size="sm" variant="ghost" icon={Search} aria-label="Search the docs" onClick={() => setOpen(true)}>
-        <span className="d-search-t">Search</span> <Kbd>mod+k</Kbd>
-      </Button>
+      <Button size="sm" variant="ghost" icon={Search} kbd="mod+k" aria-label="Search the docs" onClick={() => setOpen(true)}>Search</Button>
       <CommandMenu open={open} onOpenChange={setOpen} placeholder="Search components, foundations, guides…" label="Search the docs">
         {NAV.map((g) => (
           <CommandGroup key={g.id} heading={g.label}>
