@@ -9,6 +9,11 @@ How to write an entry:
 - Start a line with the component it touches in brackets, e.g. `[table]`, using the component's page id (as in /components/table). Use `[tokens]`, `[fonts]` or `[tailwind]` for those packages.
 - Say what changed for the person using it, in one line. Name the prop in backticks.
 
+## Unreleased
+
+### Fixed
+- [tailwind] Components keep their padding in any app. `@wldd/ui/styles.css` is no longer wrapped in `@layer components`, so an app's own reset (`button { padding: 0 }`, `* { padding: 0 }`) can't strip the padding from buttons, tabs, chips, filters and the command menu. To adjust a component with a Tailwind utility, add `!` (`mt-2!`).
+
 ## 0.1.3 — 2026-11-12
 
 ### Changed

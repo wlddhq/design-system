@@ -1,6 +1,6 @@
 /* ═════════ Base — reset and page defaults ═════════
    html keeps the browser's 16px so Tailwind's rem spacing stays standard; body sets the product's 13.5px.
-   Layered as base so components (layer components) always win over the reset. */
+   Layered as base so the component CSS (unlayered) always wins over the reset. */
 
 @layer base {
 *, *::before, *::after { box-sizing: border-box; }
