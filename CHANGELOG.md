@@ -9,7 +9,7 @@ How to write an entry:
 - Start a line with the component it touches in brackets, e.g. `[table]`, using the component's page id (as in /components/table). Use `[tokens]`, `[fonts]` or `[tailwind]` for those packages.
 - Say what changed for the person using it, in one line. Name the prop in backticks.
 
-## Unreleased
+## 0.1.6 — 2026-11-23
 
 ### Fixed
 - [command] Ctrl K closes the command menu on Windows. Inside the menu, cmdk read Ctrl K as "move up", so it only opened.
