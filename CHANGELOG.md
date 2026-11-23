@@ -9,6 +9,11 @@ How to write an entry:
 - Start a line with the component it touches in brackets, e.g. `[table]`, using the component's page id (as in /components/table). Use `[tokens]`, `[fonts]` or `[tailwind]` for those packages.
 - Say what changed for the person using it, in one line. Name the prop in backticks.
 
+## Unreleased
+
+### Changed
+- Built with tsup 9. The JavaScript is byte-for-byte the same; the type declarations now export types on their own `export type` line. Nothing changes in your code.
+
 ## 0.1.5 — 2026-11-23
 
 ### Changed
