@@ -9,10 +9,10 @@ How to write an entry:
 - Start a line with the component it touches in brackets, e.g. `[table]`, using the component's page id (as in /components/table). Use `[tokens]`, `[fonts]` or `[tailwind]` for those packages.
 - Say what changed for the person using it, in one line. Name the prop in backticks.
 
-## Unreleased
+## 0.1.5 — 2026-11-23
 
 ### Changed
-- Releases are published from GitHub Actions with npm provenance, so each version on npm links to the commit and build that made it. Check with `npm audit signatures`.
+- Releases are built and published from GitHub Actions with npm provenance, and approved by a maintainer with 2FA, so each version on npm links to the commit and build that made it. Check with `npm audit signatures`.
 - `@wldd/ui` works with `lucide-react` 1.x, and now asks for `motion` 12 (`^12.0.0`) and `lucide-react` below 2.0, so a future major version of either can't be installed alongside it untested.
 
 ## 0.1.4 — 2026-11-16
