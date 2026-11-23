@@ -79,7 +79,7 @@ npm run typecheck
 
 Every fix or addition gets a line in [CHANGELOG.md](CHANGELOG.md) under `## Unreleased` when it's merged, tagged with the component it touches (`- [table] ...`). The docs site reads that file: the What's new page, the version in the sidebar, and the "Updated in" badge and history on each component page.
 
-Releases are published by GitHub Actions, not from a laptop. Every pull request and push to `main` runs [CI](.github/workflows/ci.yml): build, typecheck, package lint (publint, are-the-types-wrong), the release check, and the smoke test (a blank Next.js app must build with the packed packages, fonts included).
+Releases are published by GitHub Actions, not from a laptop. Every pull request and push to `main` runs [CI](.github/workflows/ci.yml): build, size budget (`npm run size`), typecheck, package lint (publint, are-the-types-wrong), the release check, and the smoke test (a blank Next.js app must build with the packed packages, fonts included).
 
 ```bash
 # 1. bump "version" in packages/*/package.json (all three together)
