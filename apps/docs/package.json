@@ -12,7 +12,7 @@
     "@wldd/tokens": "*",
     "@wldd/ui": "*",
     "lucide-react": "^1.77.0",
-    "marked": "^15.0.6",
+    "marked": "^18.2.1",
     "motion": "^12.42.2",
     "next": "^15.3.2",
     "react": "^19.1.0",
