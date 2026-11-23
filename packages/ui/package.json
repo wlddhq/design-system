@@ -36,7 +36,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@wldd/tokens": "*",
-    "lucide-react": "^0.468.0",
+    "lucide-react": "^1.77.0",
     "motion": "^12.42.2",
     "react": "^19.0.0",
     "react-docgen-typescript": "^2.2.2",
