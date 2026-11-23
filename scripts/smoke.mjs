@@ -63,7 +63,7 @@ export default function Page() {
   }
   for (const [f, c] of Object.entries(files)) writeFileSync(join(app, f), c)
 
-  run(`npm install --no-audit --no-fund next@latest react@latest react-dom@latest tailwindcss@4 @tailwindcss/postcss@4 lucide-react motion typescript @types/react @types/react-dom @types/node ${tgz}`, app)
+  run(`npm install --no-audit --no-fund next@latest react@latest react-dom@latest tailwindcss@4 @tailwindcss/postcss@4 lucide-react@latest motion@12 typescript @types/react @types/react-dom @types/node ${tgz}`, app)
   run('npx next build', app)
   // The build must carry the fonts: @font-face for Inter and the font files themselves (a lost import fails here).
   const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(join(d, e.name)) : [join(d, e.name)]))
