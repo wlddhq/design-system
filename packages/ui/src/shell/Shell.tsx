@@ -10,8 +10,15 @@ const TONE: Record<Tone | 'fg', string> = { fg: 'var(--fg)', neutral: 'var(--mut
 
 /* ───────── Sidebar ───────── */
 
-export function Sidebar({ children, className }: { children: ReactNode; className?: string }) {
-  return <aside className={cx('w-side', className)}>{children}</aside>
+export type SidebarProps = {
+  children: ReactNode
+  /** Names the sidebar for screen readers, so it can't be confused with another side panel. @default 'Sidebar' */
+  label?: string
+  className?: string
+}
+
+export function Sidebar({ children, label = 'Sidebar', className }: SidebarProps) {
+  return <aside className={cx('w-side', className)} aria-label={label}>{children}</aside>
 }
 
 /** Logo on the left, small ghost tools (theme, collapse) on the right. */

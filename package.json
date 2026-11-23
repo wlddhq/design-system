@@ -15,7 +15,8 @@
     "smoke": "node scripts/smoke.mjs",
     "release:check": "node scripts/release-check.mjs",
     "lint:package": "publint packages/tokens && publint packages/tailwind && publint packages/ui && attw --pack packages/tokens --profile esm-only --exclude-entrypoints tokens.css fonts.css && attw --pack packages/ui --profile esm-only --exclude-entrypoints styles.css AGENTS.md",
-    "size": "node scripts/size-check.mjs"
+    "size": "node scripts/size-check.mjs",
+    "test": "npm run test -w @wldd/ui"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",

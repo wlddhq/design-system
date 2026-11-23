@@ -23,7 +23,8 @@
   "scripts": {
     "build": "tsup && node scripts/fix-imports.mjs && node scripts/build-css.mjs && node scripts/build-meta.mjs",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "node ../../scripts/release-check.mjs"
+    "prepublishOnly": "node ../../scripts/release-check.mjs",
+    "test": "vitest run"
   },
   "peerDependencies": {
     "@wldd/tokens": "^0.1.0",
@@ -33,16 +34,22 @@
     "react-dom": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^8.0.0",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.13",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@wldd/tokens": "*",
+    "axe-core": "^4.14.1",
+    "jsdom": "^29.1.1",
     "lucide-react": "^1.77.0",
     "motion": "^12.42.2",
     "react": "^19.0.0",
     "react-docgen-typescript": "^2.2.2",
     "react-dom": "^19.0.0",
     "tsup": "^9.0.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^5.1.1"
   },
   "dependencies": {
     "cmdk": "^1.1.1",

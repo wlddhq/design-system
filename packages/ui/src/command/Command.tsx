@@ -72,7 +72,8 @@ export function CommandMenu({ open, onOpenChange, hotkey = true, placeholder = '
   }, [open])
 
   return (
-    <Command.Dialog open={open} onOpenChange={onOpenChange} label={label} loop shouldFilter={filter} filter={rank}
+    // vimBindings off: cmdk reads Ctrl K inside the menu as "move up", which stopped Ctrl K from closing it on Windows.
+    <Command.Dialog open={open} onOpenChange={onOpenChange} label={label} loop shouldFilter={filter} filter={rank} vimBindings={false}
       className="w-cmd" overlayClassName="w-cmd-scrim" contentClassName={cx('w-cmd-panel', className)}>
       <Command.Input value={search} onValueChange={onSearchChange} placeholder={placeholder} />
       <Command.List>

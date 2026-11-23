@@ -11,6 +11,13 @@ How to write an entry:
 
 ## Unreleased
 
+### Fixed
+- [command] Ctrl K closes the command menu on Windows. Inside the menu, cmdk read Ctrl K as "move up", so it only opened.
+- [tooltip] Escape hides a tooltip wherever focus is. One opened by hovering couldn't be dismissed from the keyboard.
+- [sheet] The panel is announced as a dialog by every screen reader. It was an `<aside>` with a dialog role, which HTML doesn't allow.
+- [shell] `Sidebar` is named for screen readers ("Sidebar", or your own with `label`), so it can't be confused with a record's side column.
+- [record] `RecordLayout`'s side column is named "Details" for screen readers; change it with `sideLabel`.
+
 ### Changed
 - Built with tsup 9. The JavaScript is byte-for-byte the same; the type declarations now export types on their own `export type` line. Nothing changes in your code.
 

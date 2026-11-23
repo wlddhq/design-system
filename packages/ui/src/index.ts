@@ -69,7 +69,7 @@ export type { FieldProps, TextareaProps, DateInputProps } from './form/Field'
 export { RadioGroup, MultiSelect } from './form/Choice'
 export type { RadioOption, RadioGroupProps, MultiSelectOption, MultiSelectProps } from './form/Choice'
 export { RecordHeader, Stepper, PropertyList, Property, PropertySeparator, RecordLayout } from './record/Record'
-export type { RecordHeaderProps, StepperProps } from './record/Record'
+export type { RecordHeaderProps, StepperProps, RecordLayoutProps } from './record/Record'
 
 /* ── App shell ── */
 export { AppShell } from './shell/AppShell'
@@ -77,6 +77,7 @@ export {
   Sidebar, SidebarHeader, SidebarBody, SidebarGroup, SidebarItem, SidebarSection, SidebarFooter, IconTile,
   TopBar, TopBarTitle, TopBarActions, Toolbar, Spacer, PageScroll, Page,
 } from './shell/Shell'
+export type { SidebarProps } from './shell/Shell'
 
 /* ── Motion & loaders ── */
 export { TextMorph } from './motion/TextMorph'

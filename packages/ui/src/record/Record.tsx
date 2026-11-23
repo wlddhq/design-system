@@ -67,12 +67,21 @@ export function Property({ label, children }: { label: ReactNode; children: Reac
 /** A hairline between groups of properties. */
 export const PropertySeparator = () => <div className="w-prop-sep" role="separator" />
 
+export type RecordLayoutProps = {
+  children: ReactNode
+  /** The side column: usually a PropertyList. */
+  side?: ReactNode
+  /** Names the side column for screen readers. @default 'Details' */
+  sideLabel?: string
+  className?: string
+}
+
 /** A record page's body: the main column, and a 280px side column for properties. Stacks on phones. */
-export function RecordLayout({ children, side, className }: { children: ReactNode; side?: ReactNode; className?: string }) {
+export function RecordLayout({ children, side, sideLabel = 'Details', className }: RecordLayoutProps) {
   return (
     <div className={cx('w-rlayout', className)} data-side={side != null || undefined}>
       <div className="w-rlayout-main">{children}</div>
-      {side != null && <aside className="w-rlayout-side">{side}</aside>}
+      {side != null && <aside className="w-rlayout-side" aria-label={sideLabel}>{side}</aside>}
     </div>
   )
 }

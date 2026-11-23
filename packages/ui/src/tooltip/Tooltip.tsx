@@ -53,11 +53,17 @@ export function Tooltip({ label, kbd, side = 'bottom', delay = 450, children, cl
     else if (under > 0) setDx((d) => d + under)
   }, [state])
   // A tooltip left behind by scrolling would point at nothing.
+  // Escape dismisses it wherever focus is: a tooltip opened by hovering must be closable from the keyboard (WCAG 1.4.13).
   useEffect(() => {
     if (!state) return
     const away = () => hide()
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && hide()
     window.addEventListener('scroll', away, true)
-    return () => window.removeEventListener('scroll', away, true)
+    window.addEventListener('keydown', esc)
+    return () => {
+      window.removeEventListener('scroll', away, true)
+      window.removeEventListener('keydown', esc)
+    }
   }, [!!state])
   const show = () => {
     clearTimeout(timer.current)
