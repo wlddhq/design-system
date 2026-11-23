@@ -89,7 +89,11 @@ git commit -am "X.Y.Z" && git push
 git tag vX.Y.Z && git push origin vX.Y.Z
 ```
 
-Pushing the tag runs [Release](.github/workflows/release.yml). It checks that the tag matches the version, builds, runs the smoke test, publishes the three packages with npm provenance (no npm token: npm trusts the workflow), smoke-tests the published versions, and creates the GitHub release from the changelog entry. If it fails partway, re-run it: packages already on npm are skipped.
+Pushing the tag runs [Release](.github/workflows/release.yml). It checks that the tag matches the version, builds, runs the smoke test, and **stages** the three packages on npm with provenance (no npm token: npm trusts the workflow). Nothing is live yet.
+
+Then:
+1. Approve each staged package on npmjs.com with 2FA (or `npm stage list`, then `npm stage approve <id>`).
+2. `gh workflow run published.yml`. [Published](.github/workflows/published.yml) checks a blank Next.js app builds with the live versions and creates the GitHub release from the changelog entry.
 
 ## License
 

@@ -1,6 +1,8 @@
-# Publishes @wldd/tokens, @wldd/tailwind and @wldd/ui when a version tag (v0.1.5) is pushed.
+# Stages @wldd/tokens, @wldd/tailwind and @wldd/ui on npm when a version tag (v0.1.5) is pushed.
 # No npm token: npm trusts this workflow directly (Trusted Publishing, set per package on npmjs.com),
 # and every version carries a provenance statement linking it to this commit and this run.
+# Staged means nothing is live until a maintainer approves each package on npmjs.com with 2FA.
+# After approving, run the Published workflow (published.yml).
 name: Release
 
 on:
@@ -8,7 +10,7 @@ on:
     tags: ['v*']
 
 permissions:
-  contents: write   # create the GitHub release
+  contents: read
   id-token: write   # npm trusted publishing + provenance
 
 concurrency:
@@ -37,30 +39,18 @@ jobs:
       - run: npm run lint:package
       - run: npm run smoke
 
-      - name: Publish (skips any package already on npm at this version, so a re-run is safe)
+      - name: Stage on npm (skips any package already on npm at this version, so a re-run is safe)
         run: |
           v=$(node -p "require('./packages/ui/package.json').version")
           for p in tokens tailwind ui; do
             if npm view "@wldd/$p@$v" version >/dev/null 2>&1; then
               echo "@wldd/$p@$v is already on npm, skipping"
             else
-              npm publish -w "@wldd/$p" --provenance --access public
+              npm stage publish -w "@wldd/$p" --provenance --access public
             fi
           done
-
-      - name: Wait for npm, then smoke-test the published versions
-        run: |
-          v=$(node -p "require('./packages/ui/package.json').version")
-          for i in $(seq 1 30); do
-            npm view "@wldd/ui@$v" version >/dev/null 2>&1 && break
-            sleep 10
-          done
-          npm run smoke -- --registry
-
-      - name: GitHub release with the changelog entry
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          v=${GITHUB_REF_NAME#v}
-          awk -v v="$v" '$0 ~ "^## "v" " {on=1; next} /^## / {if (on) exit} on' CHANGELOG.md > notes.md
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md
+          {
+            echo "### Staged @wldd/tokens, @wldd/tailwind and @wldd/ui $v"
+            echo "Nothing is live yet. Approve each one on npmjs.com (2FA), or: \`npm stage list\` then \`npm stage approve <id>\`."
+            echo "Then run the **Published** workflow: \`gh workflow run published.yml\`"
+          } >> "$GITHUB_STEP_SUMMARY"
