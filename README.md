@@ -79,14 +79,17 @@ npm run typecheck
 
 Every fix or addition gets a line in [CHANGELOG.md](CHANGELOG.md) under `## Unreleased` when it's merged, tagged with the component it touches (`- [table] ...`). The docs site reads that file: the What's new page, the version in the sidebar, and the "Updated in" badge and history on each component page.
 
+Releases are published by GitHub Actions, not from a laptop. Every pull request and push to `main` runs [CI](.github/workflows/ci.yml): build, typecheck, package lint (publint, are-the-types-wrong), the release check, and the smoke test (a blank Next.js app must build with the packed packages, fonts included).
+
 ```bash
 # 1. bump "version" in packages/*/package.json (all three together)
-# 2. in CHANGELOG.md, rename "## Unreleased" to "## X.Y.Z — YYYY-MM-DD" (publishing refuses without it)
-npm run smoke                  # a blank Next.js app must build with the packed packages, fonts included
-npm publish -w @wldd/tokens -w @wldd/tailwind -w @wldd/ui --auth-type=web
-npm run smoke -- --registry    # once npm has processed it: the same check against the published versions
-git tag vX.Y.Z && git push --tags
+# 2. in CHANGELOG.md, rename "## Unreleased" to "## X.Y.Z — YYYY-MM-DD"
+npm run release:check          # optional: the same check the release runs first
+git commit -am "X.Y.Z" && git push
+git tag vX.Y.Z && git push origin vX.Y.Z
 ```
+
+Pushing the tag runs [Release](.github/workflows/release.yml). It checks that the tag matches the version, builds, runs the smoke test, publishes the three packages with npm provenance (no npm token: npm trusts the workflow), smoke-tests the published versions, and creates the GitHub release from the changelog entry. If it fails partway, re-run it: packages already on npm are skipped.
 
 ## License
 

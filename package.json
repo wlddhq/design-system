@@ -13,6 +13,11 @@
     "dev": "npm run build && npm run dev -w docs",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "smoke": "node scripts/smoke.mjs",
-    "release:check": "node scripts/release-check.mjs"
+    "release:check": "node scripts/release-check.mjs",
+    "lint:package": "publint packages/tokens && publint packages/tailwind && publint packages/ui && attw --pack packages/tokens --profile esm-only --exclude-entrypoints tokens.css fonts.css && attw --pack packages/ui --profile esm-only --exclude-entrypoints styles.css AGENTS.md"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "publint": "^0.3.25"
   }
 }

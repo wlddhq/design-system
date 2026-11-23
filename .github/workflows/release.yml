@@ -1,0 +1,66 @@
+# Publishes @wldd/tokens, @wldd/tailwind and @wldd/ui when a version tag (v0.1.5) is pushed.
+# No npm token: npm trusts this workflow directly (Trusted Publishing, set per package on npmjs.com),
+# and every version carries a provenance statement linking it to this commit and this run.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write   # create the GitHub release
+  id-token: write   # npm trusted publishing + provenance
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      # Trusted publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@latest
+      - run: npm ci
+      # Tag must equal the packages' version; changelog must have the dated entry.
+      - run: npm run release:check
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm run lint:package
+      - run: npm run smoke
+
+      - name: Publish (skips any package already on npm at this version, so a re-run is safe)
+        run: |
+          v=$(node -p "require('./packages/ui/package.json').version")
+          for p in tokens tailwind ui; do
+            if npm view "@wldd/$p@$v" version >/dev/null 2>&1; then
+              echo "@wldd/$p@$v is already on npm, skipping"
+            else
+              npm publish -w "@wldd/$p" --provenance --access public
+            fi
+          done
+
+      - name: Wait for npm, then smoke-test the published versions
+        run: |
+          v=$(node -p "require('./packages/ui/package.json').version")
+          for i in $(seq 1 30); do
+            npm view "@wldd/ui@$v" version >/dev/null 2>&1 && break
+            sleep 10
+          done
+          npm run smoke -- --registry
+
+      - name: GitHub release with the changelog entry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v=${GITHUB_REF_NAME#v}
+          awk -v v="$v" '$0 ~ "^## "v" " {on=1; next} /^## / {if (on) exit} on' CHANGELOG.md > notes.md
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md
